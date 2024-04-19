@@ -1,5 +1,7 @@
 <?php 
-    
+    require_once "database\conectar_db.php";
+    require_once "clase_usuario.php";
+
 ?>
 
 <!DOCTYPE html>

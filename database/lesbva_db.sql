@@ -99,15 +99,15 @@ insert into materias (materia_nombre,anio_materia,ciclo_id,carrera_id) values
 ('ALGORITMOS Y ESTRUCTURAS DE DATOS III', 3,6,1); --12
 
 
-/*create table materia_usuario(
-    -- materia_usuario_id int auto_increment,
-    usuario_id int,
-    materia_id int,
-    estado_activo boolean,
-    foreign key (usuario_id) references usuarios(usuario_id),
-    foreign key (materia_id) references materias(materia_id),
-    primary key (usuario_id,materia_id)
-);*/
+-- create table materia_usuario(
+--     materia_usuario_id int auto_increment,
+--     usuario_id int,
+--     materia_id int,
+--     estado_activo boolean,
+--     foreign key (usuario_id) references usuarios(usuario_id),
+--     foreign key (materia_id) references materias(materia_id),
+--     primary key (usuario_id,materia_id)
+-- );
 
 --Modificado Mati
 
@@ -121,19 +121,19 @@ create table materia_usuario(
     primary key (materia_usuario_id)
 );
 
-/*
-insert into materia_usuario (usuario_id, materia_id, estado_activo) values
-(1,1, TRUE),
-(2,1, TRUE),
-(3,1, TRUE),
-(5,6, TRUE),
-(6,6, TRUE),
-(7,6, TRUE),
-(4,2, TRUE),
-(1,2, TRUE),
-(6,3, TRUE),
-(7,3, TRUE),
-(4,7, TRUE);*/
+
+-- insert into materia_usuario (usuario_id, materia_id, estado_activo) values
+-- (1,1, TRUE),
+-- (2,1, TRUE),
+-- (3,1, TRUE),
+-- (5,6, TRUE),
+-- (6,6, TRUE),
+-- (7,6, TRUE),
+-- (4,2, TRUE),
+-- (1,2, TRUE),
+-- (6,3, TRUE),
+-- (7,3, TRUE),
+-- (4,7, TRUE);
 
 -- Modificado Mati, no me deja insertar valores a claves foraneas:
 insert into materia_usuario (estado_activo) values
