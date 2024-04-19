@@ -1,5 +1,6 @@
 <?php
-    require_once "database\conectar_db.php"
+    require_once "database\conectar_db.php";
+    require_once "clase_carrera.php";
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +18,11 @@
 <main>
 
 <body>
+    <form class="presentacion" method="post">
+        <?php
+            Carrera::listarCarreras();
+        ?>
+    </form>
 
 
 </body>
