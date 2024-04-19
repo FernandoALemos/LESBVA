@@ -24,7 +24,7 @@ create table ciclo_letivo(
     ciclo_id int auto_increment,
     turno_id int,
     anio_lectivo int (4),
-    foreign key (turno_id) references turno(turno_id),
+    foreign key (turno_id) references turnos(turno_id), -- Modificado Mati, estaba mal la tabla de referencia
     primary key (ciclo_id, turno_id)
 );
 
@@ -52,8 +52,8 @@ insert into usuarios (usuario_id,usuario_nombre,apellido,rol_id,contrasenia,emai
 ('Matias','Vasca',1,'mvasca','mvasca@gmail.com',11223344),
 ('Walter','Muscolo',2,'wmuscolo','wmuscolo@gmail.com',33445566),
 ('Juan','Pellegrini',2,'jpellegrini','jpellegrini@gmail.com',29031795),
-('Wlater','Vilches',2,'wvilches','wvilches@gmail.com',29031123),
-('Verónica','Micheltorena',2,'jpellegrini','jpellegrini@gmail.com',29038893),
+('Walter','Vilches',2,'wvilches','wvilches@gmail.com',29031123),
+('Verónica','Micheltorena',2,'vmicheltorena','vmicheltorena@gmail.com',29038893), --Modificado Mati, tenía mismo usuario y email que Pellegrini
 ('Gonzalo','Rojas',4,'grojas','grojas@gmail.com',36123789), --1
 ('Alexia','Cepeda',4,'acepeda','acepeda@gmail.com',41346781), --2
 ('Jesica','Dalmazzo',4,'jdalmazzo','jdalmazzo@gmail.com',34159746), --3
@@ -99,7 +99,7 @@ insert into materias (materia_nombre,anio_materia,ciclo_id,carrera_id) values
 ('ALGORITMOS Y ESTRUCTURAS DE DATOS III', 3,6,1); --12
 
 
-create table materia_usuario(
+/*create table materia_usuario(
     -- materia_usuario_id int auto_increment,
     usuario_id int,
     materia_id int,
@@ -107,6 +107,18 @@ create table materia_usuario(
     foreign key (usuario_id) references usuarios(usuario_id),
     foreign key (materia_id) references materias(materia_id),
     primary key (usuario_id,materia_id)
+);*/
+
+--Modificado Mati
+
+create table materia_usuario(
+    materia_usuario_id int auto_increment,
+    usuario_id int,
+    materia_id int,
+    estado_activo boolean,
+    foreign key (usuario_id) references usuarios(usuario_id),
+    foreign key (materia_id) references materias(materia_id),
+    primary key (materia_usuario_id)
 );
 
 
@@ -121,4 +133,4 @@ insert into materia_usuario (usuario_id, materia_id, estado_activo) values
 (1,2, TRUE),
 (6,3, TRUE),
 (7,3, TRUE),
-(4,7 TRUE);
+(4,7, TRUE);
