@@ -1,0 +1,34 @@
+.contenedorLogin{
+    color: var(--color-negro);
+    font: var(--font-P500);
+}
+
+.contenedorLogin-form{
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contenedorLogin_form-label{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.contenedorLogin_form_label-input{
+    padding: 8px;
+    outline: none;
+    border-radius: 4px;
+}
+
+.contenedorLogin_form-cajaBtn{
+display: flex;
+justify-content: center;
+}
+
+.contenedorLogin_form_cajaBtn-btn:hover{
+    background-color: var(--color-verde100);
+}
