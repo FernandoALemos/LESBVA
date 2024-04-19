@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
     <script src="https://kit.fontawesome.com/600e7f7446.js" crossorigin="anonymous"></script>
-    <title>Titulo</title>
+    <title>Iniciar sesión</title> <!-- Cambio Mati -->
 
 </head>
 
@@ -31,11 +31,11 @@
             <form class="contenedorLogin-form" method="POST">
                 <label class="contenedorLogin_form-label" for="dni">
                     Ingrese su dni
-                    <input class="contenedorLogin_form_label-input" type="number" name="dni" id="dni" placeholder="00000000" maxlength="8" required>
+                    <input class="contenedorLogin_form_label-input" type="number" name="dni" id="dni" placeholder="Ingrese su DNI" maxlength="8" required> <!-- modificado Mati el placeholder-->
                 </label>
                 <label class="contenedorLogin_form-label" for="contra">
                     Ingrese su contraseña
-                    <input class="contenedorLogin_form_label-input" type="password" name="contrasenia" id="contra" placeholder="***********" required>
+                    <input class="contenedorLogin_form_label-input" type="password" name="contrasenia" id="contra" placeholder="Ingrese su contraseña" required> <!-- modificado Mati el placeholder-->
                 </label>
                 <div class="contenedorLogin_form-cajaBtn">
                     <button class="btn-ok" type="submit">Acceder</button>
