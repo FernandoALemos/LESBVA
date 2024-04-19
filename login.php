@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
-    <script src="https://kit.fontawesome.com/600e7f7446.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/600e7f7446.js" crossorigin="anonymous"></script> Comento, no es necesario y sale la ficha de donde salieron los iconos -->
     <title>Iniciar sesión</title> <!-- Cambio Mati -->
 
 </head>
