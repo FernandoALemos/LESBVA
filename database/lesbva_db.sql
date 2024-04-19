@@ -121,7 +121,7 @@ create table materia_usuario(
     primary key (materia_usuario_id)
 );
 
-
+/*
 insert into materia_usuario (usuario_id, materia_id, estado_activo) values
 (1,1, TRUE),
 (2,1, TRUE),
@@ -133,4 +133,18 @@ insert into materia_usuario (usuario_id, materia_id, estado_activo) values
 (1,2, TRUE),
 (6,3, TRUE),
 (7,3, TRUE),
-(4,7, TRUE);
+(4,7, TRUE);*/
+
+-- Modificado Mati, no me deja insertar valores a claves foraneas:
+insert into materia_usuario (estado_activo) values
+(TRUE),
+(TRUE),
+(TRUE),
+(TRUE),
+(TRUE),
+(TRUE),
+(TRUE),
+(TRUE),
+(TRUE),
+(TRUE),
+(TRUE);
