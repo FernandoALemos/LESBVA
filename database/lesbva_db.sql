@@ -76,7 +76,7 @@ insert into carreras (carrera_nombre) values ('TECNICATURA EN ANÁLISIS DE SISTE
 create table materias(
     materia_id int auto_increment,
     materia_nombre varchar(45),
-    anio_materia int (1),
+    anio_materia varchar (2),
     ciclo_id int,
     carrera_id int,
     foreign key (ciclo_id) references ciclo_letivo(ciclo_id),
@@ -85,18 +85,18 @@ create table materias(
 ); 
 
 insert into materias (materia_nombre,anio_materia,ciclo_id,carrera_id) values
-('CIENCIA, TENOLOGÍA Y SOCIEDAD', 1,3,1),
-('ALGEBRA', 1,3,1),
-('BASES DE DATOS', 2,3,1),
-('ESTADISTICA', 2,3,1),
-('ALGORITMOS Y ESTRUCTURAS DE DATOS III', 3,3,1),
-('PRÁCTICAS PROFESIONALIZANTES III', 3,3,1),
-('CIENCIA, TENOLOGÍA Y SOCIEDAD', 1,3,1),
-('ALGEBRA', 1,6,1),
-('BASES DE DATOS', 2,6,1),
-('ESTADISTICA', 2,6,1),
-('PRÁCTICAS PROFESIONALIZANTES III', 3,6,1),
-('ALGORITMOS Y ESTRUCTURAS DE DATOS III', 3,6,1);
+('CIENCIA, TENOLOGÍA Y SOCIEDAD', 1A,3,1),
+('ALGEBRA', 1B,3,1),
+('BASES DE DATOS', 2A,3,1),
+('ESTADISTICA', 2A,3,1),
+('ALGORITMOS Y ESTRUCTURAS DE DATOS III', 3A,3,1),
+('PRÁCTICAS PROFESIONALIZANTES III', 3A,3,1),
+('CIENCIA, TENOLOGÍA Y SOCIEDAD', 1B,3,1),
+('ALGEBRA', 1A,6,1),
+('BASES DE DATOS', 2A,6,1),
+('ESTADISTICA', 2A,6,1),
+('PRÁCTICAS PROFESIONALIZANTES III', 3A,6,1),
+('ALGORITMOS Y ESTRUCTURAS DE DATOS III', 3A,6,1);
 
 
 create table materia_usuario(
