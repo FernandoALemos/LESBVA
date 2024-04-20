@@ -85,18 +85,18 @@ create table materias(
 ); 
 
 insert into materias (materia_nombre,anio_materia,ciclo_id,carrera_id) values
-('CIENCIA, TENOLOGÍA Y SOCIEDAD', 1A,3,1),
-('ALGEBRA', 1B,3,1),
-('BASES DE DATOS', 2A,3,1),
-('ESTADISTICA', 2A,3,1),
-('ALGORITMOS Y ESTRUCTURAS DE DATOS III', 3A,3,1),
-('PRÁCTICAS PROFESIONALIZANTES III', 3A,3,1),
-('CIENCIA, TENOLOGÍA Y SOCIEDAD', 1B,3,1),
-('ALGEBRA', 1A,6,1),
-('BASES DE DATOS', 2A,6,1),
-('ESTADISTICA', 2A,6,1),
-('PRÁCTICAS PROFESIONALIZANTES III', 3A,6,1),
-('ALGORITMOS Y ESTRUCTURAS DE DATOS III', 3A,6,1);
+('CIENCIA, TENOLOGÍA Y SOCIEDAD', "1A",3,1),
+('ALGEBRA', "1B",3,1),
+('BASES DE DATOS', "2A",3,1),
+('ESTADISTICA', "2A",3,1),
+('ALGORITMOS Y ESTRUCTURAS DE DATOS III', "3A",3,1),
+('PRÁCTICAS PROFESIONALIZANTES III', "3A",3,1),
+('CIENCIA, TENOLOGÍA Y SOCIEDAD', "1B",3,1),
+('ALGEBRA', "1A",6,1),
+('BASES DE DATOS', "2A",6,1),
+('ESTADISTICA', "2A",6,1),
+('PRÁCTICAS PROFESIONALIZANTES III', "3A",6,1),
+('ALGORITMOS Y ESTRUCTURAS DE DATOS III', "3A",6,1);
 
 
 create table materia_usuario(
@@ -125,16 +125,3 @@ insert into materia_usuario (usuario_id, materia_id, estado_activo) values
 (7,3, TRUE),
 (4,7, TRUE);
 
--- Modificado Mati, no me deja insertar valores a claves foraneas:
--- insert into materia_usuario (estado_activo) values
--- (TRUE),
--- (TRUE),
--- (TRUE),
--- (TRUE),
--- (TRUE),
--- (TRUE),
--- (TRUE),
--- (TRUE),
--- (TRUE),
--- (TRUE),
--- (TRUE);
