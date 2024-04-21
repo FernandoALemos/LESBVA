@@ -20,7 +20,7 @@ create table turnos(
 
 insert into turnos (turno) values ('Mañana'), ('Tarde'), ('Verpertino');
 
-create table ciclo_letivo(
+create table ciclo_lectivo(
     ciclo_id int auto_increment,
     turno_id int,
     anio_lectivo int (4),
@@ -28,7 +28,7 @@ create table ciclo_letivo(
     primary key (ciclo_id, turno_id)
 );
 
-insert into ciclo_letivo (turno_id, anio_lectivo) values 
+insert into ciclo_lectivo (turno_id, anio_lectivo) values 
 ('1', 2024), ('2', 2024), ('3', 2024), 
 ('1', 2025), ('2', 2025), ('3', 2025), 
 ('1', 2026), ('2', 2026), ('3', 2026);
@@ -79,7 +79,7 @@ create table materias(
     anio_materia varchar (2),
     ciclo_id int,
     carrera_id int,
-    foreign key (ciclo_id) references ciclo_letivo(ciclo_id),
+    foreign key (ciclo_id) references ciclo_lectivo(ciclo_id),
     foreign key (carrera_id) references carreras(carrera_id),
     primary key (materia_id,ciclo_id,carrera_id)
 ); 

@@ -1,5 +1,5 @@
 <?php
-    require "database\conectar_db.php";
+    require_once "database\conectar_db.php";
 
     #region clase Carrera
     class Carrera{
@@ -103,7 +103,29 @@
         }
         #endregion
 
-    }
+    
     #endregion
 
+
+    #region mostrarCarreras y selecionar
+    // Método para obtener y mostrar todos los nombres de las carreras desde la base de datos
+        public static function mostrarNombresCarreras(){
+        // Conexión a la base de datos (suponiendo que ya tienes esto configurado)
+            $con = conectar_db();
+            // Consulta SQL para obtener los nombres de las carreras
+            $sql = "SELECT carrera_id, carrera_nombre FROM carreras";
+            $resultado = $con->query($sql);
+
+            // Mostrar los nombres de las carreras y permitir al usuario seleccionar una
+            echo "<form action='pantalla_busqueda.php' method='POST'>"; // Formulario para enviar la selección a otra pantalla
+            echo "<select name='carrera_id'>"; // Lista desplegable para mostrar los nombres de las carreras
+            while ($fila = $resultado->fetch_assoc()) {
+                echo "<option value='{$fila['carrera_id']}'>{$fila['carrera_nombre']}</option>";
+            }
+            echo "</select>";
+            echo "<input type='submit' value='Seleccionar' href='pantalla_busqueda.php'>";
+            echo "</form>";
+        }
+    #endregion
+    }
 ?>

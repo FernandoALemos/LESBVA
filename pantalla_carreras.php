@@ -1,13 +1,15 @@
 <?php
     require_once "database\conectar_db.php";
     require_once "clase_carrera.php";
+
     session_start();
+    // != "4" || $_SESSION['rol_id'] != "3"
+    if(isset($_SESSION['rol_id'])){
+        // die("No tenes credenciales para ingresar a este sitio. Intenta registrate</a>.");
+        //echo($_SESSION['rol_id']);
+    }
 
-    // if(($_SESSION['rol_id'] != 4 || $_SESSION['rol_id'] != 3)){
-    //     die("No tenes credenciales para ingresar a este sitio. Intenta registrate</a>.");
-    // }
-
-    // $idSESION = $_SESSION['rol_id'];
+    $idSESION = $_SESSION['rol_id'];
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +27,7 @@
 <main>
 
 <body>
-    <form class="presentacion" method="post">
+    <form class="presentacion" method="POST">
         <?php
             Carrera::mostrarNombresCarreras();
         ?>

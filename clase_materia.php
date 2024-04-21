@@ -65,7 +65,7 @@
         public static function listarMaterias(){
             $con = conectar_db();
 
-            $data = mysqli_query($con,"select materias.materia_id, materias.materia_nombre, materias.anio_materia, ciclo_letivo.anio_lectivo, carreras.carrera_nombre from (( materias inner join ciclo_letivo on materias.ciclo_id = ciclo_letivo.ciclo_id ) inner join carreras on materias.carrera_id = carreras.carrera_id);");
+            $data = mysqli_query($con,"select materias.materia_id, materias.materia_nombre, materias.anio_materia, ciclo_lectivo.anio_lectivo, carreras.carrera_nombre from (( materias inner join ciclo_lectivo on materias.ciclo_id = ciclo_lectivo.ciclo_id ) inner join carreras on materias.carrera_id = carreras.carrera_id);");
             
             if(mysqli_affected_rows($con) == 0){
                 echo "<tr><td><b class='bold red'>No hay materias registradas en el sistema</b></td></tr>";
@@ -97,7 +97,7 @@
             $con = conectar_db();
             
             $info = mysqli_query($con, "select materias.materia_id, materias.materia_nombre, materias.anio_materia,
-            ciclo_letivo.anio_lectivo, carreras.carrera_nombre from (( materias inner join ciclo_letivo on materias.ciclo_id = ciclo_letivo.ciclo_id ) inner join carreras on materias.carrera_id = carreras.carrera_id) where materias.materia_id = $materia_id;");
+            ciclo_lectivo.anio_lectivo, carreras.carrera_nombre from (( materias inner join ciclo_lectivo on materias.ciclo_id = ciclo_lectivo.ciclo_id ) inner join carreras on materias.carrera_id = carreras.carrera_id) where materias.materia_id = $materia_id;");
 
             $data = mysqli_fetch_assoc($info);
 
