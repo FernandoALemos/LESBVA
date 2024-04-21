@@ -1,5 +1,5 @@
 <?php
-    require "database\conectar_db.php";
+    require_once "database\conectar_db.php";
     #region clase Usuario
     class Usuario {
 
@@ -130,10 +130,11 @@
                     <td><?php echo $info['nombreEstado']; ?></td>
                     <td>
                         <p class="acciones">
-                            <a class="modificar" href="vista.php?pan=1 & acc=1 & usuario_id=<?php echo $info['usuario_id']; ?>">
+                            <!-- ARREGLAR SI ES QUE LO PIDE, MODIFICAR USUARIO -->
+                            <a class="modificar" href=".php?pan=1 & acc=1 & usuario_id=<?php echo $info['usuario_id']; ?>">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-                            <a class="eliminar" href="vista.php?pan=1 & acc=2 & usuario_id=<?php echo $info['usuario_id']; ?>">
+                            <a class="eliminar" href=".php?pan=1 & acc=2 & usuario_id=<?php echo $info['usuario_id']; ?>">
                                 <i class="fa-solid fa-trash-can"></i>
                             </a>
                         </p>
@@ -179,7 +180,8 @@
                     <label for="confirmar_cambios"><input type="checkbox" name="confirmar" usuario_id="confirmar_cambios" value="1" required> Confirmar</label>
                     <input type="hidden" name="pan" value="1"> 
                     <button type="submit" class="btn-ok">Modificar</button>
-                    <a href="vista.php#Usuarios" class="btn-no ancora">Cancelar</a>
+                    <!-- ARREGLAR SI ES QUE LO PIDE, MODIFICAR USUARIO -->
+                    <a href=".php#Usuarios" class="btn-no ancora">Cancelar</a>
                 </div>
             </form>
 

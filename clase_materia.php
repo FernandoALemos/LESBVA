@@ -1,6 +1,5 @@
 <?php
     require_once "database\conectar_db.php";
-    require_once "database\conectar_db.php";
 
     #region clase Materia
     class Materia{
@@ -105,6 +104,75 @@
         }
         #endregion
 
+        
+        #region mostrarMaterias y selecionar
+        // Método para obtener y mostrar todos los nombres de las carreras desde la base de datos
+        public static function filterAñoMateria(){
+            // Conexión a la base de datos (suponiendo que ya tienes esto configurado)
+                $con = conectar_db();
+                // Consulta SQL para obtener los nombres de las carreras
+                $sql = "SELECT materia_id, materia_nombre ,anio_materia FROM materias";
+                $resultado = $con->query($sql);
+
+                // Mostrar los nombres de las carreras y permitir al usuario seleccionar una
+                echo "<form action='pantalla_busqueda.php' method='POST'>"; // Formulario para enviar la selección a otra pantalla
+                echo "<select name='materia_id'>"; // Lista desplegable para mostrar los nombres de las carreras
+                while ($fila = $resultado->fetch_assoc()) {
+                    echo "<option value='{$fila['materia_id']}'>{$fila['materia_nombre']}</option>";
+                }
+                echo "</select>";
+                echo "<input type='submit' value='Seleccionar'>";
+                echo "</form>";
+            }
+        #endregion
+        // public static function filterAñoMateria(){
+        //     // Conexión a la base de datos (suponiendo que ya tienes esto configurado)
+        //     $con = conectar_db();
+            
+        //     // Consulta SQL para obtener los nombres de las materias y los años
+        //     $sql = "SELECT materia_id, materia_nombre, anio_materia FROM materias";
+        //     $resultado = $con->query($sql);
+            
+        //     // Mostrar los nombres de las materias y permitir al usuario seleccionar una
+        //     echo "<form action='pantalla_busqueda.php' method='POST'>"; // Formulario para enviar la selección a otra pantalla
+        //     echo "<label for='materia_nombre'>Nombre de la materia:</label>";
+        //     echo "<select name='materia_nombre'>";
+        //     echo "<option value=''>Selecciona una materia</option>";
+        //     while ($fila = $resultado->fetch_assoc()) {
+        //         echo "<option value='{$fila['materia_id']}'>{$fila['materia_nombre']}</option>";
+        //     }
+        //     echo "</select>";
+            
+        //     // Mostrar los años de las materias y permitir al usuario seleccionar uno
+        //     $resultado->data_seek(0); // Reiniciar el puntero del resultado
+        //     echo "<br><label for='anio_materia'>Año de la materia:</label>";
+        //     echo "<select name='anio_materia'>";
+        //     echo "<option value=''>Selecciona un año</option>";
+        //     while ($fila = $resultado->fetch_assoc()) {
+        //         echo "<option value='{$fila['anio_materia']}'>{$fila['anio_materia']}</option>";
+        //     }
+        //     echo "</select>";
+            
+        //     echo "<br><input type='submit' value='Filtrar'>";
+        //     echo "</form>";
+        // }
+
+        // public static function mostrarMateriasFiltradas($materia_id, $anio_materia){
+        //     // Conexión a la base de datos (suponiendo que ya tienes esto configurado)
+        //     $con = conectar_db();
+            
+        //     // Consulta SQL para obtener las materias filtradas por nombre y año
+        //     $sql = "SELECT materia_nombre, anio_materia FROM materias WHERE materia_id = '{$materia_id}' AND anio_materia = '{$anio_materia}'";
+        //     $resultado = $con->query($sql);
+            
+        //     // Mostrar el listado de materias filtradas
+        //     echo "<h2>Materias filtradas:</h2>";
+        //     echo "<ul>";
+        //     while ($fila = $resultado->fetch_assoc()) {
+        //         echo "<li>{$fila['materia_nombre']} - Año: {$fila['anio_materia']}</li>";
+        //     }
+        //     echo "</ul>";
+        // }
     }
     #endregion
 
