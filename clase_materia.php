@@ -242,7 +242,7 @@
             }
             echo "</select>";
             
-            echo "<br><input type='submit' value='Filtrar'>";
+            echo "<br><input type='submit' class = 'button' value='Continuar'>";
             echo "</form>";
         }
     }
