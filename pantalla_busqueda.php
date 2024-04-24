@@ -30,9 +30,13 @@
 <body>
     <form class="presentacion" method="POST">
         <?php
-            // Materia::filterMateria();
+            Carrera::mostrarNombresCarreras();
+        ?>
+    </form>
+    <br>
+    <form class="presentacion" method="POST">
+        <?php
             Materia::filterAño_Materia();
-            // Materia::filterMateria();
         ?>
     </form>
 

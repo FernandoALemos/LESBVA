@@ -84,7 +84,7 @@
                         $_SESSION['rol_id'] = $info['rol_id'];
                         $_SESSION['email'] = $info['email'];
                         $_SESSION['dni'] = $dni;
-                        header("location:pantalla_carreras.php");
+                        header("location:pantalla_busqueda.php");
                         //echo "<script> window.location.href='vista.php';</script>";
                     }else{
                         echo "Contraseña invalida";

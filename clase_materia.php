@@ -104,114 +104,12 @@
         }
         #endregion
 
-        
-        #region mostrarMaterias y selecionar
-        // Método para obtener y mostrar todos los nombres de las materias desde la base de datos
-        // public static function filterMateria(){
-        //     // Conexión a la base de datos (suponiendo que ya tienes esto configurado)
-        //         $con = conectar_db();
-        //         // Consulta SQL para obtener los nombres de las materias
-        //         $sql = "SELECT materia_id, materia_nombre ,anio_materia FROM materias";
-        //         $resultado = $con->query($sql);
-
-        //         // Mostrar los nombres de las materias y permitir al usuario seleccionar una
-        //         echo "<form action='pantalla_busqueda.php' method='POST'>"; // Formulario para enviar la selección a otra pantalla
-        //         echo "<select name='materia_id'>"; // Lista desplegable para mostrar los nombres de las materias
-        //         while ($fila = $resultado->fetch_assoc()) {
-        //             echo "<option value='{$fila['materia_id']}'>{$fila['materia_nombre']}</option>";
-        //         }
-        //         echo "</select>";
-        //         echo "<input type='submit' value='Seleccionar'>";
-        //         echo "</form>";
-        //     }
-        #endregion
-        // public static function filterAñoMateria(){
-        //     $con = conectar_db();
-            
-        //     // Consulta SQL para obtener los nombres de las materias y los años
-        //     $sql = "SELECT materia_id, materia_nombre, anio_materia FROM materias";
-        //     $resultado = $con->query($sql);
-            
-        //     // Mostrar los nombres de las materias y permitir al usuario seleccionar una
-        //     echo "<form action='pantalla_busqueda.php' method='POST'>"; // Formulario para enviar la selección a otra pantalla
-        //     echo "<br><label for='anio_materia'>Año de la materia:</label>";
-        //     echo "<select name='anio_materia'>";
-        //     echo "<option value=''>Selecciona un año</option>";
-        //     while ($fila = $resultado->fetch_assoc()) {
-        //         echo "<option value='{$fila['anio_materia']}'>{$fila['anio_materia']}</option>";
-        //     }
-        //     echo "</select>";
-            
-        //     // Mostrar los años de las materias y permitir al usuario seleccionar uno
-        //     $resultado->data_seek(0); // Reiniciar el puntero del resultado
-        //     echo "<label for='materia_nombre'>Nombre de la materia:</label>";
-        //     echo "<select name='materia_nombre'>";
-        //     echo "<option value=''>Selecciona una materia</option>";
-        //     while ($fila = $resultado->fetch_assoc()) {
-        //         echo "<option value='{$fila['materia_id']}'>{$fila['materia_nombre']}</option>";
-        //     }
-        //     echo "</select>";
-        //     echo "<br><input type='submit' value='Filtrar'>";
-
-        //     echo "</form>";
-        // }
-
-        // public static function mostrarMateriasFiltradas($materia_id, $anio_materia){
-        //     // Conexión a la base de datos (suponiendo que ya tienes esto configurado)
-        //     $con = conectar_db();
-            
-        //     // Consulta SQL para obtener las materias filtradas por nombre y año
-        //     $sql = "SELECT materia_nombre, anio_materia FROM materias WHERE materia_id = '{$materia_id}' AND anio_materia = '{$anio_materia}'";
-        //     $resultado = $con->query($sql);
-            
-        //     // Mostrar el listado de materias filtradas
-        //     echo "<h2>Materias filtradas:</h2>";
-        //     echo "<ul>";
-        //     while ($fila = $resultado->fetch_assoc()) {
-        //         echo "<li>{$fila['materia_nombre']} - Año: {$fila['anio_materia']}</li>";
-        //     }
-        //     echo "</ul>";
-        // }
-        // public static function filterAño_Materia(){
-        //     $con = conectar_db();
-            
-        //     // Consulta SQL para obtener los nombres de las materias y los años
-        //     $sql = "SELECT anio_materia FROM materias";
-        //     $resultado = $con->query($sql);
-            
-        //     // Almacenar los resultados en un array asociativo
-        //     $materias = array();
-        //     while ($fila = $resultado->fetch_assoc()) {
-        //         $materias[] = $fila;
-        //     }
-            
-        //     // Mostrar el formulario con las opciones
-        //     echo "<form action='pantalla_busqueda.php' method='POST'>";
-        //     echo "<br><label for='anio_materia'>Año de la materia:</label>";
-        //     echo "<select name='anio_materia'>";
-        //     echo "<option value=''>Selecciona un año</option>";
-        //     foreach ($materias as $materia) {
-        //         echo "<option value='{$materia['anio_materia']}'>{$materia['anio_materia']}</option>";
-        //     }
-        //     echo "</select>";
-            
-        //     echo "<label for='materia_nombre'>Nombre de la materia:</label>";
-        //     echo "<select name='materia_nombre'>";
-        //     echo "<option value=''>Selecciona una materia</option>";
-        //     foreach ($materias as $materia) {
-        //         echo "<option value='{$materia['materia_id']}'>{$materia['materia_nombre']}</option>";
-        //     }
-        //     echo "</select>";
-            
-        //     echo "<br><input type='submit' value='Filtrar'>";
-        //     echo "</form>";
-        // }
-
         public static function filterAño_Materia(){
             $con = conectar_db();
             
             // Consulta SQL para obtener los nombres de las materias y los años
             $sql = "SELECT anio_materia, materia_id, materia_nombre FROM materias";
+            // $sql = "SELECT DISTINCT anio_materia FROM materias";
             $resultado = $con->query($sql);
             
             // Almacenar los años de materias en un array asociativo
@@ -230,7 +128,7 @@
                 echo "<option value='{$anio}'>{$anio}</option>";
             }
             echo "</select>";
-            
+            // hacer otra query sql para que redefina la busqueda en base al año seleccionado
             echo "<label for='materia_nombre'>Nombre de la materia:</label>";
             echo "<select name='materia_nombre'>";
             echo "<option value=''>Selecciona una materia</option>";
@@ -245,6 +143,52 @@
             echo "<br><input type='submit' class = 'button' value='Continuar'>";
             echo "</form>";
         }
+
+        // PROBAR
+        // echo <<<HTML
+        //     <script>
+        //     document.addEventListener('DOMContentLoaded', function() {
+        //         const anioSelect = document.querySelector('select[name="anio_materia"]');
+        //         const materiaSelect = document.querySelector('select[name="materia_nombre"]');
+                
+        //         const materias = JSON.parse('{$materias}');
+                
+        //         anioSelect.addEventListener('change', function() {
+        //             const anioSeleccionado = this.value;
+                    
+        //             materiaSelect.innerHTML = '<option value="">Selecciona una materia</option>';
+                    
+        //             if (anioSeleccionado in materias) {
+        //                 materias[anioSeleccionado].forEach(materia => {
+        //                     const option = document.createElement('option');
+        //                     option.value = materia.materia_id;
+        //                     option.textContent = materia.materia_nombre;
+        //                     materiaSelect.appendChild(option);
+        //                 });
+        //             }
+                    
+        //             // Enviar el año seleccionado al servidor mediante AJAX
+        //             const xhr = new XMLHttpRequest();
+        //             xhr.open('POST', 'procesar_filtro.php', true);
+        //             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        //             xhr.onreadystatechange = function() {
+        //                 if (xhr.readyState === 4 && xhr.status === 200) {
+        //                     // Actualizar la lista de materias con la respuesta del servidor
+        //                     const response = JSON.parse(xhr.responseText);
+        //                     materiaSelect.innerHTML = '<option value="">Selecciona una materia</option>';
+        //                     response.forEach(materia => {
+        //                         const option = document.createElement('option');
+        //                         option.value = materia.materia_id;
+        //                         option.textContent = materia.materia_nombre;
+        //                         materiaSelect.appendChild(option);
+        //                     });
+        //                 }
+        //             };
+        //             xhr.send('anio=' + anioSeleccionado);
+        //         });
+        //     });
+        //     </script>
+        //     HTML>>>;
     }
     #endregion
 
