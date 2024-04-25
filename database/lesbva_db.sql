@@ -54,14 +54,6 @@ insert into usuarios (usuario_nombre,apellido,rol_id,contrasenia,email,dni) valu
 ('Juan','Pellegrini',2,'jpellegrini','jpellegrini@gmail.com',29031795),
 ('Walter','Vilches',2,'wvilches','wvilches@gmail.com',29031123),
 ('Verónica','Micheltorena',2,'vmicheltorena','vmicheltorena@gmail.com',29038893),
-('Gonzalo','Rojas',4,'grojas','grojas@gmail.com',36123789),
-('Alexia','Cepeda',4,'acepeda','acepeda@gmail.com',41346781),
-('Jesica','Dalmazzo',4,'jdalmazzo','jdalmazzo@gmail.com',34159746),
-('Nicolas','Camaño',4,'ncamaño','ncamaño@gmail.com',37456881),
-('Lautaro','Rossi',4,'lrossi','lrossi@gmail.com',40159741),
-('Juan','Perez',4,'jperez','jperez@gmail.com',29111222),
-('Mariano','Morbelli',4,'mmorbelli','mmorbelli@gmail.com',30451879);
-
 
 
 create table carreras(
@@ -77,6 +69,7 @@ create table materias(
     materia_id int auto_increment,
     materia_nombre varchar(45),
     anio_materia varchar (2),
+    cantidad_alumno int (3),
     ciclo_id int,
     carrera_id int,
     foreign key (ciclo_id) references ciclo_lectivo(ciclo_id),
@@ -84,20 +77,10 @@ create table materias(
     primary key (materia_id,ciclo_id,carrera_id)
 ); 
 
-insert into materias (materia_nombre,anio_materia,ciclo_id,carrera_id) values
-('CIENCIA, TENOLOGÍA Y SOCIEDAD', "1A",3,1),
-('ALGEBRA', "1B",3,1),
-('BASES DE DATOS', "2A",3,1),
-('ESTADISTICA', "2A",3,1),
-('ALGORITMOS Y ESTRUCTURAS DE DATOS III', "3A",3,1),
-('PRÁCTICAS PROFESIONALIZANTES III', "3A",3,1),
-('CIENCIA, TENOLOGÍA Y SOCIEDAD', "1B",3,1),
-('ALGEBRA', "1A",6,1),
-('BASES DE DATOS', "2A",6,1),
-('ESTADISTICA', "2A",6,1),
-('PRÁCTICAS PROFESIONALIZANTES III', "3A",6,1),
-('ALGORITMOS Y ESTRUCTURAS DE DATOS III', "3A",6,1);
-
+insert into materias (materia_nombre,anio_materia,cantidad_alumno,ciclo_id,carrera_id) values
+('CIENCIA, TENOLOGÍA Y SOCIEDAD', "1A",24,3,1),
+('BASES DE DATOS', "2A",29,3,1),
+('PRÁCTICAS PROFESIONALIZANTES III', "3A",17,3,1),
 
 create table materia_usuario(
     materia_usuario_id int auto_increment,
@@ -112,16 +95,16 @@ create table materia_usuario(
 
 
 
-insert into materia_usuario (usuario_id, materia_id, estado_activo) values
-(1,1, TRUE),
-(2,1, TRUE),
-(3,1, TRUE),
-(5,6, TRUE),
-(6,6, TRUE),
-(7,6, TRUE),
-(4,2, TRUE),
-(1,2, TRUE),
-(6,3, TRUE),
-(7,3, TRUE),
-(4,7, TRUE);
+-- insert into materia_usuario (usuario_id, materia_id, estado_activo) values
+-- (1,1, TRUE),
+-- (2,1, TRUE),
+-- (3,1, TRUE),
+-- (5,6, TRUE),
+-- (6,6, TRUE),
+-- (7,6, TRUE),
+-- (4,2, TRUE),
+-- (1,2, TRUE),
+-- (6,3, TRUE),
+-- (7,3, TRUE),
+-- (4,7, TRUE);
 

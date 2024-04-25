@@ -123,6 +123,8 @@
                 echo "<option value='{$fila['carrera_id']}'>{$fila['carrera_nombre']}</option>";
             }
             echo "</select>";
+            
+            echo "<br><input type='submit' class = 'button' value='Continuar'>";
             echo "</form>";
         }
     #endregion

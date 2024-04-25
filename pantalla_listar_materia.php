@@ -28,11 +28,26 @@
 <main>
 
 <body>
-    <form class="presentacion" method="POST">
+    <section id="Materias" class="divMaterias">
+        <div class="divMaterias-cabecera">
+            <!-- <p class="titulos" >Administración de materias</p>
+            <a href="pantalla_listar_materia.php?pan=1&acc=4#Matrequirederias" class="btn-ok ancora">Agregar nueva materia</a> -->
+        </div>
+        <table class="lista">
+        <thead>
+        <tr>
+        <th>MATERIA</th>
+        <th>GRADO</th>
+        <th>CANT. ALUMNOS</th>
+        </tr>
+        </thead>
+        <tbody>
         <?php
-            Materia::filterAño_Materia();
+            Materia::listarMaterias();
         ?>
-    </form>
+        </tbody>
+        </table>
+    </section>
     
 
 

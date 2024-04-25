@@ -5,7 +5,8 @@
     require_once "clase_carrera.php";
 
     // session_start();
-    // if(isset($_SESSION['rol_id']) && ($_SESSION['rol_id'] != 1 || $_SESSION['rol_id'] != 2)){
+
+    // if(isset($_SESSION['rol_id'])){
     //     die("No tenes credenciales para ingresar a este sitio. Intenta registrate</a>.");
     // }
 
@@ -18,11 +19,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/login2.css">
+    <link rel="stylesheet" href="css/login1.css">
     <title>Bienvenido</title>
 </head>
 <header>
-        <p class="titulos blanco">Seleccione la Carrera</p>
+        <p class="titulos blanco"> </p>
 </header>
 <main>
 
@@ -30,9 +31,9 @@
     <form class="presentacion" method="POST">
         <?php
             Carrera::mostrarNombresCarreras();
-            Materia::filterAño_Materia();
         ?>
     </form>
+    
 
 
 </body>

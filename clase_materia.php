@@ -73,8 +73,7 @@
                     <tr>
                         <td><?php echo $info['materia_nombre']; ?></td>
                         <td><?php echo $info['anio_materia']; ?></td>
-                        <td><?php echo $info['anio_lectivo']; ?></td>
-                        <td><?php echo $info['carrera_nombre']; ?></td>
+                        <td><?php echo $info['cantidad_alumno']; ?></td>
                         <td>
                             <p class="acciones">
                                 <a class="modificar" href="pantalla_busqueda.php?pan=1 & acc=5 & materia_id=<?php echo $info['materia_id']; ?>">
@@ -109,7 +108,6 @@
             
             // Consulta SQL para obtener los nombres de las materias y los años
             $sql = "SELECT anio_materia, materia_id, materia_nombre FROM materias";
-            // $sql = "SELECT DISTINCT anio_materia FROM materias";
             $resultado = $con->query($sql);
             
             // Almacenar los años de materias en un array asociativo
@@ -120,7 +118,7 @@
             }
             
             // Mostrar el formulario con las opciones
-            echo "<form action='pantalla_busqueda.php' method='POST'>";
+            echo "<form action='pantalla_listar_materia.php' method='POST'>";
             echo "<br><label for='anio_materia'>Año de la materia:</label>";
             echo "<select name='anio_materia'>";
             echo "<option value=''>Selecciona un año</option>";
@@ -128,15 +126,23 @@
                 echo "<option value='{$anio}'>{$anio}</option>";
             }
             echo "</select>";
+            $materia = array();
+            while ($fila = $resultado->fetch_assoc()) {
+                $materia[] = $fila['materia_nombre'];
+                $materias[$fila['materia_nombre']][] = array('materia_id' => $fila['materia_id'], 'anio_materia' => $fila['anio_materia']);
+            }
             // hacer otra query sql para que redefina la busqueda en base al año seleccionado
             echo "<label for='materia_nombre'>Nombre de la materia:</label>";
             echo "<select name='materia_nombre'>";
             echo "<option value=''>Selecciona una materia</option>";
-            if (isset($_POST['anio_materia'])) {
-                $anio_seleccionado = $_POST['anio_materia'];
-                foreach ($materias[$anio_seleccionado] as $materia) {
-                    echo "<option value='{$materia['materia_id']}'>{$materia['materia_nombre']}</option>";
-                }
+            // if (isset($_POST['anio_materia'])) {
+            //     $anio_seleccionado = $_POST['anio_materia'];
+            //     foreach ($materias[$anio_seleccionado] as $materia) {
+            //         echo "<option value='{$materia['materia_id']}'>{$materia['materia_nombre']}</option>";
+            //     }
+            // }
+            foreach ($materia as $nombre_materia) {
+                echo "<option value='{$nombre_materia}'>{$nombre_materia}</option>";
             }
             echo "</select>";
             
