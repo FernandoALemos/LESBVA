@@ -94,7 +94,7 @@
             
             // Mostrar el formulario con las opciones
             echo "<form action='pantalla_listar_materia.php' method='POST'>";
-            echo "<br><label for='anio_materia'>Año de la materia:</label>";
+            echo "<br><label for='anio_materia'>Año de la materia:      </label>";
             echo "<select name='anio_materia'>";
             echo "<option value=''>Selecciona un año</option>";
             foreach ($anios_materias as $anio) {
@@ -123,7 +123,7 @@
             
             // Mostrar el formulario con las opciones
             echo "<br> <form action='pantalla_listar_materia.php' method='POST'>";
-            echo "<label for='materia_nombre'>Nombre de la materia:</label>";
+            echo "<label for='materia_nombre'>Nombre de la materia:     </label>";
             echo "<select name='materia_nombre'>";
             echo "<option value=''>Selecciona un año</option>";
             foreach ($materia as $nombre_materia) {
