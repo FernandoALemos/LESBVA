@@ -42,18 +42,6 @@
         }
         #endregion
 
-        #region eliminarCarrera
-        public static function eliminarCarrera($carrera_id){
-            $con = conectar_db();
-            $text = "" ;
-
-            mysqli_query($con,"delete from carreras where carrera_id = $carrera_id");
-
-            (mysqli_affected_rows($con) > 0) ? $text = "Carrera Eliminada permanentemente" : $text = "No se pudo eliminar la carrera. Por favor corrobore que esta carrera no tenga materias asignadas.";  
-
-            return $text;
-        }
-        #endregion
 
         #region listarCarreras
         public static function listarCarreras(){
@@ -83,25 +71,6 @@
         }
         #endregion
 
-        #region buscarCarreras
-        public static function buscarCarreras(){
-            $con = conectar_db();
-
-            $data = mysqli_query($con, "select * from carreras;");
-
-            return $data;
-        }
-        #endregion
-
-        #region buscarCarrera
-        public static function buscarCarrera($carrera_id){
-            $con = conectar_db();
-
-            $data = mysqli_query($con, "select * from carreras where id = $carrera_id");
-
-            return $data;
-        }
-        #endregion
 
     
     #endregion
@@ -110,22 +79,29 @@
     #region mostrarCarreras y selecionar
     // Método para obtener y mostrar todos los nombres de las carreras desde la base de datos
         public static function mostrarNombresCarreras(){
-        // Conexión a la base de datos (suponiendo que ya tienes esto configurado)
             $con = conectar_db();
-            // Consulta SQL para obtener los nombres de las carreras
+        // Conexión a la base de datos (suponiendo que ya tienes esto configurado)
             $sql = "SELECT carrera_id, carrera_nombre FROM carreras";
             $resultado = $con->query($sql);
 
-            // Mostrar los nombres de las carreras y permitir al usuario seleccionar una
-            echo "<form action='pantalla_busqueda.php' method='POST'>"; // Formulario para enviar la selección a otra pantalla
-            echo "<select name='carrera_id'>"; // Lista desplegable para mostrar los nombres de las carreras
+            $carrera = array();
             while ($fila = $resultado->fetch_assoc()) {
-                echo "<option value='{$fila['carrera_id']}'>{$fila['carrera_nombre']}</option>";
+                $carrera[] = $fila['carrera_nombre'];
+                $carreras[$fila['carrera_nombre']][] = array('carrera_id' => $fila['carrera_id']);
+            }
+
+            echo "<br> <form action='pantalla_busqueda.php' method='POST'>";
+            echo "<label for='carrera_nombre'>Nombre de la Carrera:</label>";
+            echo "<select name='carrera_nombre'>";
+            echo "<option value=''>Selecciona un año</option>";
+            foreach ($carrera as $nombre_carrera) {
+                echo "<option value='{$nombre_carrera}'>{$nombre_carrera}</option>";
             }
             echo "</select>";
-            
-            echo "<br><input type='submit' class = 'button' value='Continuar'>";
-            echo "</form>";
+
+            // echo "<br><input type='submit' class = 'button' value='Continuar'>";
+            // echo "<br><input type='submit' class='button' value='Continuar' onclick='window.location.href = \"pantalla_busqueda.php\";'>";
+            echo "</form> <br>";
         }
     #endregion
     }

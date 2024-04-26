@@ -50,10 +50,8 @@ insert into usuarios (usuario_nombre,apellido,rol_id,contrasenia,email,dni) valu
 ('Fernando','Lemos',1,'flemos','flemos@gmail.com',37865101),
 ('Lues','Sbarbati',1,'lsbarbati','lsbarbati@gmail.com',12341234),
 ('Matias','Vasca',1,'mvasca','mvasca@gmail.com',11223344),
-('Walter','Muscolo',2,'wmuscolo','wmuscolo@gmail.com',33445566),
-('Juan','Pellegrini',2,'jpellegrini','jpellegrini@gmail.com',29031795),
-('Walter','Vilches',2,'wvilches','wvilches@gmail.com',29031123),
-('Verónica','Micheltorena',2,'vmicheltorena','vmicheltorena@gmail.com',29038893),
+('Walter','Muscolo',2,'wmuscolo','wmuscolo@gmail.com',33445566);
+
 
 
 create table carreras(
@@ -80,17 +78,17 @@ create table materias(
 insert into materias (materia_nombre,anio_materia,cantidad_alumno,ciclo_id,carrera_id) values
 ('CIENCIA, TENOLOGÍA Y SOCIEDAD', "1A",24,3,1),
 ('BASES DE DATOS', "2A",29,3,1),
-('PRÁCTICAS PROFESIONALIZANTES III', "3A",17,3,1),
+('PRÁCTICAS PROFESIONALIZANTES III', "3A",17,3,1);
 
-create table materia_usuario(
-    materia_usuario_id int auto_increment,
-    usuario_id int,
-    materia_id int,
-    estado_activo boolean,
-    foreign key (usuario_id) references usuarios(usuario_id),
-    foreign key (materia_id) references materias(materia_id),
-    primary key (materia_usuario_id,usuario_id,materia_id)
-);
+-- create table materia_usuario(
+--     materia_usuario_id int auto_increment,
+--     usuario_id int,
+--     materia_id int,
+--     estado_activo boolean,
+--     foreign key (usuario_id) references usuarios(usuario_id),
+--     foreign key (materia_id) references materias(materia_id),
+--     primary key (materia_usuario_id,usuario_id,materia_id)
+-- );
 
 
 

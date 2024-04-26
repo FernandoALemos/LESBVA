@@ -214,3 +214,9 @@ input[type=number]::-webkit-outer-spin-button {
 .button:hover{
 	background: #6d44b8;
 }
+
+/* ESTILOS A MOFIFICAR */
+
+.modificar{
+    color: var(--color-verde200);
+}

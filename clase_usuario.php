@@ -51,18 +51,6 @@
         }
     #endregion
 
-    #region eliminarUsuario
-        public static function eliminarUsuario($usuario_id){
-            $con = conectar_db();
-            $text = "" ;
-
-            mysqli_query($con,"delete from usuarios where usuario_id = $usuario_id");
-
-            (mysqli_affected_rows($con) > 0) ? $text = 'Usuario eliminado permanentemente' : $text = 'No se pudo eliminar al usuario correctamente';
-
-            return $text;
-        }
-    #endregion
 
     #region VerificarUsuario
     #      PREGUNTAR SI QUIER QUE EL USUARIO SEA EL DNI O EL EMAL
@@ -84,7 +72,7 @@
                         $_SESSION['rol_id'] = $info['rol_id'];
                         $_SESSION['email'] = $info['email'];
                         $_SESSION['dni'] = $dni;
-                        header("location:pantalla_carreras.php");
+                        header("location:pantalla_busqueda.php");
                         //echo "<script> window.location.href='vista.php';</script>";
                     }else{
                         echo "Contraseña invalida";
@@ -96,15 +84,6 @@
         }
     #endregion
 
-    #region buscarUsuario
-        public static function buscarRol($rol_id){
-            $con = conectar_db();
-            
-            $data = mysqli_query($con, "select * from usuarios where rol_id = $rol_id;");
-
-            return $data;
-        }
-    #endregion
 
 
     #region listarUsuarios

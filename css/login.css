@@ -32,3 +32,59 @@ justify-content: center;
 .contenedorLogin_form_cajaBtn-btn:hover{
     background-color: var(--color-verde100);
 }
+
+
+/* ESTILO PARA LAS TABLAS A MOSTRAR */
+
+table.lista {
+    width: 99%;
+    min-height: 120px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+table.lista td,
+table.lista th {
+    padding: 5px 5px;
+}
+
+table.lista tbody td {
+    font: var(--font-P300);
+}
+
+table.lista tr:nth-child(even) {
+    background: #D0E4F5;
+}
+
+table.lista thead {
+    background: #121155;
+}
+
+table.lista thead th {
+    font: var(--font-P700);
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.acciones{
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+.divUsuarios, .divMaterias, .divCarreras, .divNotas{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+}
+
+.divUsuarios-cabecera, .divMaterias-cabecera, .divCarreras-cabecera, .divNotas-cabecera{
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -22,49 +22,27 @@
         }
         #endregion
 
-        #region crearMateria
-        public function crearMateria(){
-            $con = conectar_db();
-            $text = "";
+        // DEJAR Y VER SI SE USARA
+        // #region crearMateria
+        // public function crearMateria(){
+        //     $con = conectar_db();
+        //     $text = "";
 
-            mysqli_query($con, "insert into materias (materia_nombre,anio_materia,ciclo_id,carrera_id) values ('$this->materia_nombre', $this->anio_materia, $this->ciclo_id, $this->carrera_id)");
+        //     mysqli_query($con, "insert into materias (materia_nombre,anio_materia,ciclo_id,carrera_id) values ('$this->materia_nombre', $this->anio_materia, $this->ciclo_id, $this->carrera_id)");
 
-            (mysqli_affected_rows($con) > 0) ? $text = "Nueva materia agregada" : $text =" No se pudo generar una nueva materia";
+        //     (mysqli_affected_rows($con) > 0) ? $text = "Nueva materia agregada" : $text =" No se pudo generar una nueva materia";
 
-            return $text;
-        }
-        #endregion
+        //     return $text;
+        // }
+        // #endregion
 
-        #region modificarMateria
-        public function modificarMateria(){
-            $con = conectar_db();
-            $texto = "";
-            mysqli_query($con, "update materias set materia_nombre = '$this->materia_nombre', anio_materia = $this->anio_materia, ciclo_id = $this->ciclo_id, carrera_id = $this->carrera_id where materia_id = $this->materia_id");
 
-            (mysqli_affected_rows($con) > 0) ? $texto = "Materia modificada correctamente" : $texto = "No se pudo modificar la materia";
-
-            return $texto;
-        }
-        #endregion
-
-        #region eliminarMateria
-        public static function eliminarMateria($materia_id){
-            $con = conectar_db();
-            $text = "";
-
-            mysqli_query($con, "delete from materias where materia_id = $materia_id;");
-
-            (mysqli_affected_rows($con) > 0) ? $text = "Materia eliminada correctamente" : $text = "No se pudo eliminar la materia";
-
-            return $text;
-        }
-        #endregion
 
         #region listarMaterias
         public static function listarMaterias(){
             $con = conectar_db();
 
-            $data = mysqli_query($con,"select materias.materia_id, materias.materia_nombre, materias.anio_materia, ciclo_lectivo.anio_lectivo, carreras.carrera_nombre from (( materias inner join ciclo_lectivo on materias.ciclo_id = ciclo_lectivo.ciclo_id ) inner join carreras on materias.carrera_id = carreras.carrera_id);");
+            $data = mysqli_query($con,"select materias.materia_id, materias.materia_nombre, materias.anio_materia, materias.cantidad_alumno, ciclo_lectivo.anio_lectivo, carreras.carrera_nombre from (( materias inner join ciclo_lectivo on materias.ciclo_id = ciclo_lectivo.ciclo_id ) inner join carreras on materias.carrera_id = carreras.carrera_id);");
             
             if(mysqli_affected_rows($con) == 0){
                 echo "<tr><td><b class='bold red'>No hay materias registradas en el sistema</b></td></tr>";
@@ -78,9 +56,6 @@
                             <p class="acciones">
                                 <a class="modificar" href="pantalla_busqueda.php?pan=1 & acc=5 & materia_id=<?php echo $info['materia_id']; ?>">
                                     <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                                <a class="eliminar" href="pantalla_busqueda.php?pan=1 & acc=6 & materia_id=<?php echo $info['materia_id']; ?>">
-                                    <i class="fa-solid fa-trash-can"></i>
                                 </a>
                             </p>
                         </td>
@@ -103,7 +78,7 @@
         }
         #endregion
 
-        public static function filterAño_Materia(){
+        public static function filterAño(){
             $con = conectar_db();
             
             // Consulta SQL para obtener los nombres de las materias y los años
@@ -126,27 +101,38 @@
                 echo "<option value='{$anio}'>{$anio}</option>";
             }
             echo "</select>";
+
+            //echo "<br><input type='submit' class = 'button' value='Continuar'>";
+            echo "</form>";
+        }
+
+
+        public static function filterMateria(){
+            $con = conectar_db();
+            
+            // Consulta SQL para obtener los nombres de las materias y los años
+            $sql = "SELECT anio_materia, materia_id, materia_nombre FROM materias";
+            $resultado = $con->query($sql);
+            
+            // Almacenar los años de materias en un array asociativo
             $materia = array();
             while ($fila = $resultado->fetch_assoc()) {
                 $materia[] = $fila['materia_nombre'];
                 $materias[$fila['materia_nombre']][] = array('materia_id' => $fila['materia_id'], 'anio_materia' => $fila['anio_materia']);
             }
-            // hacer otra query sql para que redefina la busqueda en base al año seleccionado
+            
+            // Mostrar el formulario con las opciones
+            echo "<br> <form action='pantalla_listar_materia.php' method='POST'>";
             echo "<label for='materia_nombre'>Nombre de la materia:</label>";
             echo "<select name='materia_nombre'>";
-            echo "<option value=''>Selecciona una materia</option>";
-            // if (isset($_POST['anio_materia'])) {
-            //     $anio_seleccionado = $_POST['anio_materia'];
-            //     foreach ($materias[$anio_seleccionado] as $materia) {
-            //         echo "<option value='{$materia['materia_id']}'>{$materia['materia_nombre']}</option>";
-            //     }
-            // }
+            echo "<option value=''>Selecciona un año</option>";
             foreach ($materia as $nombre_materia) {
                 echo "<option value='{$nombre_materia}'>{$nombre_materia}</option>";
             }
             echo "</select>";
             
-            echo "<br><input type='submit' class = 'button' value='Continuar'>";
+            // echo "<br><input type='submit' class = 'button' value='Continuar'>";
+            echo "<br><input type='submit' class='button' value='Continuar' onclick='window.location.href = \"pantalla_listar_materia.php\";'>";
             echo "</form>";
         }
 
