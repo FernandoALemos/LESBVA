@@ -28,13 +28,13 @@
 
 			<div class="signup">
 				<form>
-					<label for="chk" aria-hidden="true">Iniciar sesión</label>
+					<label for="chk" aria-hidden="true">Bienvenido</label>
 				</form>
 			</div>
 
 			<div class="login">
 				<form method="POST">
-					<label for="chk" aria-hidden="true">Login</label>
+					<label for="chk" aria-hidden="true">Iniciar Sesión</label>
 					<input type="number" name="dni" id="dni" placeholder="Ingrese su DNI" required="">
 					<input type="password" name="contrasenia" id="contra" placeholder="Contraseña" required="">
 					<button>Acceder</button>

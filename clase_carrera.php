@@ -91,9 +91,9 @@
             }
 
             echo "<br> <form action='pantalla_busqueda.php' method='POST'>";
-            echo "<label for='carrera_nombre'>Nombre de la Carrera:     </label>";
+            echo "<label for='carrera_nombre'>Carrera:     </label>";
             echo "<select name='carrera_nombre'>";
-            echo "<option value=''>Selecciona un año</option>";
+            echo "<option value=''>Todos</option>";
             foreach ($carrera as $nombre_carrera) {
                 echo "<option value='{$nombre_carrera}'>{$nombre_carrera}</option>";
             }

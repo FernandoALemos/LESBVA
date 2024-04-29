@@ -42,15 +42,16 @@
         public static function listarMaterias(){
             $con = conectar_db();
 
-            $data = mysqli_query($con,"select materias.materia_id, materias.materia_nombre, materias.anio_materia, materias.cantidad_alumno, ciclo_lectivo.anio_lectivo, carreras.carrera_nombre from (( materias inner join ciclo_lectivo on materias.ciclo_id = ciclo_lectivo.ciclo_id ) inner join carreras on materias.carrera_id = carreras.carrera_id);");
+            $data = mysqli_query($con,"select materias.materia_id, materias.materia_nombre, materias.anio_materia, materias.cantidad_alumno, ciclo_lectivo.anio_lectivo, carreras.carrera_nombre from (( materias inner join ciclo_lectivo on materias.ciclo_id = ciclo_lectivo.ciclo_id ) inner join carreras on materias.carrera_id = carreras.carrera_id) order by  materias.anio_materia, materias.materia_nombre;");
             
             if(mysqli_affected_rows($con) == 0){
                 echo "<tr><td><b class='bold red'>No hay materias registradas en el sistema</b></td></tr>";
             }else{
                 while ($info = mysqli_fetch_assoc($data)){ ?>
                     <tr>
-                        <td><?php echo $info['materia_nombre']; ?></td>
+                        <td><?php echo (2024); ?></td>
                         <td><?php echo $info['anio_materia']; ?></td>
+                        <td><?php echo $info['materia_nombre']; ?></td>
                         <td><?php echo $info['cantidad_alumno']; ?></td>
                         <td>
                             <p class="acciones">
@@ -78,25 +79,26 @@
         }
         #endregion
 
+        // filtrar curso
         public static function filterAño(){
             $con = conectar_db();
             
             // Consulta SQL para obtener los nombres de las materias y los años
-            $sql = "SELECT anio_materia, materia_id, materia_nombre FROM materias";
+            $sql = "SELECT DISTINCT anio_materia FROM materias";
             $resultado = $con->query($sql);
             
             // Almacenar los años de materias en un array asociativo
             $anios_materias = array();
             while ($fila = $resultado->fetch_assoc()) {
                 $anios_materias[] = $fila['anio_materia'];
-                $materias[$fila['anio_materia']][] = array('materia_id' => $fila['materia_id'], 'materia_nombre' => $fila['materia_nombre']);
+                // $materias[$fila['anio_materia']][] = array('materia_id' => $fila['materia_id'], 'materia_nombre' => $fila['materia_nombre']);
             }
             
             // Mostrar el formulario con las opciones
             echo "<form action='pantalla_listar_materia.php' method='POST'>";
-            echo "<br><label for='anio_materia'>Año de la materia:      </label>";
+            echo "<br><label for='anio_materia'>Curso:      </label>";
             echo "<select name='anio_materia'>";
-            echo "<option value=''>Selecciona un año</option>";
+            echo "<option value=''>Todos</option>";
             foreach ($anios_materias as $anio) {
                 echo "<option value='{$anio}'>{$anio}</option>";
             }
@@ -107,25 +109,26 @@
         }
 
 
+        // filtrar materia
         public static function filterMateria(){
             $con = conectar_db();
             
             // Consulta SQL para obtener los nombres de las materias y los años
-            $sql = "SELECT anio_materia, materia_id, materia_nombre FROM materias";
+            $sql = "SELECT DISTINCT materia_nombre FROM materias order by materia_nombre";
             $resultado = $con->query($sql);
             
             // Almacenar los años de materias en un array asociativo
             $materia = array();
             while ($fila = $resultado->fetch_assoc()) {
                 $materia[] = $fila['materia_nombre'];
-                $materias[$fila['materia_nombre']][] = array('materia_id' => $fila['materia_id'], 'anio_materia' => $fila['anio_materia']);
+                // $materias[$fila['materia_nombre']][] = array('materia_id' => $fila['materia_id'], 'anio_materia' => $fila['anio_materia']);
             }
             
             // Mostrar el formulario con las opciones
             echo "<br> <form action='pantalla_listar_materia.php' method='POST'>";
-            echo "<label for='materia_nombre'>Nombre de la materia:     </label>";
+            echo "<label for='materia_nombre'>Materia:     </label>";
             echo "<select name='materia_nombre'>";
-            echo "<option value=''>Selecciona un año</option>";
+            echo "<option value=''>Todos</option>";
             foreach ($materia as $nombre_materia) {
                 echo "<option value='{$nombre_materia}'>{$nombre_materia}</option>";
             }

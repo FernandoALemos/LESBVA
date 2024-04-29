@@ -23,7 +23,7 @@
     <title>Bienvenido</title>
 </head>
 <header>
-    <title class="titulos blanco">Estudiar en Instituto Superior de Formación Docente y Técnica Nº 24</title>
+    <p class="header_div_nav-item">Instituto Superior de Formación Docente y Técnica Nº 24</p>
 </header>
 <main>
 
@@ -36,9 +36,12 @@
         <table class="lista">
             <thead>
                 <tr>
-                    <th>MATERIA</th>
+                    <th>AÑO</th>
                     <th>CURSO</th>
-                    <th>CANT. ALUMNOS</th>
+                    <th>MATERIA</th>
+                    <th>INSCRIPTOS</th>
+                    <th>1° PERIODO</th>
+                    <th>2° PERIODO</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,7 +56,7 @@
 </body>
 </main>
 <footer>
-        <font-size="2"><h4><p class="titulos blanco" ><font-size="2"></p><br>
-        <p class="titulos blanco"></p></h4></font-size>
+        <font-size="2"><h4><p class="titulos" ><font-size="2"></p><br>
+        <p class="titulos"></p></h4></font-size>
     </footer>
 </html>

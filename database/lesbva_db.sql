@@ -76,9 +76,37 @@ create table materias(
 ); 
 
 insert into materias (materia_nombre,anio_materia,cantidad_alumno,ciclo_id,carrera_id) values
-('CIENCIA, TENOLOGÍA Y SOCIEDAD', "1A",24,3,1),
-('BASES DE DATOS', "2A",29,3,1),
-('PRÁCTICAS PROFESIONALIZANTES III', "3A",17,3,1);
+('Inglés I', "1A",24,3,1),
+('Ciencia, Tecnología y Sociedad', "1A",24,3,1),
+('Análisis Matemático I', "1A",24,3,1),
+('Algebra', "1A",24,3,1),
+('Algoritmos y Estructuras de Datos I', "1A",24,3,1),
+('Sistemas y Organizaciones', "1A",24,3,1),
+('Arquitectura de Computadores', "1A",24,3,1),
+('Prácticas Profesionalizantes I', "1A",24,3,1),
+('Inglés I', "1B",24,3,1),
+('Ciencia, Tecnología y Sociedad', "1B",24,3,1),
+('Análisis Matemático I', "1B",24,3,1),
+('Algebra', "1B",24,3,1),
+('Algoritmos y Estructuras de Datos I', "1B",24,3,1),
+('Sistemas y Organizaciones', "1B",24,3,1),
+('Arquitectura de Computadores', "1B",24,3,1),
+('Prácticas Profesionalizantes I', "1B",24,3,1),
+('Inglés II', '2A', 17, 3,1),
+('Análisis Matemático II', '2A', 17, 3,1),
+('Estadistica', '2A', 17, 3,1),
+('Ingeniería de Software I', '2A', 17, 3,1),
+('Algoritmos y Estructura de Datos II', '2A', 17, 3,1),
+('Sistemas Operativos', '2A', 17, 3,1),
+('Base de Datos', '2A', 17, 3,1),
+('Prácticas Profesionalizantes II', '2A', 17, 3,1),
+('Inglés III', '3A', 15, 3,1),
+('Aspectos Legales de la Profesión', '3A', 15, 3,1),
+('Seminario de la actualización', '3A', 15, 3,1),
+('Redes y Comunicaciones', '3A', 15, 3,1),
+('Ingeniería de Software II', '3A', 15, 3,1),
+('Algoritmos y Estructura de Datos III', '3A', 15, 3,1),
+('Prácticas Profesionalizantes III', "3A",17,3,1);
 
 -- create table materia_usuario(
 --     materia_usuario_id int auto_increment,

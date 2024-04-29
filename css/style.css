@@ -132,7 +132,9 @@ footer{
 }
 
 .titulos{
-    font: var(--font-T500);
+    /* font: var(--font-T500); */
+    color:#ffffff;
+    font-weight: 400;
 }
 
 .btn-ok, .btn-no{
@@ -219,4 +221,18 @@ input[type=number]::-webkit-outer-spin-button {
 
 .modificar{
     color: var(--color-verde200);
+}
+
+
+/* IMAGENES Y LOGOS DEL INSTITUTO PARA MOSTRAR */
+
+.logo{
+    background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.acaula.com.ar%2Finstituciones%2Finstituto-superior-de-formacion-docente-y-tecnica-no-24&psig=AOvVaw3DviusJVFVaAE93D_lw2l7&ust=1714517301445000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCOjH4uvA6IUDFQAAAAAdAAAAABAY");
+    width: 100%;
+    padding: 12vh;
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    background-repeat: no-repeat;
+    background-position: right;
 }
