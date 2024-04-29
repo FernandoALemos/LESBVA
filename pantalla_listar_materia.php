@@ -23,7 +23,7 @@
     <title>Bienvenido</title>
 </head>
 <header>
-        <p class="titulos blanco"> </p>
+    <title class="titulos blanco">Estudiar en Instituto Superior de Formación Docente y Técnica Nº 24</title>
 </header>
 <main>
 
@@ -34,21 +34,20 @@
             <a href="pantalla_listar_materia.php?pan=1&acc=4#Matrequirederias" class="btn-ok ancora">Agregar nueva materia</a> -->
         </div>
         <table class="lista">
-        <thead>
-        <tr>
-        <th>MATERIA</th>
-        <th>GRADO</th>
-        <th>CANT. ALUMNOS</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php
-            Materia::listarMaterias();
-        ?>
-        </tbody>
+            <thead>
+                <tr>
+                    <th>MATERIA</th>
+                    <th>CURSO</th>
+                    <th>CANT. ALUMNOS</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+                Materia::listarMaterias();
+            ?>
+            </tbody>
         </table>
     </section>
-    
 
 
 </body>

@@ -23,7 +23,8 @@
     <title>Bienvenido</title>
 </head>
 <header>
-        <p class="titulos blanco"> </p>
+        <!-- <p class="titulos blanco"> </p> -->
+        <title>Estudiar en Instituto Superior de Formación Docente y Técnica Nº 24</title>
 </header>
 <main>
 
