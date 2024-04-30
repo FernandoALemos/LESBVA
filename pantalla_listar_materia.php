@@ -23,6 +23,7 @@
     <title>Bienvenido</title>
 </head>
 <header>
+    <img src="https://isfdyt24-bue.infd.edu.ar/sitio/wp-content/uploads/2020/07/logo-chico.png" alt="Instituto Superior de Formación Docente y Técnica Nº 24" style="float: left; margin-right: 10px; width: 100px; height: 100px;">
     <p class="header_div_nav-item">Instituto Superior de Formación Docente y Técnica Nº 24</p>
 </header>
 <main>
@@ -30,8 +31,7 @@
 <body>
     <section id="Materias" class="divMaterias">
         <div class="divMaterias-cabecera">
-            <!-- <p class="titulos" >Administración de materias</p>
-            <a href="pantalla_listar_materia.php?pan=1&acc=4#Matrequirederias" class="btn-ok ancora">Agregar nueva materia</a> -->
+            <button class="btn-descargar">Descargar Excel</button>
         </div>
         <table class="lista">
             <thead>

@@ -23,14 +23,12 @@
     <title>Bienvenido</title>
 </head>
 <header>
-        <!-- <p class="titulos"> </p> -->
-        <p class="header_div_nav-item">Instituto Superior de Formación Docente y Técnica Nº 24</p>
+    <img src="https://isfdyt24-bue.infd.edu.ar/sitio/wp-content/uploads/2020/07/logo-chico.png" alt="Instituto Superior de Formación Docente y Técnica Nº 24" style="float: left; margin-right: 10px; width: 100px; height: 100px;">
+    <p class="header_div_nav-item">Instituto Superior de Formación Docente y Técnica Nº 24</p>
 </header>
 <main>
 
 <body>
-<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fisfdyt24-bue.infd.edu.ar%2Faula%2F&psig=AOvVaw2c5znKacYxUb9w-UIkHi8b&ust=1714519150539000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJjG9dzH6IUDFQAAAAAdAAAAABAE" class="logo">
-
     <form class="presentacion" method="POST" style="display: flex; justify-content: center; flex-direction: row;">
         <div style="margin-right: 10px;">
             <?php

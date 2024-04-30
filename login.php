@@ -16,17 +16,19 @@
 	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 
 </head>
+<!-- <header>
+	<div>
+	<img src="https://isfdyt24-bue.infd.edu.ar/sitio/wp-content/uploads/2020/07/logo-chico.png" alt="Instituto Superior de Formación Docente y Técnica Nº 24" style="float: left; margin-right: 10px; width: 100px; height: 100px;">
+		<p class="header_div_nav-item">Instituto Superior de Formación Docente y Técnica Nº 24</p>
+	</div>
+</header> -->
 
 <body>
-    <header>
-        <div>
-
-        </div>
-    </header>
 	<div class="main">  	
 		<input type="checkbox" id="chk" aria-hidden="true">
 
 			<div class="signup">
+				<img src="https://isfdyt24-bue.infd.edu.ar/sitio/wp-content/uploads/2020/07/logo-chico.png" alt="Instituto Superior de Formación Docente y Técnica Nº 24" style="float: left; margin-right: 10px; width: 100px; height: 100px;">
 				<form>
 					<label for="chk" aria-hidden="true">Bienvenido</label>
 				</form>

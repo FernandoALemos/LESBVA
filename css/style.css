@@ -236,3 +236,16 @@ input[type=number]::-webkit-outer-spin-button {
     background-repeat: no-repeat;
     background-position: right;
 }
+
+/* BOTONES */
+
+.btn-descargar {
+    background-color: #135da7;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+    margin-top: 10px;
+}
