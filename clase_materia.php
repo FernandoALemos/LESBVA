@@ -53,6 +53,7 @@
                         <td><?php echo $info['anio_materia']; ?></td>
                         <td><?php echo $info['materia_nombre']; ?></td>
                         <td><?php echo $info['cantidad_alumno']; ?></td>
+                        <td></td>
                         <td>
                             <p class="acciones">
                                 <a class="modificar" href="pantalla_busqueda.php?pan=1 & acc=5 & materia_id=<?php echo $info['materia_id']; ?>">

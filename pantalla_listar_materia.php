@@ -31,6 +31,7 @@
 <body>
     <section id="Materias" class="divMaterias">
         <div class="divMaterias-cabecera">
+            <div class="btns-space"></div>
             <button class="btn-descargar">Descargar Excel</button>
         </div>
         <table class="lista">

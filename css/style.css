@@ -238,7 +238,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 /* BOTONES */
-
+.btns-space {
+  width: 80%;  
+}
 .btn-descargar {
     background-color: #135da7;
     color: white;
@@ -247,5 +249,12 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 5px;
     cursor: pointer;
     float: right;
+    width: 280px;
     margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.divMaterias-cabecera
+{
+    width: 100%;
 }
