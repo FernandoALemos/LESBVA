@@ -1,0 +1,18 @@
+¿Cuál es el proposito del sistema?
+¿Qué funcionalidad especifica debe realizar el sistema?
+¿Quienes son los actores que interactuan con el sistema? (USUARIOS)
+¿Qué es lo que podrían hacer cada uno de los actores? (ROLES)
+¿Tienes algun sistema viejo o datos apropiados para asemejarnos a las necesidades?
+¿Se pueden ver?
+Para ingresar con el usuario: ¿queres que sea con el dni, una cuenta de email u otra forma de ingresar?
+
+
+
+
+¿Qué aspectos del sistema te parecieron más útiles o interesantes?
+¿Hay alguna funcionalidad que te gustaría que se agregara o modificara?
+¿Cómo te pareció la usabilidad del sistema? ¿Hubo algo que te resultara confuso o difícil de entender?
+¿Consideras que el sistema cumple con tus expectativas y necesidades?
+¿Qué áreas crees que podrían mejorarse para que el sistema sea aún más útil para ti?
+¿Cómo evaluarías la velocidad y el rendimiento del sistema durante su uso?
+¿Qué opinas sobre el diseño y la interfaz del sistema? ¿Hay algún aspecto visual que te gustaría cambiar?
