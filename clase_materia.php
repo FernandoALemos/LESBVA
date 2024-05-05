@@ -7,16 +7,16 @@
         #region atributos
         private $materia_id;
         private $materia_nombre;
-        private $anio_materia;
+        private $curso;
         private $ciclo_id;
         private $carrera_id;
         #endregion
 
         #region constructor
-        public function __construct($materia_id,$materia_nombre,$anio_materia,$ciclo_id,$carrera_id){
+        public function __construct($materia_id,$materia_nombre,$curso,$ciclo_id,$carrera_id){
             $this->materia_id = $materia_id;
             $this->materia_nombre = $materia_nombre;
-            $this->anio_materia = $anio_materia;
+            $this->curso = $curso;
             $this->ciclo_id = $ciclo_id;
             $this->carrera_id = $carrera_id;
         }
@@ -28,7 +28,7 @@
         //     $con = conectar_db();
         //     $text = "";
 
-        //     mysqli_query($con, "insert into materias (materia_nombre,anio_materia,ciclo_id,carrera_id) values ('$this->materia_nombre', $this->anio_materia, $this->ciclo_id, $this->carrera_id)");
+        //     mysqli_query($con, "insert into materias (materia_nombre,curso,ciclo_id,carrera_id) values ('$this->materia_nombre', $this->curso, $this->ciclo_id, $this->carrera_id)");
 
         //     (mysqli_affected_rows($con) > 0) ? $text = "Nueva materia agregada" : $text =" No se pudo generar una nueva materia";
 
@@ -42,7 +42,10 @@
         public static function listarMaterias(){
             $con = conectar_db();
 
-            $data = mysqli_query($con,"select materias.materia_id, materias.materia_nombre, materias.anio_materia, materias.cantidad_alumno, ciclo_lectivo.anio_lectivo, carreras.carrera_nombre from (( materias inner join ciclo_lectivo on materias.ciclo_id = ciclo_lectivo.ciclo_id ) inner join carreras on materias.carrera_id = carreras.carrera_id) order by  materias.anio_materia, materias.materia_nombre;");
+            // $data = mysqli_query($con,"select materias.materia_id, materias.materia_nombre, materias.curso, materias.profesor, materias.situacion_revista, materias.cantidad_alumno, ciclo_lectivo.anio_lectivo, carreras.carrera_nombre from (( materias inner join ciclo_lectivo on materias.ciclo_id = ciclo_lectivo.ciclo_id ) inner join carreras on materias.carrera_id = carreras.carrera_id) order by  materias.curso, materias.materia_nombre;");
+
+            // PROBAR
+            $data = mysqli_query($con,"select materias.materia_id, materias.materia_nombre, materias.curso, materias.profesor, materias.situacion_revista, materias.cantidad_alumno, ciclo_lectivo.anio_lectivo, carreras.carrera_nombre from (( materias inner join ciclo_lectivo on materias.ciclo_id = ciclo_lectivo.ciclo_id ) inner join carreras on materias.carrera_id = carreras.carrera_id)  WHERE materias.curso = '{$_POST['curso']}' order by  materias.curso, materias.materia_nombre;");
             
             if(mysqli_affected_rows($con) == 0){
                 echo "<tr><td><b class='bold red'>No hay materias registradas en el sistema</b></td></tr>";
@@ -50,8 +53,10 @@
                 while ($info = mysqli_fetch_assoc($data)){ ?>
                     <tr>
                         <td><?php echo (2024); ?></td>
-                        <td><?php echo $info['anio_materia']; ?></td>
+                        <td><?php echo $info['curso']; ?></td>
                         <td><?php echo $info['materia_nombre']; ?></td>
+                        <td><?php echo $info['profesor']; ?></td>
+                        <td><?php echo $info['situacion_revista']; ?></td>
                         <td><?php echo $info['cantidad_alumno']; ?></td>
                         <td></td>
                         <td>
@@ -67,124 +72,35 @@
         }
         #endregion
 
-        #region buscarMateria
-        public static function buscarMateria($materia_id){
-            $con = conectar_db();
-            
-            $info = mysqli_query($con, "select materias.materia_id, materias.materia_nombre, materias.anio_materia,
-            ciclo_lectivo.anio_lectivo, carreras.carrera_nombre from (( materias inner join ciclo_lectivo on materias.ciclo_id = ciclo_lectivo.ciclo_id ) inner join carreras on materias.carrera_id = carreras.carrera_id) where materias.materia_id = $materia_id;");
-
-            $data = mysqli_fetch_assoc($info);
-
-            return $data;
-        }
-        #endregion
-
-        // filtrar curso
-        public static function filterAño(){
+        // filtrar curso HACER QUE FUNCIONE EL FILTRO PARA EL CURSO
+        public static function filtrarCurso(){
             $con = conectar_db();
             
             // Consulta SQL para obtener los nombres de las materias y los años
-            $sql = "SELECT DISTINCT anio_materia FROM materias";
+            // $_POST['curso'] rompe si se llama directamente sin usar
+            // No es necesario tomar $_POST['curso'] dado que al enviar el form, lo toma la funcion porque ya obtiene ese dato
+            $sql = "SELECT DISTINCT curso FROM materias";
             $resultado = $con->query($sql);
             
             // Almacenar los años de materias en un array asociativo
-            $anios_materias = array();
+            $cursos_materias = array();
             while ($fila = $resultado->fetch_assoc()) {
-                $anios_materias[] = $fila['anio_materia'];
-                // $materias[$fila['anio_materia']][] = array('materia_id' => $fila['materia_id'], 'materia_nombre' => $fila['materia_nombre']);
+                $cursos_materias[] = $fila['curso'];
             }
             
             // Mostrar el formulario con las opciones
             echo "<form action='pantalla_listar_materia.php' method='POST'>";
-            echo "<br><label for='anio_materia'>Curso:      </label>";
-            echo "<select name='anio_materia'>";
+            echo "<br><label for='curso'>Curso:      </label>";
+            echo "<select name='curso'>";
             echo "<option value=''>Todos</option>";
-            foreach ($anios_materias as $anio) {
-                echo "<option value='{$anio}'>{$anio}</option>";
+            foreach ($cursos_materias as $curso) {
+                echo "<option value='{$curso}'>{$curso}</option>";
             }
             echo "</select>";
 
-            //echo "<br><input type='submit' class = 'button' value='Continuar'>";
-            echo "</form>";
-        }
-
-
-        // filtrar materia
-        public static function filterMateria(){
-            $con = conectar_db();
-            
-            // Consulta SQL para obtener los nombres de las materias y los años
-            $sql = "SELECT DISTINCT materia_nombre FROM materias order by materia_nombre";
-            $resultado = $con->query($sql);
-            
-            // Almacenar los años de materias en un array asociativo
-            $materia = array();
-            while ($fila = $resultado->fetch_assoc()) {
-                $materia[] = $fila['materia_nombre'];
-                // $materias[$fila['materia_nombre']][] = array('materia_id' => $fila['materia_id'], 'anio_materia' => $fila['anio_materia']);
-            }
-            
-            // Mostrar el formulario con las opciones
-            echo "<br> <form action='pantalla_listar_materia.php' method='POST'>";
-            echo "<label for='materia_nombre'>Materia:     </label>";
-            echo "<select name='materia_nombre'>";
-            echo "<option value=''>Todos</option>";
-            foreach ($materia as $nombre_materia) {
-                echo "<option value='{$nombre_materia}'>{$nombre_materia}</option>";
-            }
-            echo "</select>";
-            
-            // echo "<br><input type='submit' class = 'button' value='Continuar'>";
             echo "<br><input type='submit' class='button' value='Continuar' onclick='window.location.href = \"pantalla_listar_materia.php\";'>";
             echo "</form>";
         }
-
-        // PROBAR
-        // echo <<<HTML
-        //     <script>
-        //     document.addEventListener('DOMContentLoaded', function() {
-        //         const anioSelect = document.querySelector('select[name="anio_materia"]');
-        //         const materiaSelect = document.querySelector('select[name="materia_nombre"]');
-                
-        //         const materias = JSON.parse('{$materias}');
-                
-        //         anioSelect.addEventListener('change', function() {
-        //             const anioSeleccionado = this.value;
-                    
-        //             materiaSelect.innerHTML = '<option value="">Selecciona una materia</option>';
-                    
-        //             if (anioSeleccionado in materias) {
-        //                 materias[anioSeleccionado].forEach(materia => {
-        //                     const option = document.createElement('option');
-        //                     option.value = materia.materia_id;
-        //                     option.textContent = materia.materia_nombre;
-        //                     materiaSelect.appendChild(option);
-        //                 });
-        //             }
-                    
-        //             // Enviar el año seleccionado al servidor mediante AJAX
-        //             const xhr = new XMLHttpRequest();
-        //             xhr.open('POST', 'procesar_filtro.php', true);
-        //             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        //             xhr.onreadystatechange = function() {
-        //                 if (xhr.readyState === 4 && xhr.status === 200) {
-        //                     // Actualizar la lista de materias con la respuesta del servidor
-        //                     const response = JSON.parse(xhr.responseText);
-        //                     materiaSelect.innerHTML = '<option value="">Selecciona una materia</option>';
-        //                     response.forEach(materia => {
-        //                         const option = document.createElement('option');
-        //                         option.value = materia.materia_id;
-        //                         option.textContent = materia.materia_nombre;
-        //                         materiaSelect.appendChild(option);
-        //                     });
-        //                 }
-        //             };
-        //             xhr.send('anio=' + anioSeleccionado);
-        //         });
-        //     });
-        //     </script>
-        //     HTML>>>;
     }
     #endregion
 

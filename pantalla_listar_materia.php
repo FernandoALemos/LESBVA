@@ -40,6 +40,8 @@
                     <th>AÑO</th>
                     <th>CURSO</th>
                     <th>MATERIA</th>
+                    <th>PROFSOR</th>
+                    <th>SITUACIÓN DE REVISTA</th>
                     <th>INSCRIPTOS</th>
                     <th>1° PERIODO</th>
                     <th>2° PERIODO</th>

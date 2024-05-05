@@ -53,7 +53,7 @@
 
 
     #region VerificarUsuario
-    #      PREGUNTAR SI QUIER QUE EL USUARIO SEA EL DNI O EL EMAL
+    // PREGUNTAR SI QUIER QUE EL USUARIO SEA EL DNI O EL EMAL
         public static function VerificarUsuario($dni,$contrasenia){
             $con = conectar_db();
             
@@ -123,7 +123,7 @@
         }
     #endregion
 
-    #region formModificarUsuario
+    #region formModificarUsuario por el momento no se usa
         public static function formModificarUsuario($usuario_id){
             $con = conectar_db();
 

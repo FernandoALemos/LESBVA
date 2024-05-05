@@ -78,7 +78,7 @@
 
     #region mostrarCarreras y selecionar
     // Método para obtener y mostrar todos los nombres de las carreras desde la base de datos
-        public static function mostrarNombresCarreras(){
+        public static function mostrarCarreras(){
             $con = conectar_db();
         // Conexión a la base de datos (suponiendo que ya tienes esto configurado)
             $sql = "SELECT carrera_id, carrera_nombre FROM carreras";

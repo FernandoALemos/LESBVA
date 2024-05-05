@@ -21,6 +21,11 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
     <title>Bienvenido</title>
+    <style>
+        header {
+            font-size: 24px;height: 150px;background-color: #302b63;width: 100%;height: 16vh;display: flex;align-items: center;justify-content: center;position: fixed;
+        }
+    </style>
 </head>
 <header>
     <img src="https://isfdyt24-bue.infd.edu.ar/sitio/wp-content/uploads/2020/07/logo-chico.png" alt="Instituto Superior de Formación Docente y Técnica Nº 24" style="float: left; margin-right: 10px; width: 100px; height: 100px;">
@@ -52,9 +57,8 @@
                 }
                 echo "</select>";
                 echo "</form> <br>";
-                Carrera::mostrarNombresCarreras();
-                Materia::filterAño();
-                Materia::filterMateria();
+                Carrera::mostrarCarreras();
+                Materia::filtrarCurso();
             ?>
         </div>
         
