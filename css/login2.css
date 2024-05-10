@@ -16,6 +16,7 @@ body{
 	background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover;
 	border-radius: 10px;
 	box-shadow: 5px 20px 50px #000;
+	backdrop-filter: blur(20px);
 }
 #chk{
 	display: none;
@@ -54,7 +55,7 @@ button{
 	justify-content: center;
 	display: block;
 	color: #fff;
-	background: #573b8a;
+	background: #3e64bc;
 	font-size: 1em;
 	font-weight: bold;
 	margin-top: 20px;
@@ -65,7 +66,7 @@ button{
 	cursor: pointer;
 }
 button:hover{
-	background: #6d44b8;
+	background: #3e64bc;
 }
 .login{
 	height: 460px;
@@ -75,7 +76,7 @@ button:hover{
 	transition: .8s ease-in-out;
 }
 .login label{
-	color: #573b8a;
+	color: #3e64bc;
 	transform: scale(.6);
 }
 
@@ -87,4 +88,13 @@ button:hover{
 }
 #chk:checked ~ .signup label{
 	transform: scale(.6);
+}
+
+
+/* -----------------IMAGEN DE FONDO LOGIN ------------------ */
+
+.body-img{
+	min-height: 100hv;
+	background: url('https://scontent.faep9-2.fna.fbcdn.net/v/t39.30808-6/270028965_3096717647317404_4183725274772638402_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=SJRkvMbZWz4Q7kNvgGzax6B&_nc_ht=scontent.faep9-2.fna&oh=00_AfB-Uiuu688ujDsn5XLWSIXpiHPUNNrc_NYcqT2Iojx5fQ&oe=66403AF6') no-repeat center center fixed;
+	background-size: cover;
 }

@@ -23,7 +23,7 @@
 	</div>
 </header> -->
 
-<body>
+<body class="body-img">
 	<div class="main">  	
 		<input type="checkbox" id="chk" aria-hidden="true">
 
@@ -44,13 +44,12 @@
 			</div>
 	</div>
 
-                    <?php 
-                        if( isset($_POST['dni']) )
-                            Usuario::VerificarUsuario($_POST['dni'],$_POST['contrasenia'])
-                    ?>
+	<?php 
+		if( isset($_POST['dni']) )
+			Usuario::VerificarUsuario($_POST['dni'],$_POST['contrasenia'])
+	?>
 
 
-    </main>
 
 </body>
 
