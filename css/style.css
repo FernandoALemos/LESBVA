@@ -274,6 +274,10 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 10px;
 }
 
+.btn-descargar:hover{
+    background-color: #518eca;
+}
+
 .divMaterias-cabecera
 {
     width: 100%;
