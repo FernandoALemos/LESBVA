@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
     <title>Bienvenido</title>
+    <style>
+        header {font-size: 24px;height: 150px;width: 100%;height: 16vh;display: flex;align-items: center;justify-content: center;position: fixed;}
+    </style>
 </head>
 <header>
     <img src="https://isfdyt24-bue.infd.edu.ar/sitio/wp-content/uploads/2020/07/logo-chico.png" alt="Instituto Superior de Formación Docente y Técnica Nº 24" style="float: left; margin-right: 10px; width: 100px; height: 100px;">
@@ -40,7 +43,7 @@
                     <th>CICLO</th>
                     <th>CURSO</th>
                     <th>MATERIA</th>
-                    <th>PROFSOR</th>
+                    <th>PROFESOR</th>
                     <th>SITUACIÓN DE REVISTA</th>
                     <th>INSCRIPTOS</th>
                     <th>1° PERIODO</th>
