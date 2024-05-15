@@ -93,7 +93,7 @@
             echo "<br> <form action='pantalla_busqueda.php' method='POST'>";
             echo "<label for='carrera_nombre'>Carrera:     </label>";
             echo "<select name='carrera_nombre'>";
-            echo "<option value=''>Todos</option>";
+            echo "<option value=''>Seleccione una carrera</option>";
             foreach ($carrera as $nombre_carrera) {
                 echo "<option value='{$nombre_carrera}'>{$nombre_carrera}</option>";
             }

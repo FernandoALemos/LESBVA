@@ -37,7 +37,7 @@
         <table class="lista">
             <thead>
                 <tr>
-                    <th>AÑO</th>
+                    <th>CICLO</th>
                     <th>CURSO</th>
                     <th>MATERIA</th>
                     <th>PROFSOR</th>

@@ -47,9 +47,9 @@
                 }
     
                 echo "<br> <form action='pantalla_busqueda.php' method='POST'>";
-                echo "<label for='anio_lectivo'>AÑO:     </label>";
+                echo "<label for='anio_lectivo'>CICLO:     </label>";
                 echo "<select name='anio_lectivo'>";
-                echo "<option value=''>Todos</option>";
+                echo "<option value=''>Selecione un ciclo</option>";
                 foreach ($ciclo as $ciclos) {
                     echo "<option value='{$ciclos}'>{$ciclos}</option>";
                 }

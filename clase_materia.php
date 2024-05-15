@@ -92,7 +92,7 @@
             echo "<form action='pantalla_listar_materia.php' method='POST'>";
             echo "<br><label for='curso'>Curso:      </label>";
             echo "<select name='curso'>";
-            echo "<option value=''>Todos</option>";
+            echo "<option value=''>Seleccione un curso</option>";
             foreach ($cursos_materias as $curso) {
                 echo "<option value='{$curso}'>{$curso}</option>";
             }
