@@ -1,4 +1,6 @@
 -- drop database lesbva;
+-- GICED gestion de inscriptos por carrera y ciclo, con capacidad de exportar datos
+-- GAPECED gestion de alumnado por periodos en carrera y ciclo, con capacidad de exportar datos
 create database lesbva;
 
 use lesbva;
@@ -77,35 +79,37 @@ create table materias(
 ); 
 
 insert into materias (materia_nombre,curso,profesor,situacion_revista,cantidad_alumno,ciclo_id,carrera_id) values
-('Inglés I', '1A','Alejandra Pérez', 'P', 27,3,1),
-('Ciencia, Tecnología y Sociedad', '1A','Claudio Adan', 'P', 29,3,1),
-('Análisis Matemático I', '1A', 'Juan Osamendia', 'P',36,3,1),
-('Algebra', '1A', 'Melina Lucero', 'S', 31,3,1),
-('Algoritmos y Estructuras de Datos I', '1A','Graciana Roldan', 'S',33,3,1),
-('Sistemas y Organizaciones', '1A','Alejandro De Andris', 'P',32,3,1),
-('Arquitectura de Computadores', '1A','Graciana Roldan', 'P',29,3,1),
-('Prácticas Profesionalizantes I', '1A','Verónica Micheltorena', 'S',36,3,1),
+('Inglés I', '1A','Alejandra Pérez', 'P', 56,3,1),
+('Ciencia, Tecnología y Sociedad', '1A','Claudio Adan', 'P', 58,3,1),
+('Análisis Matemático I', '1A', 'Juan Osamendia', 'P',67,3,1),
+('Algebra', '1A', 'Melina Lucero', 'S', 58,3,1),
+('Algoritmos y Estructuras de Datos I', '1A','Graciana Roldan', 'S',67,3,1),
+('Sistemas y Organizaciones', '1A','Alejandro De Andreis', 'P',66,3,1),
+('Arquitectura de Computadores', '1A','Graciana Roldan', 'P',59,3,1),
+('Prácticas Profesionalizantes I A', '1A','Verónica Micheltorena', 'S',28,3,1),
+('Prácticas Profesionalizantes I B', '1A','Alejandro De Andreis', 'S',28,3,1),
 
 
-('Inglés I', '1B','Alejandra Pérez', 'P', 24,3,1),
-('Ciencia, Tecnología y Sociedad', '1B','Claudio Adan', 'P', 29,3,1),
-('Análisis Matemático I', '1B','Gabriela Pugliese','P',30,3,1),
-('Algebra', '1B','Miguel Martínez','S',30,3,1),
-('Algoritmos y Estructuras de Datos I', '1B','Graciana Roldan', 'S',28,3,1),
-('Sistemas y Organizaciones', '1B','Alejandro De Andris', 'P',32,3,1),
-('Arquitectura de Computadores', '1B','Graciana Roldan', 'P',24,3,1),
-('Prácticas Profesionalizantes I', '1B','Paula Giaimo', 'P',32,3,1),
+('Inglés I', '1B','Alejandra Pérez', 'P', 56,3,1),
+('Ciencia, Tecnología y Sociedad', '1B','Claudio Adan', 'P', 58,3,1),
+('Análisis Matemático I', '1B','Gabriela Pugliese','P',67,3,1),
+('Algebra', '1B','Miguel Martínez','S',67,3,1),
+('Algoritmos y Estructuras de Datos I', '1B','Graciana Roldan', 'S',67,3,1),
+('Sistemas y Organizaciones', '1B','Alejandro De Andreis', 'P',66,3,1),
+('Arquitectura de Computadores', '1B','Graciana Roldan', 'P',59,3,1),
+('Prácticas Profesionalizantes I A', '1B','Paula Giaimo', 'P',28,3,1),
+('Prácticas Profesionalizantes I B', '1B','Verónica Micheltorena', 'S',28,3,1),
 
 
-('Inglés II', '2A','Angélica Zozula','P', 25, 3,1),
-('Análisis Matemático II', '2A','Norberto Cascelli','P', 30, 3,1),
-('Estadistica', '2A','Ramiro Villar','T', 28, 3,1),
-('Ingeniería de Software I', '2A', 'Paula Giaimo','P',28, 3,1),
-('Algoritmos y Estructura de Datos II', '2A','Paula Giaimo','P', 34, 3,1),
-('Sistemas Operativos', '2A','Diego Pacini','P', 32, 3,1),
-('Base de Datos', '2A','Juan Pellegrini','P', 38, 3,1),
-('Prácticas Profesionalizantes II A', '2A','Graciana Roldan', 'P',28, 3,1),
-('Prácticas Profesionalizantes II B', '2A','Alicia Ferreira', 'P',28, 3,1),
+('Inglés II', '2A','Angélica Zozula','P', 52, 3,1),
+('Análisis Matemático II', '2A','Norberto Cascelli','P', 40, 3,1),
+('Estadistica', '2A','Ramiro Villar','P', 41, 3,1),
+('Ingeniería de Software I', '2A', 'Paula Giaimo','P',50, 3,1),
+('Algoritmos y Estructura de Datos II', '2A','Paula Giaimo','P', 58, 3,1),
+('Sistemas Operativos', '2A','Diego Pacini','P', 50, 3,1),
+('Base de Datos', '2A','Juan Pellegrini','P', 58, 3,1),
+('Prácticas Profesionalizantes II A', '2A','Graciana Roldan', 'P',29, 3,1),
+('Prácticas Profesionalizantes II B', '2A','Alicia Ferreira', 'P',29, 3,1),
 
 
 ('Inglés III', '3A', 'Alejandra Pérez', 'P', 26, 3,1),
@@ -113,7 +117,7 @@ insert into materias (materia_nombre,curso,profesor,situacion_revista,cantidad_a
 ('Seminario de la actualización','3A', 'Alicia Ferreira', 'S', 34, 3,1),
 ('Redes y Comunicaciones','3A', 'Diego Pacini', 'P', 34, 3,1),
 ('Ingeniería de Software II','3A','Sin Profesor', '-', 28, 3,1),
-('Algoritmos y Estructura de Datos III','3A', 'Verónica Micheltorena', 'S', 17, 3,1),
+('Algoritmos y Estructura de Datos III','3A', 'Verónica Micheltorena', 'P', 17, 3,1),
 ('Prácticas Profesionalizantes III A','3A','Walter Vilches', 'P',20,3,1),
 ('Prácticas Profesionalizantes III B','3A','Juan Pellegrini', 'P',20,3,1);
 

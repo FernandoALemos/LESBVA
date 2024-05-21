@@ -1,3 +1,19 @@
+Personal interviniente
+¿Quienes van a utilizar el sistema?
+
+
+Funcionalidad
+En base a lo que nos oriento vilches, tenemos este prototipo
+¿Es similiar a lo que esperabas?
+¿hay algo mas que requiera?
+Falta desarrollar quienes cargan los datos
+
+Tiempos de entrega
+Este sistema estaria desarrollado para mostrar en octubre/nov
+
+Proximo encuentro
+primer semna sept
+
 ¿Cuál es el proposito del sistema?
 ¿Qué funcionalidad especifica debe realizar el sistema?
 ¿Quienes son los actores que interactuan con el sistema? (USUARIOS)
@@ -16,3 +32,11 @@ Para ingresar con el usuario: ¿queres que sea con el dni, una cuenta de email u
 ¿Qué áreas crees que podrían mejorarse para que el sistema sea aún más útil para ti?
 ¿Cómo evaluarías la velocidad y el rendimiento del sistema durante su uso?
 ¿Qué opinas sobre el diseño y la interfaz del sistema? ¿Hay algún aspecto visual que te gustaría cambiar?
+
+
+el sistema solamente muestra la cantidad de inscriptos
+para implementar que alumnos tiene tal materia, sera el proximo año cuando le hagan una actualizacion
+cambiar usuarios a nombre y contraseña
+usuario pedido 
+user = pellegrini
+pass = vilches

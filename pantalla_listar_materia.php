@@ -34,6 +34,7 @@
 <body>
     <section id="Materias" class="divMaterias">
         <div class="divMaterias-cabecera">
+            <button class="btn-descargar" onclick="location.href='pantalla_busqueda.php'">Volver</button>
             <div class="btns-space"></div>
             <button class="btn-descargar">Descargar Excel</button>
         </div>

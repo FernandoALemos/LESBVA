@@ -53,32 +53,36 @@
 
 
     #region VerificarUsuario
-    // PREGUNTAR SI QUIER QUE EL USUARIO SEA EL DNI O EL EMAL
-        public static function VerificarUsuario($dni,$contrasenia){
+    // PREGUNTAR SI QUIER QUE EL USUARIO SEA EL DNI O EL EMAL/nombre
+        public static function VerificarUsuario($usuario_nombre,$contrasenia){
             $con = conectar_db();
             
-            if ($dni != "" && $contrasenia != ""){
-                $usu = mysqli_query($con , "select dni from usuarios where dni = $dni");
+            if ($usuario_nombre != "" && $contrasenia != ""){
+                $usu = mysqli_query($con , "select usuario_nombre from usuarios where usuario_nombre = '$usuario_nombre'");
                 if(mysqli_affected_rows($con)>0){
-                    $contra = mysqli_query($con, " select contrasenia from usuarios where dni = $dni");
+                    $contra = mysqli_query($con, " select contrasenia from usuarios where usuario_nombre = '$usuario_nombre'");
                     $contra = mysqli_fetch_assoc($contra);
                     if($contra['contrasenia'] === $contrasenia){
-                        $data = mysqli_query($con,"select * from usuarios where dni = '$dni' ");
+                        $data = mysqli_query($con,"select * from usuarios where usuario_nombre = '$usuario_nombre' ");
                         $info = mysqli_fetch_assoc($data);
                         session_start();
                         $_SESSION['usuario_id'] = $info['usuario_id'];
-                        $_SESSION['usuario_nombre'] = $info['usuario_nombre'];
+                        $_SESSION['usuario_nombre'] = $usuario_nombre;
                         $_SESSION['apellido'] = $info['apellido'];
                         $_SESSION['rol_id'] = $info['rol_id'];
                         $_SESSION['email'] = $info['email'];
-                        $_SESSION['dni'] = $dni;
+                        $_SESSION['dni'] = $info['dni'];
+                        
                         header("location:pantalla_busqueda.php");
                         //echo "<script> window.location.href='vista.php';</script>";
                     }else{
-                        echo "Contraseña invalida";
+                        ?>
+                        <script>alert("Contraseña invalida");</script>
+                        <?php
                     }
-                }else{
-                    echo "DNI invalido";
+                }else{?>
+                    <script>alert ("Usuario invalido");</script>
+                    <?php
                 }
             }
         }
