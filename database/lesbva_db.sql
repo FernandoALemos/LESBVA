@@ -51,7 +51,8 @@ insert into usuarios (usuario_nombre,apellido,rol_id,contrasenia,email,dni) valu
 ('Fernando','Lemos',1,'flemos','flemos@gmail.com',11112222),
 ('Lues','Sbarbati',1,'lsbarbati','lsbarbati@gmail.com',33334444),
 ('Matias','Vasca',1,'mvasca','mvasca@gmail.com',55556666),
-('Walter','Muscolo',2,'wmuscolo','wmuscolo@gmail.com',77778888);
+('Walter','Muscolo',2,'wmuscolo','wmuscolo@gmail.com',77778888)
+('pellegrini','profes',1,'vilches','profesores@gmail.com',77778888);
 
 
 
@@ -61,7 +62,16 @@ create table carreras(
     primary key (carrera_id)
 );
 
-insert into carreras (carrera_nombre) values ('TECNICATURA EN ANÁLISIS DE SISTEMAS');
+insert into carreras (carrera_nombre) values 
+('TECNICATURA EN ANÁLISIS DE SISTEMAS'),
+('PROFESORADO DE MATEMÁTICA'),
+('PROFESORADO DE INGLÉS'),
+('PROFESORADO DE EDUCACIÓN INICIAL'),
+('PROFESORADO DE EDUCACIÓN PRIMARIA'),
+('CUFBA'),
+('PROFESORADO DE QUÍMICA'),
+('PROFESORADO DE FÍSICA'),
+('PROFESORADO DE BIOLOGÍA');
 
 
 create table materias(
@@ -79,15 +89,15 @@ create table materias(
 ); 
 
 insert into materias (materia_nombre,curso,profesor,situacion_revista,cantidad_alumno,ciclo_id,carrera_id) values
-('Inglés I', '1A','Alejandra Pérez', 'P', 56,3,1),
-('Ciencia, Tecnología y Sociedad', '1A','Claudio Adan', 'P', 58,3,1),
-('Análisis Matemático I', '1A', 'Juan Osamendia', 'P',67,3,1),
-('Algebra', '1A', 'Melina Lucero', 'S', 58,3,1),
-('Algoritmos y Estructuras de Datos I', '1A','Graciana Roldan', 'S',67,3,1),
-('Sistemas y Organizaciones', '1A','Alejandro De Andreis', 'P',66,3,1),
-('Arquitectura de Computadores', '1A','Graciana Roldan', 'P',59,3,1),
-('Prácticas Profesionalizantes I A', '1A','Verónica Micheltorena', 'S',28,3,1),
-('Prácticas Profesionalizantes I B', '1A','Alejandro De Andreis', 'S',28,3,1),
+('Inglés I', '1A','Alejandra Pérez', 'P', 51,3,1),
+('Ciencia, Tecnología y Sociedad', '1A','Claudio Adan', 'P', 50,3,1),
+('Análisis Matemático I', '1A', 'Juan Osamendia', 'P',62,3,1),
+('Algebra', '1A', 'Melina Lucero', 'S', 59,3,1),
+('Algoritmos y Estructuras de Datos I', '1A','Graciana Roldan', 'S',60,3,1),
+('Sistemas y Organizaciones', '1A','Alejandro De Andreis', 'P',63,3,1),
+('Arquitectura de Computadores', '1A','Graciana Roldan', 'P',57,3,1),
+('Prácticas Profesionalizantes I A', '1A','Verónica Micheltorena', 'S',30,3,1),
+('Prácticas Profesionalizantes I B', '1A','Alejandro De Andreis', 'S',30,3,1),
 
 
 ('Inglés I', '1B','Alejandra Pérez', 'P', 56,3,1),

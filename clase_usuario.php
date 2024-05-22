@@ -53,7 +53,7 @@
 
 
     #region VerificarUsuario
-    // PREGUNTAR SI QUIER QUE EL USUARIO SEA EL DNI O EL EMAL/nombre
+    // MODIFICAR PARA QUE EL USUARIO SEA CON EL EMAIL Y SACAR EL DNI
         public static function VerificarUsuario($usuario_nombre,$contrasenia){
             $con = conectar_db();
             
