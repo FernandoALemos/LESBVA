@@ -25,12 +25,12 @@ insert into turnos (turno) values ('Mañana'), ('Tarde'), ('Verpertino');
 create table ciclo_lectivo(
     ciclo_id int auto_increment,
     turno_id int,
-    anio_lectivo int (4),
+    ciclo int (4),
     foreign key (turno_id) references turnos(turno_id),
     primary key (ciclo_id, turno_id)
 );
 
-insert into ciclo_lectivo (turno_id, anio_lectivo) values 
+insert into ciclo_lectivo (turno_id, ciclo) values 
 ('1', 2024), ('2', 2024), ('3', 2024), 
 ('1', 2025), ('2', 2025), ('3', 2025);
 

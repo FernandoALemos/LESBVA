@@ -114,11 +114,11 @@ insert into profesores (profesor_nombre, profesor_apellido) values
 
 create table ciclo_lectivo(
     ciclo_id int auto_increment,
-    anio_lectivo int (4),
+    ciclo int (4),
     primary key (ciclo_id)
 );
 
-insert into ciclo_lectivo (anio_lectivo) values 
+insert into ciclo_lectivo (ciclo) values 
 (2024), (2025);
 
 

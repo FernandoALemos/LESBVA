@@ -3,6 +3,11 @@
     require_once "clase_materia.php";
     require_once "clase_usuario.php";
     require_once "clase_carrera.php";
+    require_once "clase_cargo.php";
+    require_once "clase_ciclo.php";
+    require_once "clase_curso.php";
+    require_once "clase_materia_carrera.php";
+    require_once "clase_profesores.php";
 
     // session_start();
 
@@ -37,26 +42,72 @@
             <?php
                 $con = conectar_db();
                 // Conexión a la base de datos (suponiendo que ya tienes esto configurado)
-                $sql = "SELECT DISTINCT anio_lectivo FROM ciclo_lectivo";
-                $resultado = $con->query($sql);
+                $sql_ciclo = "SELECT DISTINCT ciclo FROM ciclo_lectivo";
+                $resultado_ciclo = $con->query($sql_ciclo);
     
                 $ciclo = array();
-                while ($fila = $resultado->fetch_assoc()) {
-                    $ciclo[] = $fila['anio_lectivo'];
+                while ($fila = $resultado_ciclo->fetch_assoc()) {
+                    $ciclo[] = $fila['ciclo'];
                     // $carreras[$fila['carrera_nombre']][] = array('carrera_id' => $fila['carrera_id']);
                 }
     
                 echo "<br> <form action='pantalla_busqueda.php' method='POST'>";
-                echo "<label for='anio_lectivo'>CICLO:     </label>";
-                echo "<select name='anio_lectivo'>";
+                echo "<label for='ciclo'>Ciclo:     </label>";
+                echo "<select name='ciclo'>";
                 echo "<option value=''>Selecione un ciclo</option>";
                 foreach ($ciclo as $ciclos) {
                     echo "<option value='{$ciclos}'>{$ciclos}</option>";
                 }
                 echo "</select>";
-                echo "</form> <br>";
-                Carrera::mostrarCarreras();
-                Materia::filtrarCurso();
+                // echo "</form> <br>";
+                echo "<br>";
+
+                // Carrera::filtrarCarreras();
+                $sql_carrera = "SELECT carrera_id, carrera_nombre FROM carreras";
+                $resultado_carrera = $con->query($sql_carrera);
+
+                $carrera = array();
+                while ($fila = $resultado_carrera->fetch_assoc()) {
+                    $carrera[] = $fila['carrera_nombre'];
+                    $carreras[$fila['carrera_nombre']][] = array('carrera_id' => $fila['carrera_id']);
+                }
+
+                // echo "<br> <form action='pantalla_busqueda.php' method='POST'>";
+                echo "<br><label for='carrera_nombre'>Carrera:     </label>";
+                echo "<select name='carrera_nombre'>";
+                echo "<option value=''>Seleccione una carrera</option>";
+                foreach ($carrera as $nombre_carrera) {
+                    echo "<option value='{$nombre_carrera}'>{$nombre_carrera}</option>";
+                }
+                echo "</select>";
+
+                // echo "</form> <br>";
+                echo "<br>";
+
+
+                // Curso::filtrarCurso();
+                $sql_curso = "SELECT DISTINCT curso FROM cursos";
+                $resultado_curso = $con->query($sql_curso);
+                
+                // Almacenar los años de cursos en un array asociativo
+                $cursos_cursos = array();
+                while ($fila = $resultado_curso->fetch_assoc()) {
+                    $cursos_cursos[] = $fila['curso'];
+                }
+                
+                // Mostrar el formulario con las opciones
+                // echo "<form action='pantalla_listar_materia.php' method='POST'>";
+                echo "<br><label for='curso'>Curso:      </label>";
+                echo "<select name='curso'>";
+                echo "<option value=''>Seleccione un curso</option>";
+                foreach ($cursos_cursos as $curso) {
+                    echo "<option value='{$curso}'>{$curso}</option>";
+                }
+                echo "</select>";
+
+                // VER SI ESTO HACE QUE TENGA POST PARA ESTE QUERY (VER EN CICLO Y CARRERAS)
+                echo "<br><input type='submit' class='button' value='Continuar' onclick='window.location.href = \"pantalla_listar_materia.php\";'>";
+                echo "</form>";
             ?>
         </div>
         

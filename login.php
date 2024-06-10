@@ -1,6 +1,7 @@
 <?php 
     require_once "database\conectar_db.php";
     require_once "clase_usuario.php";
+	// CREAR CLASES PROFE, CURSO, CARGO, CICLO
 
 ?>
 
@@ -37,7 +38,7 @@
 			<div class="login">
 				<form method="POST">
 					<label for="chk" aria-hidden="true">Iniciar Sesión</label>
-					<input type="text" name="usuario_nombre" id="usuario_nombre" placeholder="Ingrese su Usuario" required="">
+					<input type="text" name="email" id="email" placeholder="Ingrese su Usuario" required="">
 					<input type="password" name="contrasenia" id="contra" placeholder="Contraseña" required="">
 					<button>Acceder</button>
 				</form>
@@ -45,8 +46,8 @@
 	</div>
 
 	<?php 
-		if( isset($_POST['usuario_nombre']) )
-			Usuario::VerificarUsuario($_POST['usuario_nombre'],$_POST['contrasenia'])
+		if( isset($_POST['email']) )
+			Usuario::VerificarUsuario($_POST['email'],$_POST['contrasenia'])
 	?>
 
 
