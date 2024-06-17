@@ -38,8 +38,8 @@
 			<div class="login">
 				<form method="POST">
 					<label for="chk" aria-hidden="true">Iniciar Sesión</label>
-					<input type="text" name="email" id="email" placeholder="Ingrese su Usuario" required="">
-					<input type="password" name="contrasenia" id="contra" placeholder="Contraseña" required="">
+					<input type="text" name="email" id="email" placeholder="Ingresar Email" required> <!-- Cambio placeholder para que no sea confuso -->
+					<input type="password" name="contrasenia" id="contra" placeholder="Contraseña" required>
 					<button>Acceder</button>
 				</form>
 			</div>
