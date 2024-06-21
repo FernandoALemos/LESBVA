@@ -152,8 +152,8 @@
                         <td><?php echo $info['curso']; ?></td>
                         <td><?php echo $info['materia_nombre']; ?></td>
                         <td><?php echo $info['modulos']; ?></td>
-                        <td><?php echo $info['profesor_nombre']." ".$info['profeprofesor_apellidosor']; ?></td> <!--VER PARA QUE SE INGRESE 1 O 2 PROFES -->
-                        <td><?php echo $info['situacion_revista']; ?></td> <!--VER PARA QUE SE INGRESE 1 O 2 SITUCICONES SI HAY MAS PROFES -->
+                        <td><?php echo $info['profesor_nombre']." ".$info['profeprofesor_apellidosor']; ?></td>
+                        <td><?php echo $info['situacion_revista']; ?></td>
                         <td><?php echo $info['inscriptos']; ?></td>
                         <td><?php echo $info['regulares']; ?></td>
                         <td><?php echo $info['atraso_academico']; ?></td>
@@ -167,7 +167,43 @@
         #endregion
 
         
-        
+        // Filtra las carreras que posean materias asignadas
+        public static function filtrarCarreras(){
+            $con = conectar_db();
+            $sql = "SELECT c.carrera_nombre
+                    FROM carreras c
+                    JOIN materia_carrera mc ON c.carrera_id = mc.carrera_id;";
+            // $sql = "SELECT c.carrera_nombre
+            //         FROM carreras c
+            //         JOIN materia_carrera mc ON c.carrera_id = mc.carrera_id
+            //         WHERE mc.carrera_id = <valor_carrera_id>;";
+            $resultado = $con->query($sql);
+
+            $carrera = array();
+            while ($fila = $resultado->fetch_assoc()) {
+                $carrera[] = $fila['carrera_nombre'];
+                $carreras[$fila['carrera_nombre']][] = array('carrera_id' => $fila['carrera_id']);
+            }
+
+            echo "<br> <form action='pantalla_busqueda.php' method='POST'>";
+            echo "<label for='carrera_nombre'>Carrera:     </label>";
+            echo "<select name='carrera_nombre'>";
+            echo "<option value=''>Seleccione una carrera</option>";
+            foreach ($carrera as $nombre_carrera) {
+                echo "<option value='{$nombre_carrera}'>{$nombre_carrera}</option>";
+            }
+            echo "</select>";
+
+            // echo "<br><input type='submit' class = 'button' value='Continuar'>";
+            // echo "<br><input type='submit' class='button' value='Continuar' onclick='window.location.href = \"pantalla_busqueda.php\";'>";
+            echo "</form> <br>";
+        }
+
+
+
+
+
+
     }
     #endregion
 
