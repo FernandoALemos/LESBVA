@@ -1,25 +1,26 @@
 <?php
-    require_once "database\conectar_db.php";
-    require_once "clase_materia.php";
-    require_once "clase_usuario.php";
-    require_once "clase_carrera.php";
-    require_once "clase_cargo.php";
-    require_once "clase_ciclo.php";
-    require_once "clase_curso.php";
-    require_once "clase_materia_carrera.php";
-    require_once "clase_profesores.php";
+require_once "database\conectar_db.php";
+require_once "clase_materia.php";
+require_once "clase_usuario.php";
+require_once "clase_carrera.php";
+// require_once "clase_cargo.php"; Comento estos require ya que aún no existen y rompen el uso de la página
+// require_once "clase_ciclo.php";
+require_once "clase_curso.php";
+require_once "clase_materia_carrera.php";
+// require_once "clase_profesores.php";
 
-    // session_start();
 
-    // if(isset($_SESSION['rol_id'])){
-    //     die("No tenes credenciales para ingresar a este sitio. Intenta registrate</a>.");
-    // }
-
-    // $idSESION = $_SESSION['rol_id'];
+session_start();
+if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo limito para que solo el director entre hasta que definamos todas las pantallas.
+    echo "<h1>Usted no posee permisos para utilizar esta página</h1>";
+    echo "<br><a href='login.php'>Ir a inicio</a>";
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +28,16 @@
     <link rel="stylesheet" href="css/login.css">
     <title>Bienvenido</title>
     <style>
-        header {font-size: 24px;height: 150px;width: 100%;height: 16vh;display: flex;align-items: center;justify-content: center;position: fixed;}
+        header {
+            font-size: 24px;
+            height: 150px;
+            width: 100%;
+            height: 16vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+        }
     </style>
 </head>
 <header>
@@ -36,21 +46,21 @@
 </header>
 <main>
 
-<body>
-    <form class="presentacion" method="POST" style="display: flex; justify-content: center; flex-direction: row;">
-        <div style="margin-right: 10px;">
-            <?php
+    <body>
+        <form class="presentacion" method="POST" style="display: flex; justify-content: center; flex-direction: row;">
+            <div style="margin-right: 10px;">
+                <?php
                 $con = conectar_db();
                 // Conexión a la base de datos (suponiendo que ya tienes esto configurado)
                 $sql_ciclo = "SELECT DISTINCT ciclo FROM ciclo_lectivo";
                 $resultado_ciclo = $con->query($sql_ciclo);
-    
+
                 $ciclo = array();
                 while ($fila = $resultado_ciclo->fetch_assoc()) {
                     $ciclo[] = $fila['ciclo'];
                     // $carreras[$fila['carrera_nombre']][] = array('carrera_id' => $fila['carrera_id']);
                 }
-    
+
                 echo "<br> <form action='pantalla_busqueda.php' method='POST'>";
                 echo "<label for='ciclo'>Ciclo:     </label>";
                 echo "<select name='ciclo'>";
@@ -88,13 +98,13 @@
                 // Curso::filtrarCurso();
                 $sql_curso = "SELECT DISTINCT curso FROM cursos";
                 $resultado_curso = $con->query($sql_curso);
-                
+
                 // Almacenar los años de cursos en un array asociativo
                 $cursos_cursos = array();
                 while ($fila = $resultado_curso->fetch_assoc()) {
                     $cursos_cursos[] = $fila['curso'];
                 }
-                
+
                 // Mostrar el formulario con las opciones
                 // echo "<form action='pantalla_listar_materia.php' method='POST'>";
                 echo "<br><label for='curso'>Curso:      </label>";
@@ -108,14 +118,16 @@
                 // VER SI ESTO HACE QUE TENGA POST PARA ESTE QUERY (VER EN CICLO Y CARRERAS)
                 echo "<br><input type='submit' class='button' value='Continuar' onclick='window.location.href = \"pantalla_listar_materia.php\";'>";
                 echo "</form>";
-            ?>
-        </div>
-        
-    </form>
-</body>
+                ?>
+            </div>
+
+        </form>
+    </body>
 </main>
 <footer>
-        <font-size="2"><h4><p class="titulos" ><font-size="2"></p><br>
-        <p class="titulos"></p></h4></font-size>
-    </footer>
+    <p class="titulos"><a href="logout.php">Cerrar sesión</a><font-size="2"></p><br> <!--Agrego para poder cerrar sesión-->
+    <p class="titulos"></p>
+    </h4></font-size>
+</footer>
+
 </html>
