@@ -47,12 +47,13 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 <main>
 
     <body>
-        <form class="presentacion" method="POST" style="display: flex; justify-content: center; flex-direction: row;">
+        <form action='pantalla_listar_materia.php' class="presentacion" method="POST" style="display: flex; justify-content: center; flex-direction: row;">
             <div style="margin-right: 10px;">
                 <?php
                 $con = conectar_db();
                 // Conexión a la base de datos (suponiendo que ya tienes esto configurado)
-                $sql_ciclo = "SELECT DISTINCT ciclo FROM ciclo_lectivo";
+                // $sql_ciclo = "SELECT DISTINCT ciclo FROM ciclo_lectivo";
+                $sql_ciclo = "SELECT DISTINCT cl.ciclo FROM materia_carrera mc inner join ciclo_lectivo cl on mc.ciclo_id = cl.ciclo_id";
                 $resultado_ciclo = $con->query($sql_ciclo);
 
                 $ciclo = array();
@@ -61,7 +62,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                     // $carreras[$fila['carrera_nombre']][] = array('carrera_id' => $fila['carrera_id']);
                 }
 
-                echo "<br> <form action='pantalla_busqueda.php' method='POST'>";
+                // echo "<br> <form action='pantalla_listar_materia.php' method='POST'>";
                 echo "<label for='ciclo'>Ciclo:     </label>";
                 echo "<select name='ciclo'>";
                 echo "<option value=''>Selecione un ciclo</option>";
@@ -116,7 +117,8 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 echo "</select>";
 
                 // VER SI ESTO HACE QUE TENGA POST PARA ESTE QUERY (VER EN CICLO Y CARRERAS)
-                echo "<br><input type='submit' class='button' value='Continuar' onclick='window.location.href = \"pantalla_listar_materia.php\";'>";
+                echo "<br><input type='submit' class='button' value='Continuar' 
+                >";
                 echo "</form>";
                 ?>
             </div>

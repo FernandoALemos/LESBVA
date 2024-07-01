@@ -3,11 +3,10 @@ require_once "database\conectar_db.php";
 require_once "clase_materia.php";
 require_once "clase_usuario.php";
 require_once "clase_carrera.php";
-// require_once "clase_cargo.php"; Comento estos require ya que aún no existen y rompen el uso de la página
-// require_once "clase_ciclo.php";
+
 require_once "clase_curso.php";
 require_once "clase_materia_carrera.php";
-// require_once "clase_profesores.php";
+
 
 session_start();
 if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo limito para que solo el director entre hasta que definamos todas las pantallas.
@@ -26,18 +25,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
     <title>Bienvenido</title>
-    <style>
-        header {
-            font-size: 24px;
-            height: 150px;
-            width: 100%;
-            height: 16vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: fixed;
-        }
-    </style>
 </head>
 <header>
     <img src="https://isfdyt24-bue.infd.edu.ar/sitio/wp-content/uploads/2020/07/logo-chico.png" alt="Instituto Superior de Formación Docente y Técnica Nº 24" style="float: left; margin-right: 10px; width: 100px; height: 100px;">
@@ -110,7 +97,8 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 JOIN 
                     turnos t ON mc.turno_id = t.turno_id
                 JOIN 
-                    profesores p ON mc.profesor_id = p.profesor_id;
+                    profesores p ON mc.profesor_id = p.profesor_id
+                    WHERE cl.ciclo = ".$_POST['ciclo'].";
                 ");
 
 
