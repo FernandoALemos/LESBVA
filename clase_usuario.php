@@ -77,7 +77,7 @@
                         $_SESSION['email'] = $email;
                         $_SESSION['usuario_suspendido'] = $info['usuario_suspendido'];
                         
-                        header("location:pantalla_busqueda.php");
+                        header("location:buscador.php");
                         //echo "<script> window.location.href='vista.php';</script>";
                     }else{
                         ?>

@@ -107,7 +107,9 @@ insert into profesores (profesor_nombre, profesor_apellido) values
 ('Alicia', 'Ferreira'),
 ('Diego','Klehr'),
 ('Walter','Vilches'),
-('Vacante','Vacante');
+('Vacante','Vacante'),
+('Walter', 'Muscolo')
+('Gustavo', 'Tattoli');
 
 
 
@@ -160,7 +162,10 @@ insert into materias (materia_nombre) values
 ('Algoritmos y Estructura de Datos II'),
 ('Prácticas Profesionalizantes III A'),
 ('Prácticas Profesionalizantes III B');
-
+-- 3° quimica
+('Politica Institucional'),
+-- 4° quimica
+('Análisis Quimico');
 
 
 
@@ -175,7 +180,8 @@ insert into cursos (curso) values
 ('1A'),
 ('1B'),
 ('2A'),
-('3A');
+('3A'),
+('4A');
 
 
 
@@ -247,3 +253,10 @@ insert into materia_carrera (materia_id, carrera_id, ciclo_id, curso_id, turno_i
 (24, 1, 1, 4, 3, 7, 'P', 17, 17, 0, 0, 4, 0, 0),-- algoritmos 3
 (25, 1, 1, 4, 3, 15, 'P', 20, 20, 0, 0, 3, 0, 0),-- practicas 3a
 (26, 1, 1, 4, 3, 19, 'P', 20, 20, 0, 0, 3, 0, 0);-- practicas 3b
+
+-- 3°A Quimica para ver filtro
+(27, 7, 1, 4, 3, 21, 'P', 27, 23, 0, 4, 2, 0, 0),-- ingles 3
+
+
+-- 4°A Qumica para ver filtro
+(28, 7, 1, 5, 3, 22, 'P', 12, 7, 0, 5, 2, 0, 0),-- ingles 3
