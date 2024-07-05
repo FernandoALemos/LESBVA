@@ -35,9 +35,8 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
             <div class="divMaterias-cabecera">
                 <button class="btn-descargar" onclick="location.href='buscador.php'">Volver</button>
                 <div class="btns-space"></div>
-                <button class="btn-descargar">Descargar Excel</button>
+                <button class="btn-descargar" onclick="location.href='excel.php'">Descargar Excel</button>
             </div>
-            <?php echo $_POST['ciclo']." ".$_POST['carrera_id']." ".$_POST['curso_id']." ".$_POST['profesor_id'];?>
             <table class="lista">
                 <thead>
                     <tr>
@@ -124,11 +123,31 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
                     $stmt->execute();
                     $result = $stmt->get_result();
 
+                    // Obtener el nombre de la carrera
+                    $sql_carrera = "SELECT carrera_nombre FROM carreras WHERE carrera_id = ?";
+                    $stmt_carrera = $con->prepare($sql_carrera);
+                    $stmt_carrera->bind_param("i", $carrera);
+                    $stmt_carrera->execute();
+                    $stmt_carrera->bind_result($carrera_nombre);
+                    $stmt_carrera->fetch();
+                    $stmt_carrera->close();
+
+                    // OBTENGO LA DATA?
+                    $data = [];
+                    while ($row = $result->fetch_assoc()) {
+                        $data[] = $row;
+                    }
+
+                    // Almacenar los datos en la sesión
+                    $_SESSION['materia_data'] = $data;
+                    $_SESSION['ciclo'] = $ciclo;
+                    $_SESSION['carrera_nombre'] = $carrera_nombre;
+
                     // Verificar si hay resultados
-                    if ($result->num_rows == 0) {
-                        echo "<tr><td colspan='13'><b class='bold red'>No hay materia_carrera registradas en el sistema</b></td></tr>";
+                    if (empty($data)) {
+                        echo "<tr><td colspan='13'><b class='bold red'>No hay materias registradas en el sistema</b></td></tr>";
                     } else {
-                        while ($info = $result->fetch_assoc()) { ?>
+                        foreach ($data as $info) { ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($info['ciclo']); ?></td>
                                 <td><?php echo htmlspecialchars($info['carrera_nombre']); ?></td>
