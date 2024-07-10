@@ -120,10 +120,10 @@ header{
 /* ESTA GENERANDO PROBLEMAS VISUALES SI LO QUITAMOS */
 main{
     width: 100%;
-    padding: 98px 0;
+    padding: 15px 0;
     min-height: 72vh;
     background-color: var(--color-violeta100);
-    display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
 }
@@ -272,6 +272,7 @@ input[type=number]::-webkit-outer-spin-button {
     width: 280px;
     margin-top: 10px;
     margin-bottom: 10px;
+    justify-self: center;
 }
 
 .btn-descargar:hover{
