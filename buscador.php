@@ -71,6 +71,10 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 <main>
 
 <body>
+    <div class="divBuscador-cabecera">
+        <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
+        <div class="btns-space"></div>
+    </div>
     <form action='informacion.php' class="presentacion" method="POST" style="display: flex; justify-content: center; flex-direction: row;">
         <div style="margin-right: 10px;">
             <?php

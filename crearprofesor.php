@@ -33,12 +33,18 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 <main>
 
     <body>
+        <div class="divMaterias-cabecera">
+            <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
+                <div class="btns-space"></div>
+            <!-- <button class="btn-descargar">Editar</button> -->
+        </div>
+        <br> <br>
         <form action="crearprofesor.php" method="post">
             <p>Ingrese el nombre: <input type="text" name="profesor_nombre" id="profesor_nombre" required></p><br>
             <p>Ingrese el apellido: <input type="text" name="profesor_apellido" id="profesor_apellido" required></p>
             <input type="submit" class="button" value="Crear"><br><br><br>
         </form>
-        <a href="index.php" class="btn-descargar">Volver a inicio</a>
+        <!-- <a href="index.php" class="btn-descargar">Volver a inicio</a> -->
         <!-- <div>
         <button class="button" onclick="location.href='index.php'">Volver</button>
         </div> -->
@@ -48,6 +54,25 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             $profesor->crearProfesor();
         }
         ?>
+        <section id="Profesores" class="divProfesores">
+            <div class="divProfesores-cabecera">
+                <!-- <a class="btn-ok ancora">Nueva Profesor</a> -->
+            </div>
+            <table class="lista">
+            <thead>
+                <tr>
+                    <th>Apellido</th>
+                    <th>Nombre</th>
+                    <th>Modificar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    Profesor::listarProfesores();
+                ?>
+            </tbody>
+            </table>
+        </section>
     </body>
 </main>
 <footer>

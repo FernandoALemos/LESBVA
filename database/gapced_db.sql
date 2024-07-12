@@ -102,13 +102,12 @@ insert into profesores (profesor_nombre, profesor_apellido) values
 ('Norberto','Cascelli'),
 ('Ramiro','Villar'),
 ('Diego','Pacini'),
-('Juan','Pacini'),
-('Diego','Pellegrini'),
+('Juan','Pellegrini'),
 ('Alicia', 'Ferreira'),
 ('Diego','Klehr'),
 ('Walter','Vilches'),
 ('Vacante','Vacante'),
-('Walter', 'Muscolo')
+('Walter', 'Muscolo'),
 ('Gustavo', 'Tattoli');
 
 

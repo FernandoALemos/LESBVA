@@ -17,7 +17,7 @@ if (isset($_POST['carrera'])) {
 
     echo "<option value=''>Seleccione un profesor</option>";
     while ($fila = $resultado_profesor->fetch_assoc()) {
-        $profesor = $fila['profesor_nombre'].' '. $fila['profesor_apellido'];
+        $profesor = $fila['profesor_apellido'].' '. $fila['profesor_nombre'];
         echo "<option value='{$fila['profesor_id']}'>{$profesor}</option>";
     }
     $stmt->close();

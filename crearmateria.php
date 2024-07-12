@@ -32,11 +32,16 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 <main>
 
     <body>
+        <div class="divMaterias-cabecera">
+            <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
+            <div class="btns-space"></div>
+            <!-- <button class="btn-descargar">Editar</button> -->
+        </div>
+        <br> <br>
         <form action="crearmateria.php" method="post">
             <p>Ingrese el nombre de la Materia: <input type="text" name="materia_nombre" id="materia_nombre" required></p>
             <input type="submit" class="button" value="Crear"><br><br><br>
         </form>
-        <a href="index.php" class="btn-descargar">Volver a inicio</a>
         <!-- <div>
         <button class="button" onclick="location.href='index.php'">Volver</button>
         </div> -->
@@ -46,6 +51,25 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             $materia->crearMateria();
         }
         ?>
+
+        <section id="Materias" class="divMaterias">
+            <div class="divMaterias-cabecera">
+                <!-- <a class="btn-ok ancora">Nueva materia</a> -->
+            </div>
+            <table class="lista">
+            <thead>
+                <tr>
+                    <th>MATERIAS</th>
+                    <th>MODIFICAR</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    Materia::listarMaterias();
+                ?>
+            </tbody>
+            </table>
+        </section>
     </body>
 </main>
 <footer>

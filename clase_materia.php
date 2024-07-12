@@ -73,21 +73,16 @@ class Materia
 
 
     #region listarMaterias
-    public static function listarMaterias()
-    {
+    public static function listarMaterias(){
         $con = conectar_db();
-
-        // $data = mysqli_query($con,"select materias.materia_id, materias.materia_nombre, materias.curso, materias.profesor, materias.situacion_revista, materias.cantidad_alumno, ciclo_lectivo.ciclo, carreras.carrera_nombre from (( materias inner join ciclo_lectivo on materias.ciclo_id = ciclo_lectivo.ciclo_id ) inner join carreras on materias.carrera_id = carreras.carrera_id) order by  materias.curso, materias.materia_nombre;");
-
-        // PROBAR
-        $data = mysqli_query($con, "select materias.materia_id, materias.materia_nombre, materias.curso, materias.profesor, materias.situacion_revista, materias.cantidad_alumno, ciclo_lectivo.ciclo, carreras.carrera_nombre from (( materias inner join ciclo_lectivo on materias.ciclo_id = ciclo_lectivo.ciclo_id ) inner join carreras on materias.carrera_id = carreras.carrera_id)  WHERE materias.curso = '{$_POST['curso']}' order by  materias.curso, materias.materia_nombre;");
+        $data = mysqli_query($con, "SELECT materia_id, materia_nombre FROM materias ORDER BY materia_nombre");
 
         if (mysqli_affected_rows($con) == 0) {
             echo "<tr><td><b class='bold red'>No hay materias registradas en el sistema</b></td></tr>";
         } else {
             while ($info = mysqli_fetch_assoc($data)) { ?>
                 <tr>
-                    <td><?php echo $info['materia_nombre']; ?></td>
+                    <td><?php echo htmlspecialchars($info['materia_nombre']); ?></td>
                     <td>
                         <p class="acciones">
                             <a class="modificar" href="pantalla_busqueda.php?pan=1 & acc=5 & materia_id=<?php echo $info['materia_id']; ?>">
@@ -96,7 +91,7 @@ class Materia
                         </p>
                     </td>
                 </tr>
-<?php   }
+        <?php }
         }
     }
     #endregion

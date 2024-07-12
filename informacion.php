@@ -33,6 +33,12 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
     <body>
         <section id="Materias" class="divMaterias">
             <div class="divMaterias-cabecera">
+                <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
+                <div class="btns-space"></div>
+                <button class="btn-descargar">Editar</button>
+            </div>
+            <br> <br>
+            <div class="divMaterias-cabecera">
                 <button class="btn-descargar" onclick="location.href='buscador.php'">Volver</button>
                 <div class="btns-space"></div>
                 <button class="btn-descargar" onclick="location.href='excel.php'">Descargar Excel</button>

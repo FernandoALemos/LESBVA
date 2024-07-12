@@ -22,7 +22,7 @@
         #region crearProfesor
         public function crearProfesor(){
             $con = conectar_db();
-           
+        
 
             mysqli_query($con, "insert into profesores (profesor_nombre, profesor_apellido) values ('$this->profesor_nombre', '$this->profesor_apellido')");
 
@@ -65,6 +65,28 @@
         }
         #endregion
         #endregion
+        public static function listarProfesores(){
+            $con = conectar_db();
+            $data = mysqli_query($con, "SELECT profesor_id, profesor_nombre, profesor_apellido FROM profesores ORDER BY profesor_apellido");
+
+            if (mysqli_affected_rows($con) == 0) {
+                echo "<tr><td><b class='bold red'>No hay profesores registrados en el sistema</b></td></tr>";
+            } else {
+                while ($info = mysqli_fetch_assoc($data)) { ?>
+                    <tr>
+                        <td><?php echo $info['profesor_apellido']; ?></td>
+                        <td><?php echo $info['profesor_nombre']; ?></td>
+                        <td>
+                            <p class="acciones">
+                                <a class="modificar" href="pantalla_busqueda.php?pan=1 & acc=5 & profesor_id=<?php echo $info['profesor_id']; ?>">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </p>
+                        </td>
+                    </tr>
+                <?php }
+                }
+            }
 
     }
 ?>

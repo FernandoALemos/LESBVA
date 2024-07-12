@@ -39,8 +39,8 @@ justify-content: center;
 /* ESTILO PARA LAS TABLAS A MOSTRAR */
 
 table.lista {
-    width: 99%;
-    min-height: 120px;
+    width: auto;
+    height: auto;
     text-align: center;
     border-collapse: collapse;
 }
@@ -54,9 +54,9 @@ table.lista tbody td {
     font: var(--font-P300);
 }
 
-table.lista tr:nth-child(even) {
+/* table.lista tr:nth-child(even) {
     background: #D0E4F5;
-}
+} */
 
 table.lista thead {
     background: #3e64bc;
@@ -65,7 +65,7 @@ table.lista thead {
 table.lista thead th {
     font: var(--font-P700);
     font-weight: bold;
-    color: #FFFFFF;
+    color: #f9fafb;
     text-align: center;
 }
 
