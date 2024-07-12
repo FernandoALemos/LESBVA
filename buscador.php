@@ -71,7 +71,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 <main>
 
 <body>
-    <div class="divBuscador-cabecera">
+    <div class="divMaterias-cabecera">
         <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
         <div class="btns-space"></div>
     </div>

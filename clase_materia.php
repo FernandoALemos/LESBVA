@@ -85,7 +85,7 @@ class Materia
                     <td><?php echo htmlspecialchars($info['materia_nombre']); ?></td>
                     <td>
                         <p class="acciones">
-                            <a class="modificar" href="pantalla_busqueda.php?pan=1 & acc=5 & materia_id=<?php echo $info['materia_id']; ?>">
+                            <a class="modificar" href="crearmateria.php?pan=1 & acc=5 & materia_id=<?php echo $info['materia_id']; ?>">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </p>

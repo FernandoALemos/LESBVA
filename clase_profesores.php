@@ -78,7 +78,7 @@
                         <td><?php echo $info['profesor_nombre']; ?></td>
                         <td>
                             <p class="acciones">
-                                <a class="modificar" href="pantalla_busqueda.php?pan=1 & acc=5 & profesor_id=<?php echo $info['profesor_id']; ?>">
+                                <a class="modificar" href="crearprofesor.php?pan=1 & acc=5 & profesor_id=<?php echo $info['profesor_id']; ?>">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                             </p>
