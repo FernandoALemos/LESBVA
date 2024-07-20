@@ -61,7 +61,14 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             <ul>
                 <a href="buscador.php">
                     <i class="fa-solid fa-list-check"></i>
-                    <span class="nombre-link">Listar información</span>
+                    <span class="nombre-link">Asignaturas</span>
+                </a>
+            </ul>
+
+            <ul>
+                <a href="usuarios.php">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span class="nombre-link">Usuarios</span>
                 </a>
             </ul>
 

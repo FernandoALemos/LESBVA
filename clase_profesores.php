@@ -41,14 +41,19 @@
         #endregion
 
         #region modificarProfesor
-        public function modificarProfesor(){
+        public function modificarProfesor($id){
             $con = conectar_db();
             $texto = "";
-            mysqli_query($con, "update profesores set profesor_nombre = '$this->profesor_nombre', profesor_apellido = '$this->profesor_apellido' where profesor_id = $this->profesor_id");
+            mysqli_query($con, "update profesores set profesor_nombre = '$this->profesor_nombre', profesor_apellido = '$this->profesor_apellido' where profesor_id = $id");
 
-            (mysqli_affected_rows($con) > 0) ? $texto = "Profesor modificada correctamente" : $texto = "No se pudo modificar el/la profesor/a";
+            if (mysqli_affected_rows($con) > 0) {
+                $texto = "Se modifico correctamente el profesor";
+            } else {
+                $texto = "No se pudo modificar el profesor";
+            }
 
-            return $texto;
+            echo "<script>alert('$texto');</script>";
+            
         }
         #endregion
 
@@ -68,25 +73,18 @@
         public static function listarProfesores(){
             $con = conectar_db();
             $data = mysqli_query($con, "SELECT profesor_id, profesor_nombre, profesor_apellido FROM profesores ORDER BY profesor_apellido");
+            $profesores = [];
 
             if (mysqli_affected_rows($con) == 0) {
                 echo "<tr><td><b class='bold red'>No hay profesores registrados en el sistema</b></td></tr>";
             } else {
-                while ($info = mysqli_fetch_assoc($data)) { ?>
-                    <tr>
-                        <td><?php echo $info['profesor_apellido']; ?></td>
-                        <td><?php echo $info['profesor_nombre']; ?></td>
-                        <td>
-                            <p class="acciones">
-                                <a class="modificar" href="crearprofesor.php?pan=1 & acc=5 & profesor_id=<?php echo $info['profesor_id']; ?>">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                            </p>
-                        </td>
-                    </tr>
-                <?php }
+                while ($info = mysqli_fetch_assoc($data)) {
+                    $profesores[] = $info;
                 }
             }
+
+            return $profesores;
+        }
 
     }
 ?>
