@@ -41,15 +41,19 @@ class Materia
     #endregion
 
     #region modificarMateria
-    public function modificarMateria()
+    public function modificarMateria($id)
     {
         $con = conectar_db();
         $texto = "";
-        mysqli_query($con, "update materias set materia_nombre = '$this->materia_nombre' where id = $this->id");
+        mysqli_query($con, "update materias set materia_nombre = '$this->materia_nombre' where materia_id = $id");
 
-        (mysqli_affected_rows($con) > 0) ? $texto = "Materia modificada correctamente" : $texto = "No se pudo modificar la materia";
+        if (mysqli_affected_rows($con) > 0) {
+            $texto = "Materia modificada correctamente";
+        } else {
+            $texto = "No se pudo modificar la materia";
+        }
 
-        return $texto;
+        echo "<script>alert('$texto');</script>";
     }
     #endregion
 
@@ -69,30 +73,24 @@ class Materia
     #endregion
 
 
-
-
-
     #region listarMaterias
-    public static function listarMaterias(){
+    public static function listarMaterias()
+    {
         $con = conectar_db();
-        $data = mysqli_query($con, "SELECT materia_id, materia_nombre FROM materias ORDER BY materia_nombre");
+        $data = mysqli_query($con, "SELECT DISTINCT materia_id, materia_nombre FROM materias ORDER BY materia_nombre");
+        $materias = [];
+        // icono de modificar
+        // <i class="fa-solid fa-pen-to-square"></i>
 
         if (mysqli_affected_rows($con) == 0) {
             echo "<tr><td><b class='bold red'>No hay materias registradas en el sistema</b></td></tr>";
         } else {
-            while ($info = mysqli_fetch_assoc($data)) { ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($info['materia_nombre']); ?></td>
-                    <td>
-                        <p class="acciones">
-                            <a class="modificar" href="crearmateria.php?pan=1 & acc=5 & materia_id=<?php echo $info['materia_id']; ?>">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
-                        </p>
-                    </td>
-                </tr>
-        <?php }
+            while ($info = mysqli_fetch_assoc($data)) {
+                $materias[] = $info;
+            }
         }
+        
+        return $materias;
     }
     #endregion
 

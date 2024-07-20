@@ -36,30 +36,35 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             <div>
                 <h2>Bienvenido <?php echo $_SESSION['usuario_nombre']; ?></h2>
             </div><br>
+
             <ul>
-
-                <a href="crearmateria.php">
-                    <i class="fa-solid fa-circle-plus"></i>
-                    <span class="nombre-link">Crear materia</span>
-                </a>
-
-            </ul>
-            <ul>
-
-                <a href="crearprofesor.php">
+                <a href="ciclos_carreras_cursos.php">
                     <i class="fa-solid fa-user-plus"></i>
-                    <span class="nombre-link">Crear profesor</span>
+                    <span class="nombre-link">Ciclos/Carreras/Cursos</span>
                 </a>
-
             </ul>
-            <ul>
 
+            <ul>
+                <a href="materias.php">
+                    <i class="fa-solid fa-circle-plus"></i>
+                    <span class="nombre-link">Materias</span>
+                </a>
+            </ul>
+
+            <ul>
+                <a href="profesores.php">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span class="nombre-link">Profesores</span>
+                </a>
+            </ul>
+
+            <ul>
                 <a href="buscador.php">
                     <i class="fa-solid fa-list-check"></i>
                     <span class="nombre-link">Listar información</span>
                 </a>
-
             </ul>
+
         </nav>
     </body>
 </main>
