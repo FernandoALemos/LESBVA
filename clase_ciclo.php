@@ -10,8 +10,8 @@
         #endregion
 
         #region constructor
-        public function __construct($ciclo_id,$ciclo){
-            $this->ciclo_id = $ciclo_id;
+        public function __construct($ciclo){
+            // $this->ciclo_id = $ciclo_id;
             $this->ciclo = $ciclo;
         }
         #endregion
@@ -20,25 +20,33 @@
         #region crearCiclo
         public function crearCiclo(){
             $con = conectar_db();
-            $text = "";
-
             mysqli_query($con, "insert into ciclo_lectivo (ciclo) values ('$this->ciclo')");
 
-            (mysqli_affected_rows($con) > 0) ? $text = "Nueva ciclo agregada" : $text =" No se pudo generar una nueva ciclo";
-
-            return $text;
+            if (mysqli_affected_rows($con) > 0) {
+                ?><script>
+                    alert("Ciclo creado con éxito");
+                </script>
+            <?php
+                } else {
+            ?><script>
+                alert("No se pudo crear el ciclo");
+            </script>
+            <?php }
         }
         #endregion
 
         #region modificarCiclo
-        public function modificarCiclo(){
-            $con = condb();
-            $texto = "";
-            mysqli_query($con, "update ciclo_lectivo set ciclo = '$this->ciclo' where ciclo_id = $this->ciclo_id");
+        public function modificarCiclo($id){
+            $con = conectar_db();
+            mysqli_query($con, "update ciclo_lectivo set ciclo = '$this->ciclo' where ciclo_id = $id");
 
-            (mysqli_affected_rows($con) > 0) ? $texto = "Ciclo modificada correctamente" : $texto = "No se pudo modificar la ciclo";
-
-            return $texto;
+            if (mysqli_affected_rows($con) > 0) {
+                $texto = "Ciclo modificado correctamente";
+            } else {
+                $texto = "No se pudo modificar el ciclo";
+            }
+    
+            echo "<script>alert('$texto');</script>";
         }
         #endregion
 
@@ -54,7 +62,28 @@
             return $text;
         }
         #endregion
+        
+        #region listarCiclos
+        public static function listarCiclos()
+        {
+            $con = conectar_db();
+            $data = mysqli_query($con, "SELECT DISTINCT ciclo_id, ciclo FROM ciclo_lectivo ORDER BY ciclo");
+            $ciclos = [];
+
+            if (mysqli_affected_rows($con) == 0) {
+                echo "<tr><td><b class='bold red'>No hay cicloes registrados en el sistema</b></td></tr>";
+            } else {
+                while ($info = mysqli_fetch_assoc($data)) {
+                    $ciclos[] = $info;
+                }
+            }
+            
+            return $ciclos;
+        }
+        #endregion
+
         #endregion
 
     }
+    #endregion
 ?>

@@ -10,8 +10,8 @@
         #endregion
 
         #region constructor
-        public function __construct($curso_id,$curso){
-            $this->curso_id = $curso_id;
+        public function __construct($curso){
+            // $this->curso_id = $curso_id;
             $this->curso = $curso;
         }
         #endregion
@@ -20,31 +20,39 @@
         #region crearCurso
         public function crearCurso(){
             $con = conectar_db();
-            $text = "";
-
             mysqli_query($con, "insert into cursos (curso) values ('$this->curso')");
 
-            (mysqli_affected_rows($con) > 0) ? $text = "Nueva curso agregada" : $text =" No se pudo generar una nueva curso";
-
-            return $text;
+            if (mysqli_affected_rows($con) > 0) {
+                ?><script>
+                    alert("Curso creado con éxito");
+                </script>
+            <?php
+                } else {
+            ?><script>
+                alert("No se pudo crear el curso");
+            </script>
+            <?php }
         }
         #endregion
 
         #region modificarCurso
-        public function modificarCurso(){
-            $con = condb();
-            $texto = "";
-            mysqli_query($con, "update cursos set curso = '$this->curso' where curso_id = $this->curso_id");
+        public function modificarCurso($id){
+            $con = conectar_db();
+            mysqli_query($con, "update cursos set curso = '$this->curso' where curso_id = $id");
 
-            (mysqli_affected_rows($con) > 0) ? $texto = "Curso modificada correctamente" : $texto = "No se pudo modificar la curso";
-
-            return $texto;
+            if (mysqli_affected_rows($con) > 0) {
+                $texto = "Curso modificado correctamente";
+            } else {
+                $texto = "No se pudo modificar el curso";
+            }
+    
+            echo "<script>alert('$texto');</script>";
         }
         #endregion
 
         #region eliminarCurso
         public static function eliminarCurso($curso_id){
-            $con = condb();
+            $con = conectar_db();
             $text = "";
 
             mysqli_query($con, "delete from cursos where curso_id = $curso_id;");
@@ -90,26 +98,45 @@
         #region listarCuros
         public static function listarCursos(){
             $con = conectar_db();
-            // PROBAR
-            $data = mysqli_query($con,"select cursos.curso order by  cursos.curso;");
+            $data = mysqli_query($con,"SELECT DISTINCT cursos_id, curso FROM cursos ORDER BY curso");
+            $cursos = [];
             
-            if(mysqli_affected_rows($con) == 0){
-                echo "<tr><td><b class='bold red'>No hay curos registrados en el sistema</b></td></tr>";
-            }else{
-                while ($info = mysqli_fetch_assoc($data)){ ?>
-                    <tr>
-                        <td><?php echo $info['curso']; ?></td>
-                        <td>
-                            <p class="acciones">
-                                <a class="modificar" href="pantalla_busqueda.php?pan=1 & acc=5 & curso_id=<?php echo $info['curso_id']; ?>">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                            </p>
-                        </td>
-                    </tr>
-                <?php   }
+            if (mysqli_affected_rows($con) == 0) {
+                echo "<tr><td><b class='bold red'>No hay cursos registrados en el sistema</b></td></tr>";
+            } else {
+                while ($info = mysqli_fetch_assoc($data)) {
+                    $cursos[] = $info;
+                }
             }
+            
+            return $cursos;
         }
         #endregion
+
+
+        public static function listar_Cursos() {
+            $con = conectar_db();
+            $data = mysqli_query($con, "SELECT curso_id, curso FROM cursos ORDER BY curso");
+        
+            // Verificar si la consulta fue exitosa
+            if (!$data) {
+                // Si la consulta falla, puedes manejar el error aquí
+                // Puedes lanzar una excepción, registrar el error, o devolver un mensaje de error
+                echo "Error en la consulta: " . mysqli_error($con);
+                return [];
+            }
+        
+            $cursos = [];
+        
+            if (mysqli_affected_rows($con) == 0) {
+                echo "<tr><td><b class='bold red'>No hay cursos registrados en el sistema</b></td></tr>";
+            } else {
+                while ($info = mysqli_fetch_assoc($data)) {
+                    $cursos[] = $info;
+                }
+            }
+        
+            return $cursos;
+        }
     }
 ?>

@@ -23,8 +23,6 @@ class Materia
     public function crearMateria()
     {
         $con = conectar_db();
-        
-
         mysqli_query($con, "insert into materias (materia_nombre) values ('$this->materia_nombre')");
         
         if (mysqli_affected_rows($con) > 0) {
@@ -36,8 +34,8 @@ class Materia
         ?><script>
             alert("No se pudo crear la materia");
         </script>
-        <?php
-    }}
+        <?php }
+    }
     #endregion
 
     #region modificarMateria
@@ -79,8 +77,6 @@ class Materia
         $con = conectar_db();
         $data = mysqli_query($con, "SELECT DISTINCT materia_id, materia_nombre FROM materias ORDER BY materia_nombre");
         $materias = [];
-        // icono de modificar
-        // <i class="fa-solid fa-pen-to-square"></i>
 
         if (mysqli_affected_rows($con) == 0) {
             echo "<tr><td><b class='bold red'>No hay materias registradas en el sistema</b></td></tr>";

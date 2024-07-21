@@ -31,8 +31,8 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 
 <body>
 
-        <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
-        <div class="btns-space"></div><br>
+    <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
+    <div class="btns-space"></div><br>
 
     <main class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
