@@ -35,7 +35,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
             <div class="divMaterias-cabecera">
                 <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
                 <div class="btns-space"></div>
-                <button class="btn-descargar">Editar</button>
+                <button class="btn-descargar" onclick="location.href='asignaturas.php'">Editar</button>
             </div>
             <div class="divMaterias-cabecera">
                 <button class="btn-descargar" onclick="location.href='buscador.php'">Volver</button>
@@ -73,15 +73,10 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
 
                         // Obtener los valores de los filtros
                         $ciclo = isset($filtros['ciclo']) ? $filtros['ciclo'] : '';
+                        $turno_id = isset($filtros['turno_id']) ? $filtros['turno_id'] : '';
                         $carrera = isset($filtros['carrera_id']) ? $filtros['carrera_id'] : '';
                         $curso = isset($filtros['curso_id']) ? $filtros['curso_id'] : '';
                         $profesor = isset($filtros['profesor_id']) ? $filtros['profesor_id'] : '';
-
-                        // Obtener los valores de POST
-                        // $ciclo = isset($_POST['ciclo']) ? $_POST['ciclo'] : '';
-                        // $carrera = isset($_POST['carrera_id']) ? $_POST['carrera_id'] : '';
-                        // $curso = isset($_POST['curso_id']) ? $_POST['curso_id'] : '';
-                        // $profesor = isset($_POST['profesor_id']) ? $_POST['profesor_id'] : '';
 
                         // Construir la consulta SQL basada en los filtros seleccionados
                         $sql = "SELECT 
@@ -116,11 +111,11 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
                                 JOIN 
                                     profesores p ON mc.profesor_id = p.profesor_id
                                 WHERE 
-                                    cl.ciclo = ? AND mc.carrera_id = ?";
+                                    cl.ciclo = ? AND mc.carrera_id = ? AND mc.turno_id = ?";
 
                         // Si el curso está seleccionado, agregarlo a la consulta
-                        $params = [$ciclo, $carrera];
-                        $types = 'ii';
+                        $params = [$ciclo, $carrera, $turno_id];
+                        $types = 'iii';
                         // Si el curso está seleccionado, agregarlo a la consulta
                         if (!empty($curso)) {
                             $sql .= " AND mc.curso_id = ?";
@@ -150,6 +145,15 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
                         $stmt_carrera->fetch();
                         $stmt_carrera->close();
 
+                        // Obtener el nombre del turno
+                        $sql_turno = "SELECT turno FROM turnos WHERE turno_id = ?";
+                        $stmt_turno = $con->prepare($sql_turno);
+                        $stmt_turno->bind_param("i", $turno_id);
+                        $stmt_turno->execute();
+                        $stmt_turno->bind_result($turno);
+                        $stmt_turno->fetch();
+                        $stmt_turno->close();
+
                         // OBTENGO LA DATA?
                         $data = [];
                         while ($row = $result->fetch_assoc()) {
@@ -160,6 +164,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
                         $_SESSION['materia_data'] = $data;
                         $_SESSION['ciclo'] = $ciclo;
                         $_SESSION['carrera_nombre'] = $carrera_nombre;
+                        $_SESSION['turno'] = $turno;
 
                         // Verificar si hay resultados
                         if (empty($data)) {

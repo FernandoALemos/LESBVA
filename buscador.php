@@ -28,14 +28,24 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         $(document).ready(function() {
             $('#ciclo').change(function() {
                 var ciclo = $(this).val();
-                $.ajax({
-                    type: 'POST',
-                    url: 'get_carreras.php',
-                    data: {ciclo: ciclo},
-                    success: function(response) {
-                        $('#carrera').html(response);
-                    }
-                });
+                if (ciclo) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'get_turnos.php',
+                        data: { ciclo: ciclo },
+                        success: function(response) {
+                            $('#turno').html(response);
+                        }
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: 'get_carreras.php',
+                        data: { ciclo: ciclo },
+                        success: function(response) {
+                            $('#carrera').html(response);
+                        }
+                    });
+                }
             });
 
             $('#carrera').change(function() {
@@ -93,6 +103,12 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             foreach ($ciclo as $ciclos) {
                 echo "<option value='{$ciclos}'>{$ciclos}</option>";
             }
+            echo "</select>";
+            echo "<br>";
+
+            echo "<br><label for='turno_id'>Turno: </label>";
+            echo "<select name='turno_id' id='turno'>";
+            echo "<option value=''>Seleccione un turno</option>";
             echo "</select>";
             echo "<br>";
 
