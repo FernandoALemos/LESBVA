@@ -71,7 +71,7 @@
             $ciclos = [];
 
             if (mysqli_affected_rows($con) == 0) {
-                echo "<tr><td><b class='bold red'>No hay cicloes registrados en el sistema</b></td></tr>";
+                echo "<tr><td><b class='bold red'>No hay ciclos registrados en el sistema</b></td></tr>";
             } else {
                 while ($info = mysqli_fetch_assoc($data)) {
                     $ciclos[] = $info;

@@ -156,11 +156,16 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
 
                         // OBTENGO LA DATA?
                         $data = [];
+                        $data_ids = [];
                         while ($row = $result->fetch_assoc()) {
-                            $data[] = $row;
+                            $data[] = $row;  // Llenas $data con todas las columnas
+                            $data_ids[] = $row['materia_carrera_id'];  // Llenas $data_ids solo con los IDs
                         }
 
-                        // Almacenar los datos en la sesión
+                        // Almacenar los IDs en la sesión
+                        $_SESSION['materia_carrera_ids'] = $data_ids;
+
+                        // Almacenar los datos en la sesión para el excel
                         $_SESSION['materia_data'] = $data;
                         $_SESSION['ciclo'] = $ciclo;
                         $_SESSION['carrera_nombre'] = $carrera_nombre;

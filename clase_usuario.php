@@ -15,8 +15,8 @@
     #endregion
 
     #region constructor
-        public function __construct($usuario_id,$usuario_nombre,$usuario_apellido,$rol_id,$cargo_id,$contrasenia,$email,$usuario_suspendido){
-            $this->usuario_id = $usuario_id;
+        public function __construct($usuario_nombre,$usuario_apellido,$rol_id,$cargo_id,$contrasenia,$email,$usuario_suspendido){
+            // $this->usuario_id = $usuario_id;
             $this->usuario_nombre = $usuario_nombre;
             $this->usuario_apellido = $usuario_apellido;
             $this->rol_id = $rol_id;
@@ -42,11 +42,11 @@
     #endregion
 
     #region modificarUsuario
-        public function modificarUsuario(){
+        public function modificarUsuario($id){
             $con = conectar_db();
             $texto = "";
 
-            mysqli_query($con,"update usuarios set usuario_nombre = '$this->usuario_nombre', usuario_apellido = '$this->usuario_apellido' , rol_id = '$this->rol_id',cargo_id = '$this->cargo_id', contrasenia = '$this->contrasenia', email = '$this->email', usuario_suspendido = $this->usuario_suspendido where usuario_id = $this->usuario_id;");
+            mysqli_query($con,"update usuarios set usuario_nombre = '$this->usuario_nombre', usuario_apellido = '$this->usuario_apellido' , rol_id = '$this->rol_id',cargo_id = '$this->cargo_id', contrasenia = '$this->contrasenia', email = '$this->email', usuario_suspendido = $this->usuario_suspendido where usuario_id = $id;");
 
             (mysqli_affected_rows($con) > 0) ? $texto = 'Usuario modificado correctamente' : $texto = 'No se pudo modificar al usuario correctamente';
 

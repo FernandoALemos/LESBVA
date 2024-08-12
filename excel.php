@@ -9,10 +9,11 @@ if (!isset($_SESSION['materia_data']) || !isset($_SESSION['ciclo']) || !isset($_
 
 $data = $_SESSION['materia_data'];
 $ciclo = $_SESSION['ciclo'];
+$turno = $_SESSION['turno'];
 $carrera_nombre = $_SESSION['carrera_nombre'];
 
 // Preparar el nombre del archivo
-$filename = "{$ciclo}-{$carrera_nombre}.xls";
+$filename = "{$ciclo}-{$carrera_nombre}-{$turno}.xls";
 
 // Enviar encabezados para la descarga del archivo
 header("Content-Type: application/vnd.ms-excel");

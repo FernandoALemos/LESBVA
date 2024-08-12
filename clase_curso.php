@@ -96,21 +96,21 @@
         }
 
         #region listarCuros
-        public static function listarCursos(){
-            $con = conectar_db();
-            $data = mysqli_query($con,"SELECT DISTINCT cursos_id, curso FROM cursos ORDER BY curso");
-            $cursos = [];
+        // public static function listarCursos(){
+        //     $con = conectar_db();
+        //     $data = mysqli_query($con,"SELECT DISTINCT cursos_id, curso FROM cursos ORDER BY curso");
+        //     $cursos = [];
             
-            if (mysqli_affected_rows($con) == 0) {
-                echo "<tr><td><b class='bold red'>No hay cursos registrados en el sistema</b></td></tr>";
-            } else {
-                while ($info = mysqli_fetch_assoc($data)) {
-                    $cursos[] = $info;
-                }
-            }
+        //     if (mysqli_affected_rows($con) == 0) {
+        //         echo "<tr><td><b class='bold red'>No hay cursos registrados en el sistema</b></td></tr>";
+        //     } else {
+        //         while ($info = mysqli_fetch_assoc($data)) {
+        //             $cursos[] = $info;
+        //         }
+        //     }
             
-            return $cursos;
-        }
+        //     return $cursos;
+        // }
         #endregion
 
 
@@ -120,8 +120,6 @@
         
             // Verificar si la consulta fue exitosa
             if (!$data) {
-                // Si la consulta falla, puedes manejar el error aquí
-                // Puedes lanzar una excepción, registrar el error, o devolver un mensaje de error
                 echo "Error en la consulta: " . mysqli_error($con);
                 return [];
             }
