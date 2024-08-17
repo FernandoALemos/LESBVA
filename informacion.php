@@ -130,6 +130,10 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
                             $types .= 'i';
                         }
 
+
+                         // Agregar la cláusula ORDER BY para ordenar por materia_nombre y curso
+                        $sql .= " ORDER BY cr.curso, m.materia_nombre";
+
                         // Preparar y ejecutar la consulta
                         $stmt = $con->prepare($sql);
                         $stmt->bind_param($types, ...$params);

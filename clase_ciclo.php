@@ -67,7 +67,7 @@
         public static function listarCiclos()
         {
             $con = conectar_db();
-            $data = mysqli_query($con, "SELECT DISTINCT ciclo_id, ciclo FROM ciclo_lectivo ORDER BY ciclo");
+            $data = mysqli_query($con, "SELECT DISTINCT ciclo_id, ciclo FROM ciclo_lectivo ORDER BY ciclo DESC");
             $ciclos = [];
 
             if (mysqli_affected_rows($con) == 0) {
