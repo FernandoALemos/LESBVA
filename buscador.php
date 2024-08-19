@@ -22,6 +22,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Bienvenido</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -32,7 +33,9 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                     $.ajax({
                         type: 'POST',
                         url: 'get_turnos.php',
-                        data: { ciclo: ciclo },
+                        data: {
+                            ciclo: ciclo
+                        },
                         success: function(response) {
                             $('#turno').html(response);
                         }
@@ -40,7 +43,9 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                     $.ajax({
                         type: 'POST',
                         url: 'get_carreras.php',
-                        data: { ciclo: ciclo },
+                        data: {
+                            ciclo: ciclo
+                        },
                         success: function(response) {
                             $('#carrera').html(response);
                         }
@@ -53,7 +58,9 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 $.ajax({
                     type: 'POST',
                     url: 'get_cursos.php',
-                    data: {carrera: carrera},
+                    data: {
+                        carrera: carrera
+                    },
                     success: function(response) {
                         $('#curso').html(response);
                     }
@@ -65,7 +72,9 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 $.ajax({
                     type: 'POST',
                     url: 'get_profesores.php',
-                    data: {carrera: carrera},
+                    data: {
+                        carrera: carrera
+                    },
                     success: function(response) {
                         $('#profesor').html(response);
                     }
@@ -80,64 +89,66 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 </header>
 <main>
 
-<body>
-    <div class="divMaterias-cabecera">
-        <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
-        <div class="btns-space"></div>
-    </div>
-    <form action='informacion.php' class="presentacion" method="POST" style="display: flex; justify-content: center; flex-direction: row;">
-        <div style="margin-right: 10px;">
-            <?php
-            $con = conectar_db();
-            $sql_ciclo = "SELECT DISTINCT cl.ciclo FROM materia_carrera mc inner join ciclo_lectivo cl on mc.ciclo_id = cl.ciclo_id";
-            $resultado_ciclo = $con->query($sql_ciclo);
-
-            $ciclo = array();
-            while ($fila = $resultado_ciclo->fetch_assoc()) {
-                $ciclo[] = $fila['ciclo'];
-            }
-
-            echo "<label for='ciclo'>Ciclo: </label>";
-            echo "<select name='ciclo' id='ciclo'>";
-            echo "<option value=''>Seleccione un ciclo</option>";
-            foreach ($ciclo as $ciclos) {
-                echo "<option value='{$ciclos}'>{$ciclos}</option>";
-            }
-            echo "</select>";
-            echo "<br>";
-
-            echo "<br><label for='turno_id'>Turno: </label>";
-            echo "<select name='turno_id' id='turno'>";
-            echo "<option value=''>Seleccione un turno</option>";
-            echo "</select>";
-            echo "<br>";
-
-            echo "<br><label for='carrera_id'>Carrera: </label>";
-            echo "<select name='carrera_id' id='carrera'>";
-            echo "<option value=''>Seleccione una carrera</option>";
-            echo "</select>";
-            echo "<br>";
-
-            echo "<br><label for='curso_id'>Curso: </label>";
-            echo "<select name='curso_id' id='curso'>";
-            echo "<option value=''>Seleccione un curso</option>";
-            echo "</select>";
-            echo "<br>";
-
-            echo "<br><label for='profesor_id'>Profesor: </label>";
-            echo "<select name='profesor_id' id='profesor'>";
-            echo "<option value=''>Seleccione un profesor</option>";
-            echo "</select>";
-            echo "<br>";
-
-            echo "<br><input type='submit' class='button' value='Continuar'>";
-            ?>
+    <body>
+        <div class="divMaterias-cabecera">
+            <!-- <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
+        <div class="btns-space"></div> -->
+            <h1></h1>
         </div>
-    </form>
-</body>
+        <form action='informacion.php' class="presentacion" method="POST" style="display: flex; justify-content: center; flex-direction: row;">
+            <div style="margin-right: 10px;">
+                <?php
+                $con = conectar_db();
+                $sql_ciclo = "SELECT DISTINCT cl.ciclo FROM materia_carrera mc inner join ciclo_lectivo cl on mc.ciclo_id = cl.ciclo_id";
+                $resultado_ciclo = $con->query($sql_ciclo);
+
+                $ciclo = array();
+                while ($fila = $resultado_ciclo->fetch_assoc()) {
+                    $ciclo[] = $fila['ciclo'];
+                }
+
+                echo "<label for='ciclo'>Ciclo: </label>";
+                echo "<select name='ciclo' id='ciclo'>";
+                echo "<option value=''>Seleccione un ciclo</option>";
+                foreach ($ciclo as $ciclos) {
+                    echo "<option value='{$ciclos}'>{$ciclos}</option>";
+                }
+                echo "</select>";
+                echo "<br>";
+
+                echo "<br><label for='turno_id'>Turno: </label>";
+                echo "<select name='turno_id' id='turno'>";
+                echo "<option value=''>Seleccione un turno</option>";
+                echo "</select>";
+                echo "<br>";
+
+                echo "<br><label for='carrera_id'>Carrera: </label>";
+                echo "<select name='carrera_id' id='carrera'>";
+                echo "<option value=''>Seleccione una carrera</option>";
+                echo "</select>";
+                echo "<br>";
+
+                echo "<br><label for='curso_id'>Curso: </label>";
+                echo "<select name='curso_id' id='curso'>";
+                echo "<option value=''>Seleccione un curso</option>";
+                echo "</select>";
+                echo "<br>";
+
+                echo "<br><label for='profesor_id'>Profesor: </label>";
+                echo "<select name='profesor_id' id='profesor'>";
+                echo "<option value=''>Seleccione un profesor</option>";
+                echo "</select>";
+                echo "<br>";
+
+                echo "<br><input type='submit' class='btn-descargar' value='Continuar'>"; #Cambio estilo de boton, queda mejor.
+                ?>
+            </div>
+        </form>
+    </body>
 </main>
 <footer>
-    <p class="titulos"><a href="logout.php">Cerrar sesión</a></p><br>
+    <p class="titulos"><i class="fa-solid fa-arrow-right-from-bracket"></i><a href="logout.php">Cerrar sesión</a></p><br>
+    <p class="titulos"><i class="fa-solid fa-house"></i><a href="index.php">Ir a inicio</a></p><br> <!-- Lo agrego acá, queda mejor que arriba de todo creo. -->
 </footer>
 
 </html>

@@ -33,42 +33,42 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 
     <body>
         <nav>
-            <div>
-                <h2>Bienvenido <?php echo $_SESSION['usuario_nombre']; ?></h2>
-            </div><br>
+            <!-- <div>
+                <h1>Bienvenido <?php echo $_SESSION['usuario_nombre']; ?></h1>
+            </div><br> -->
 
             <ul>
-                <a href="ciclos_carreras_cursos.php">
+                <a href="ciclos_carreras_cursos.php" class='btn-descargar'>
                     <i class="fa-solid fa-user-plus"></i>
                     <span class="nombre-link">Ciclos/Carreras/Cursos</span>
                 </a>
             </ul>
 
             <ul>
-                <a href="materias.php">
+                <a href="materias.php" class='btn-descargar'>
                     <i class="fa-solid fa-circle-plus"></i>
                     <span class="nombre-link">Materias</span>
                 </a>
             </ul>
 
             <ul>
-                <a href="profesores.php">
+                <a href="profesores.php" class='btn-descargar'>
                     <i class="fa-solid fa-user-plus"></i>
                     <span class="nombre-link">Profesores</span>
                 </a>
             </ul>
 
             <ul>
-                <a href="buscador.php">
+                <a href="buscador.php" class='btn-descargar'>
                     <i class="fa-solid fa-list-check"></i>
                     <span class="nombre-link">Asignaturas</span>
                 </a>
             </ul>
 
             <ul>
-                <a href="usuarios.php">
+                <a href="usuarios.php" class='btn-descargar'>
                     <i class="fa-solid fa-list-check"></i>
-                    <span class="nombre-link">Usuarios</span>
+                    <span class="nombre-link">Usuarios (no funciona)</span> <!-- HAY QUE CREAR EL ABM -->
                 </a>
             </ul>
 

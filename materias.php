@@ -29,20 +29,20 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 </header>
 
 <body>
-    <div class="divMaterias-cabecera">
+    <!-- <div class="divMaterias-cabecera">
         <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
         <div class="btns-space"></div>
-    </div> <br>
+    </div> <br> -->
     <main class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1>Materias</h1>
             <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearMateria">Nueva materia</button>
         </div>
         <table class="table table-bordered">
-        <!-- <table class="lista"> -->
+            <!-- <table class="lista"> -->
             <thead>
                 <tr>
-                    <th>Nombre Materia</th>
+                    <th>Nombre de la materia</th> <!-- Cambio nombre de th, me parece más adecuado -->
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -118,15 +118,15 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     </div>
 
     <script>
-    $(document).ready(function() {
-        $('.btnEditar').on('click', function() {
-            var id = $(this).data('id');
-            var nombre = $(this).data('nombre');
-            $('#editar_materia_id').val(id);
-            $('#editar_materia_nombre').val(nombre);
-            $('#modalEditarMateria').modal('show');
+        $(document).ready(function() {
+            $('.btnEditar').on('click', function() {
+                var id = $(this).data('id');
+                var nombre = $(this).data('nombre');
+                $('#editar_materia_id').val(id);
+                $('#editar_materia_nombre').val(nombre);
+                $('#modalEditarMateria').modal('show');
+            });
         });
-    });
     </script>
 
 
@@ -136,6 +136,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 </body>
 <footer>
     <p class="titulos"><i class="fa-solid fa-arrow-right-from-bracket"></i><a href="logout.php">Cerrar sesión</a></p><br>
+    <p class="titulos"><i class="fa-solid fa-house"></i><a href="index.php">Ir a inicio</a></p><br> <!-- Lo agrego acá, queda mejor que arriba de todo creo. -->
 </footer>
 
 </html>

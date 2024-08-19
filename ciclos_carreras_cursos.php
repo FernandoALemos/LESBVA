@@ -21,6 +21,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Gestionar Ciclos, Carreras y Cursos</title>
@@ -31,19 +32,19 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 </header>
 
 <body>
-    <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
-    <div class="btns-space"></div><br>
+    <!-- <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button> -->
+    <!-- <div class="btns-space"></div><br> -->
 
     <!-- CICLOS -->
     <main class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1>Clicos</h1>
+            <h1>Ciclos</h1> <!-- Corrijo, mal escrito-->
             <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearCiclo">Nuevo ciclo</button>
         </div>
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Ciclo</th>
+                    <th>Ciclo Lectivo</th> <!--Agrego "Lectivo" para que visualmente no quede el boton "nuevo ciclo" pegado al titulo "Ciclos" -->
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -238,7 +239,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Curso</th>
+                    <th>Cursos disponibles</th> <!--Agrego "disponibles" para que visualmente no quede el boton "nuevo curso" pegado al titulo "Cursos" -->
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -330,6 +331,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 </body>
 <footer>
     <p class="titulos"><i class="fa-solid fa-arrow-right-from-bracket"></i><a href="logout.php">Cerrar sesión</a></p><br>
+    <p class="titulos"><i class="fa-solid fa-house"></i><a href="index.php">Ir a inicio</a></p><br> <!-- Lo agrego acá, queda mejor que arriba de todo creo. -->
 </footer>
 
 </html>
