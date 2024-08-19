@@ -160,7 +160,7 @@ insert into materias (materia_nombre) values
 ('Ingeniería de Software II'),
 ('Algoritmos y Estructura de Datos II'),
 ('Prácticas Profesionalizantes III A'),
-('Prácticas Profesionalizantes III B');
+('Prácticas Profesionalizantes III B'),
 -- 3° quimica
 ('Politica Institucional'),
 -- 4° quimica
@@ -206,7 +206,7 @@ create table materia_carrera(
     foreign key (curso_id) references cursos(curso_id),
     foreign key (turno_id) references turnos(turno_id),
     foreign key (profesor_id) references profesores(profesor_id),
-    primary key (materia_carrera_id, materia_id, ciclo_id, carrera_id, curso_id, turno_id, profesor_id)
+    primary key (materia_carrera_id) -- , materia_id, ciclo_id, carrera_id, curso_id, turno_id, profesor_id -- si las declaro como primary después no puedo insertar valores.
 );
 
 
@@ -251,11 +251,11 @@ insert into materia_carrera (materia_id, carrera_id, ciclo_id, curso_id, turno_i
 (23, 1, 1, 4, 3, 20, '', 28, 28, 0, 0, 2, 0, 0),-- ing 2
 (24, 1, 1, 4, 3, 7, 'P', 17, 17, 0, 0, 4, 0, 0),-- algoritmos 3
 (25, 1, 1, 4, 3, 15, 'P', 20, 20, 0, 0, 3, 0, 0),-- practicas 3a
-(26, 1, 1, 4, 3, 19, 'P', 20, 20, 0, 0, 3, 0, 0);-- practicas 3b
+(26, 1, 1, 4, 3, 19, 'P', 20, 20, 0, 0, 3, 0, 0),-- practicas 3b
 
 -- 3°A Quimica para ver filtro
 (27, 7, 1, 4, 3, 21, 'P', 27, 23, 0, 4, 2, 0, 0),-- ingles 3
 
 
 -- 4°A Qumica para ver filtro
-(28, 7, 1, 5, 3, 22, 'P', 12, 7, 0, 5, 2, 0, 0),-- ingles 3
+(28, 7, 1, 5, 3, 22, 'P', 12, 7, 0, 5, 2, 0, 0);-- ingles 3
