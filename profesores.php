@@ -22,6 +22,8 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/all.min.css" rel="stylesheet">
     <title>Gestión de Profesores</title>
 </head>
 
@@ -31,40 +33,33 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 </header>
 
 <body>
-<!-- 
-    <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
-    <div class="btns-space"></div><br> -->
-
-    <main class="container mt-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1>Profesores</h1>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearProfesor">Nuevo profesor</button>
-        </div>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Apellido</th>
-                    <th>Nombre</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $profesores = Profesor::listarProfesores();
-                foreach ($profesores as $profesor) {
-                    echo "<tr>";
-                    echo "<td>{$profesor['profesor_apellido']}</td>";
-                    echo "<td>{$profesor['profesor_nombre']}</td>";
-                    // VER si data-nombre funciona
-                    echo "<td>
-                            <button class='btn btn-info btn-sm btnEditar' data-id='{$profesor['profesor_id']}' data-nombre='{$profesor['profesor_nombre']}' data-apellido='{$profesor['profesor_apellido']}'>Editar</button>
-                        </td>";
-                    echo "</tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-    </main>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Profesores</h1>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearProfesor">Nuevo profesor</button>
+    </div>
+    <table class="table table-sm table-striped table-hover mt-4">
+        <thead class="table-primary">
+            <tr>
+                <th>Apellido</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="table-active">
+            <?php
+            $profesores = Profesor::listarProfesores();
+            foreach ($profesores as $profesor) {
+                echo "<tr>";
+                echo "<td>{$profesor['profesor_apellido']}</td>";
+                echo "<td>{$profesor['profesor_nombre']}</td>";
+                echo "<td>
+                        <button class='btn btn-info btn-sm btnEditar' data-id='{$profesor['profesor_id']}' data-nombre='{$profesor['profesor_nombre']}' data-apellido='{$profesor['profesor_apellido']}'>Editar</button>
+                    </td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
 
 
     <!-- Modal Crear Profesor -->

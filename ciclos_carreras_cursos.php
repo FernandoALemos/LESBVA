@@ -24,6 +24,8 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/all.min.css" rel="stylesheet">
     <title>Gestionar Ciclos, Carreras y Cursos</title>
 </head>
 <header>
@@ -41,14 +43,14 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             <h1>Ciclos</h1> <!-- Corrijo, mal escrito-->
             <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearCiclo">Nuevo ciclo</button>
         </div>
-        <table class="table table-bordered">
-            <thead>
+        <table class="table table-sm table-striped table-hover mt-4">
+            <thead class="table-primary">
                 <tr>
                     <th>Ciclo Lectivo</th> <!--Agrego "Lectivo" para que visualmente no quede el boton "nuevo ciclo" pegado al titulo "Ciclos" -->
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-active">
                 <?php
                 $ciclos = CicloLectivo::listarCiclos();
                 foreach ($ciclos as $ciclo) {
@@ -139,14 +141,14 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             <h1>Carreras</h1>
             <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearCarrera">Nueva carrera</button>
         </div>
-        <table class="table table-bordered">
-            <thead>
+        <table class="table table-sm table-striped table-hover mt-4">
+            <thead class="table-primary">
                 <tr>
                     <th>Carrera</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-active">
                 <?php
                 $carreras = Carrera::listarCarreras();
                 foreach ($carreras as $carrera) {
@@ -236,14 +238,14 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             <h1>Cursos</h1>
             <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearCurso">Nuevo curso</button>
         </div>
-        <table class="table table-bordered">
-            <thead>
+        <table class="table table-sm table-striped table-hover mt-4">
+            <thead class="table-primary">
                 <tr>
                     <th>Cursos disponibles</th> <!--Agrego "disponibles" para que visualmente no quede el boton "nuevo curso" pegado al titulo "Cursos" -->
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-active">
                 <?php
                 $cursos = Curso::listar_Cursos();
                 foreach ($cursos as $curso) {

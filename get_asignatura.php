@@ -1,40 +1,59 @@
 <?php
-require_once 'database/conectar_db.php';
+require_once "database\conectar_db.php";
+// require_once 'clase_materia_carrera.php';
 
-if (isset($_GET['id'])) {
-    $asignatura_id = $_GET['id'];
-    echo $asignatura_id;
-
-    $mysqli = conectar_db();
-    // $sql = "SELECT situacion_revista, inscriptos, regulares, atraso_academico, recursantes, modulos, primer_periodo, segundo_periodo
-    //         FROM materia_carrera
-    //         WHERE materia_carrera_id = ?";
-    $sql = "SELECT mc.*, c.ciclo, t.turno_nombre, cr.carrera_nombre, cu.curso, m.materia_nombre, p.profesor_apellido, p.profesor_nombre
-            FROM materia_carrera mc
-            JOIN ciclo c ON mc.ciclo_id = c.ciclo_id
-            JOIN turno t ON mc.turno_id = t.turno_id
-            JOIN carrera cr ON mc.carrera_id = cr.carrera_id
-            JOIN curso cu ON mc.curso_id = cu.curso_id
-            JOIN materia m ON mc.materia_id = m.materia_id
-            JOIN profesor p ON mc.profesor_id = p.profesor_id
-            WHERE mc.materia_carrera_id = ?";
+// if (isset($_POST['asignatura_id'])) {
+//     $asignatura_id = intval($_POST['asignatura_id']);
+//     $asignatura = MateriaCarrera::obtenerAsignaturaPorId($asignatura_id);
     
-    $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param("i", $asignatura_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+//     if ($asignatura) {
+//         echo json_encode($asignatura);
+//     } else {
+//         echo json_encode(['error' => 'No se encontraron datos']);
+//     }
+// }
+// else{
+//     echo 'error => No se encontraron datos';
+//     echo $_POST['asignatura_id'];
+//     echo intval($_POST['asignatura_id']);
+// }
 
-    if ($result->num_rows > 0) {
-        $asignatura = $result->fetch_assoc();
-        echo json_encode($asignatura);
-    } else {
-        echo json_encode([]);
-    }
+$id = $conn->real_escape_string($_POST['id']);
 
-    $stmt->close();
-    $mysqli->close();
-} else {
-    echo $asignatura_id;
-    echo json_encode(["error" => "No se proporcionó un ID válido"]);
+$sql = "SELECT mc.*, 
+            m.materia_nombre, 
+            c.carrera_nombre, 
+            cl.ciclo, 
+            cr.curso, 
+            t.turno, 
+            p.profesor_nombre, 
+            p.profesor_apellido,
+            mc.situacion_revista,
+            mc.inscriptos,
+            mc.regulares,
+            mc.atraso_academico,
+            mc.recursantes,
+            mc.modulos,
+            mc.primer_periodo,
+            mc.segundo_periodo
+    FROM materia_carrera mc
+    JOIN materias m ON mc.materia_id = m.materia_id
+    JOIN carreras c ON mc.carrera_id = c.carrera_id
+    JOIN ciclo_lectivo cl ON mc.ciclo_id = cl.ciclo_id
+    JOIN cursos cr ON mc.curso_id = cr.curso_id
+    JOIN turnos t ON mc.turno_id = t.turno_id
+    JOIN profesores p ON mc.profesor_id = p.profesor_id
+    WHERE mc.materia_carrera_id = $id LIMIT 1";
+
+$resultado = $conn->query($sql);
+$rows = $resultado->num_rows;
+
+$asignatura = [];
+
+if ($rows > 0) {
+    $asignatura = $resultado->fetch_array();
 }
+
+echo json_encode($asignatura, JSON_UNESCAPED_UNICODE);
+
 ?>

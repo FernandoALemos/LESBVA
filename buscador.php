@@ -93,7 +93,8 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         <div class="divMaterias-cabecera">
             <!-- <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
         <div class="btns-space"></div> -->
-            <h1></h1>
+        <button class="btn-descargar" onclick="location.href='from_crear_asignatura.php'">Crear Asignatura</button>
+
         </div>
         <form action='informacion.php' class="presentacion" method="POST" style="display: flex; justify-content: center; flex-direction: row;">
             <div style="margin-right: 10px;">
@@ -107,8 +108,8 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                     $ciclo[] = $fila['ciclo'];
                 }
 
-                echo "<label for='ciclo'>Ciclo: </label>";
-                echo "<select name='ciclo' id='ciclo'>";
+                echo "<label for='ciclo'>Ciclo: </label><br>";
+                echo "<select name='ciclo' id='ciclo' required>";
                 echo "<option value=''>Seleccione un ciclo</option>";
                 foreach ($ciclo as $ciclos) {
                     echo "<option value='{$ciclos}'>{$ciclos}</option>";
@@ -116,25 +117,25 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 echo "</select>";
                 echo "<br>";
 
-                echo "<br><label for='turno_id'>Turno: </label>";
-                echo "<select name='turno_id' id='turno'>";
+                echo "<br><label for='turno_id'>Turno: </label><br>";
+                echo "<select name='turno_id' id='turno' required>";
                 echo "<option value=''>Seleccione un turno</option>";
                 echo "</select>";
                 echo "<br>";
 
                 echo "<br><label for='carrera_id'>Carrera: </label>";
-                echo "<select name='carrera_id' id='carrera'>";
+                echo "<select name='carrera_id' id='carrera' required>";
                 echo "<option value=''>Seleccione una carrera</option>";
                 echo "</select>";
                 echo "<br>";
 
-                echo "<br><label for='curso_id'>Curso: </label>";
+                echo "<br><label for='curso_id'>Curso: </label><br>";
                 echo "<select name='curso_id' id='curso'>";
                 echo "<option value=''>Seleccione un curso</option>";
                 echo "</select>";
                 echo "<br>";
 
-                echo "<br><label for='profesor_id'>Profesor: </label>";
+                echo "<br><label for='profesor_id'>Profesor: </label><br>";
                 echo "<select name='profesor_id' id='profesor'>";
                 echo "<option value=''>Seleccione un profesor</option>";
                 echo "</select>";

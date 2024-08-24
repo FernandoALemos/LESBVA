@@ -21,6 +21,8 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/all.min.css" rel="stylesheet">
     <title>Gestión de Materias</title>
 </head>
 <header>
@@ -29,39 +31,32 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 </header>
 
 <body>
-    <!-- <div class="divMaterias-cabecera">
-        <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
-        <div class="btns-space"></div>
-    </div> <br> -->
-    <main class="container mt-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1>Materias</h1>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearMateria">Nueva materia</button>
-        </div>
-        <table class="table table-bordered">
-            <!-- <table class="lista"> -->
-            <thead>
-                <tr>
-                    <th>Nombre de la materia</th> <!-- Cambio nombre de th, me parece más adecuado -->
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $materias = Materia::listarMaterias();
-                foreach ($materias as $materia) {
-                    echo "<tr>";
-                    echo "<td>{$materia['materia_nombre']}</td>";
-                    // class='btn btn-info btn-sm btnEditar'
-                    echo "<td>
-                            <button class='btn btn-info btn-sm btnEditar' data-id='{$materia['materia_id']}' data-nombre='{$materia['materia_nombre']}'>Editar</button>
-                        </td>";
-                    echo "</tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-    </main>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Materias</h1>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearMateria">Nueva materia</button>
+    </div>
+    <table class="table table-sm table-striped table-hover mt-4">
+        <thead class="table-primary">
+            <tr>
+                <th>Nombre de la unidad curricular</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="table-active">
+            <?php
+            $materias = Materia::listarMaterias();
+            foreach ($materias as $materia) {
+                echo "<tr>";
+                echo "<td>{$materia['materia_nombre']}</td>";
+                echo "<td>
+                        <button class='btn btn-info btn-sm btnEditar' data-id='{$materia['materia_id']}' data-nombre='{$materia['materia_nombre']}'>Editar</button>
+                    </td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+
 
 
     <!-- Modal Crear Materia -->

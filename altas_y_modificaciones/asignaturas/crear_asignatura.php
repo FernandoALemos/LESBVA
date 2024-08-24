@@ -24,7 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = mysqli_query($con, $query);
 
     if ($result) {
-        header("Location: ../../asignaturas.php");
+        $_SESSION['mensaje_exito'] = "La asignatura se ha creado con éxito.";
+        header("Location: ../../form_crear_asignatura.php");
     } else {
         echo "Error: " . mysqli_error($con);
     }

@@ -33,11 +33,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
 
     <body>
         <section id="Materias" class="divMaterias">
-            <!-- <div class="divMaterias-cabecera">
-                <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
-                <div class="btns-space"></div>
-                <button class="btn-descargar" onclick="location.href='asignaturas.php'">Editar</button>
-            </div> -->
             <div class="divMaterias-cabecera">
                 <button class="btn-descargar" onclick="location.href='buscador.php'"><i class="fa-solid fa-arrow-left"></i>Volver</button>
                 <div class="btns-space"></div>
@@ -66,22 +61,22 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
                 <tbody>
                     <?php
                     $con = conectar_db();
-                    // Guardar los valores de los filtros en la sesión
+                    // guardar los valores de los filtros en la sesión
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $_SESSION['filtros'] = $_POST;
                     }
 
-                    // Obtener los filtros de la sesión
+                    // filtros de la sesión
                     $filtros = isset($_SESSION['filtros']) ? $_SESSION['filtros'] : [];
 
-                    // Obtener los valores de los filtros
+                    //valores de los filtros
                     $ciclo = isset($filtros['ciclo']) ? $filtros['ciclo'] : '';
                     $turno_id = isset($filtros['turno_id']) ? $filtros['turno_id'] : '';
                     $carrera = isset($filtros['carrera_id']) ? $filtros['carrera_id'] : '';
                     $curso = isset($filtros['curso_id']) ? $filtros['curso_id'] : '';
                     $profesor = isset($filtros['profesor_id']) ? $filtros['profesor_id'] : '';
 
-                    // Construir la consulta SQL basada en los filtros seleccionados
+                    // Query en base a lo filtrado
                     $sql = "SELECT 
                                     mc.materia_carrera_id,
                                     m.materia_nombre,
@@ -178,12 +173,11 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
                     $_SESSION['carrera_nombre'] = $carrera_nombre;
                     $_SESSION['turno'] = $turno;
 
-                    // Verificar si hay resultados
+                    // Verifica si hay resultados
                     if (empty($data)) {
                         echo "<tr><td colspan='13'><b class='bold red'>No hay materias registradas en el sistema</b></td></tr>";
                     } else {
                         // VER BIEN COMO CENTRAR PORQUE AGRANDA MUCHO LA PANTALLA
-                        // AL ACTUALIZAR SE VA EL LISTADO -- ARREGLAR
                         foreach ($data as $info) { ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($info['ciclo']); ?></td>
@@ -208,7 +202,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
                     ?>
                 </tbody>
             </table>
-            <!-- </div> -->
         </section>
     </body>
 </main>
