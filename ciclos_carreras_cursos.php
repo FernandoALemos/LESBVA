@@ -39,31 +39,58 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 
     <!-- CICLOS -->
     <main class="container mt-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1>Ciclos</h1> <!-- Corrijo, mal escrito-->
-            <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearCiclo">Nuevo ciclo</button>
+        <div class="form-row">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1>Ciclos</h1> <!-- Corrijo, mal escrito-->
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearCiclo">Nuevo ciclo</button>
+            </div>
+            <table class="table table-sm table-striped table-hover mt-4">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Ciclo Lectivo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="table-active">
+                    <?php
+                    $ciclos = CicloLectivo::listarCiclos();
+                    foreach ($ciclos as $ciclo) {
+                        echo "<tr>";
+                        echo "<td>{$ciclo['ciclo']}</td>";
+                        echo "<td>
+                                <button class='btn btn-info btn-sm btnEditarCiclo' data-id='{$ciclo['ciclo_id']}' data-ciclo='{$ciclo['ciclo']}'>Editar</button>
+                            </td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1>Cursos</h1>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearCurso">Nuevo curso</button>
+            </div>
+            <table class="table table-sm table-striped table-hover mt-4">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Cursos disponibles</th> <!--Agrego "disponibles" para que visualmente no quede el boton "nuevo curso" pegado al titulo "Cursos" -->
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="table-active">
+                    <?php
+                    $cursos = Curso::listar_Cursos();
+                    foreach ($cursos as $curso) {
+                        echo "<tr>";
+                        echo "<td>{$curso['curso']}</td>";
+                        echo "<td>
+                                <button class='btn btn-info btn-sm btnEditarCurso' data-id='{$curso['curso_id']}' data-curso='{$curso['curso']}'>Editar</button>
+                            </td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
         </div>
-        <table class="table table-sm table-striped table-hover mt-4">
-            <thead class="table-primary">
-                <tr>
-                    <th>Ciclo Lectivo</th> <!--Agrego "Lectivo" para que visualmente no quede el boton "nuevo ciclo" pegado al titulo "Ciclos" -->
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody class="table-active">
-                <?php
-                $ciclos = CicloLectivo::listarCiclos();
-                foreach ($ciclos as $ciclo) {
-                    echo "<tr>";
-                    echo "<td>{$ciclo['ciclo']}</td>";
-                    echo "<td>
-                            <button class='btn btn-info btn-sm btnEditarCiclo' data-id='{$ciclo['ciclo_id']}' data-ciclo='{$ciclo['ciclo']}'>Editar</button>
-                        </td>";
-                    echo "</tr>";
-                }
-                ?>
-            </tbody>
-        </table>
     </main>
 
 
@@ -137,31 +164,33 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 
     <!-- Carreras -->
     <main class="container mt-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1>Carreras</h1>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearCarrera">Nueva carrera</button>
+        <div class="form-row">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1>Carreras</h1>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearCarrera">Nueva carrera</button>
+            </div>
+            <table class="table table-sm table-striped table-hover mt-4">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Carrera</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="table-active">
+                    <?php
+                    $carreras = Carrera::listarCarreras();
+                    foreach ($carreras as $carrera) {
+                        echo "<tr>";
+                        echo "<td>{$carrera['carrera_nombre']}</td>";
+                        echo "<td>
+                                <button class='btn btn-info btn-sm btnEditarCarrera' data-id='{$carrera['carrera_id']}' data-carrera='{$carrera['carrera_nombre']}'>Editar</button>
+                            </td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
         </div>
-        <table class="table table-sm table-striped table-hover mt-4">
-            <thead class="table-primary">
-                <tr>
-                    <th>Carrera</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody class="table-active">
-                <?php
-                $carreras = Carrera::listarCarreras();
-                foreach ($carreras as $carrera) {
-                    echo "<tr>";
-                    echo "<td>{$carrera['carrera_nombre']}</td>";
-                    echo "<td>
-                            <button class='btn btn-info btn-sm btnEditarCarrera' data-id='{$carrera['carrera_id']}' data-carrera='{$carrera['carrera_nombre']}'>Editar</button>
-                        </td>";
-                    echo "</tr>";
-                }
-                ?>
-            </tbody>
-        </table>
     </main>
 
 
@@ -230,36 +259,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         });
     });
     </script>
-
-
-    <!-- Cursos -->
-    <main class="container mt-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1>Cursos</h1>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearCurso">Nuevo curso</button>
-        </div>
-        <table class="table table-sm table-striped table-hover mt-4">
-            <thead class="table-primary">
-                <tr>
-                    <th>Cursos disponibles</th> <!--Agrego "disponibles" para que visualmente no quede el boton "nuevo curso" pegado al titulo "Cursos" -->
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody class="table-active">
-                <?php
-                $cursos = Curso::listar_Cursos();
-                foreach ($cursos as $curso) {
-                    echo "<tr>";
-                    echo "<td>{$curso['curso']}</td>";
-                    echo "<td>
-                            <button class='btn btn-info btn-sm btnEditarCurso' data-id='{$curso['curso_id']}' data-curso='{$curso['curso']}'>Editar</button>
-                        </td>";
-                    echo "</tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-    </main>
 
 
     <!-- Modal Crear Curso -->

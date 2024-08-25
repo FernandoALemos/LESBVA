@@ -137,34 +137,34 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
                 <label for="situacion_revista">Situación de Revista</label>
                 <input type="text" class="form-control" id="situacion_revista" name="situacion_revista" required>
             </div>
+            <!-- Campo modulos -->
+            <div class="form-group col-md-6">
+                <label for="modulos">Módulos</label>
+                <input type="number" class="form-control" id="modulos" name="modulos" required>
+            </div>
+        </div>
+        <div class="form-row">
             <!-- Campo inscriptos -->
             <div class="form-group col-md-6">
                 <label for="inscriptos">Inscriptos</label>
                 <input type="number" class="form-control" id="inscriptos" name="inscriptos" required>
             </div>
-        </div>
-        <div class="form-row">
             <!-- Campo regulares -->
             <div class="form-group col-md-6">
                 <label for="regulares">Regulares</label>
                 <input type="number" class="form-control" id="regulares" name="regulares" required>
             </div>
+        </div>
+        <div class="form-row">
             <!-- Campo atraso academico -->
             <div class="form-group col-md-6">
                 <label for="atraso_academico">Atraso Académico</label>
                 <input type="number" class="form-control" id="atraso_academico" name="atraso_academico" required>
             </div>
-        </div>
-        <div class="form-row">
             <!-- Campo recurusantes -->
             <div class="form-group col-md-6">
                 <label for="recursantes">Recursantes</label>
                 <input type="number" class="form-control" id="recursantes" name="recursantes" required>
-            </div>
-            <!-- Campo modulos -->
-            <div class="form-group col-md-6">
-                <label for="modulos">Módulos</label>
-                <input type="number" class="form-control" id="modulos" name="modulos" required>
             </div>
         </div>
         <div class="form-row">

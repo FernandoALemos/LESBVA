@@ -20,9 +20,16 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Bienvenido</title>
 </head>
 <header>
@@ -40,8 +47,8 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
                 <div class="btns-space"></div>
                 <button class="btn-descargar" onclick="location.href='excel.php'"><i class="fa-solid fa-file-excel"></i>Descargar</button>
             </div>
-            <table class="lista">
-                <thead>
+            <table class="table table-sm table-striped table-hover mt-4">
+                <thead class="table-primary">
                     <tr>
                         <th>CICLO</th>
                         <th>CARRERA</th>
@@ -58,7 +65,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
                         <th>2° PERIODO</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-active">
                     <?php
                     $con = conectar_db();
                     // guardar los valores de los filtros en la sesión

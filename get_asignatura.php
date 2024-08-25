@@ -1,24 +1,12 @@
 <?php
 require_once "database\conectar_db.php";
-// require_once 'clase_materia_carrera.php';
 
-// if (isset($_POST['asignatura_id'])) {
-//     $asignatura_id = intval($_POST['asignatura_id']);
-//     $asignatura = MateriaCarrera::obtenerAsignaturaPorId($asignatura_id);
-    
-//     if ($asignatura) {
-//         echo json_encode($asignatura);
-//     } else {
-//         echo json_encode(['error' => 'No se encontraron datos']);
-//     }
-// }
-// else{
-//     echo 'error => No se encontraron datos';
-//     echo $_POST['asignatura_id'];
-//     echo intval($_POST['asignatura_id']);
-// }
+$con = conectar_db();
 
-$id = $conn->real_escape_string($_POST['id']);
+$id = $con->real_escape_string($_POST['id']);
+// $_POST['id'] = $asignatura['materia_carrera_id'] no reconoce el id
+
+echo $id;
 
 $sql = "SELECT mc.*, 
             m.materia_nombre, 
@@ -45,7 +33,7 @@ $sql = "SELECT mc.*,
     JOIN profesores p ON mc.profesor_id = p.profesor_id
     WHERE mc.materia_carrera_id = $id LIMIT 1";
 
-$resultado = $conn->query($sql);
+$resultado = $con->query($sql);
 $rows = $resultado->num_rows;
 
 $asignatura = [];
@@ -55,5 +43,6 @@ if ($rows > 0) {
 }
 
 echo json_encode($asignatura, JSON_UNESCAPED_UNICODE);
+
 
 ?>
