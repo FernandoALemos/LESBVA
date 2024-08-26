@@ -48,9 +48,9 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
 
 <body>
     <div class="divMaterias-cabecera">
-        <button class="btn btn-primary" onclick="location.href='index.php'">Inicio</button>
-        <button class="btn btn-primary" onclick="location.href='buscador.php'">Volver</button>
+        <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
         <div class="btns-space"></div>
+        <button class="btn-descargar" onclick="location.href='buscador.php'">Volver</button>
     </div> <br>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Asignaturas</h1>

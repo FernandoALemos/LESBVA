@@ -35,7 +35,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 <body>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Profesores</h1>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearProfesor">Nuevo profesor</button>
+        <button class="btn-descargar" data-toggle="modal" data-target="#modalCrearProfesor">Nuevo profesor</button>
     </div>
     <table class="table table-sm table-striped table-hover mt-4">
         <thead class="table-primary">

@@ -41,11 +41,12 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
     <body>
         <section id="Materias" class="divMaterias">
             <div class="divMaterias-cabecera">
-                <button class="btn-descargar" onclick="location.href='buscador.php'"><i class="fa-solid fa-arrow-left"></i>Volver</button>
+                <button class="btn-descargar" onclick="location.href='buscador.php'"><i class="fa-solid fa-arrow-left"> </i> Volver</button>
                 <div class="btns-space"></div>
-                <button class="btn-descargar" onclick="location.href='asignaturas.php'"><i class="fa-solid fa-pen-to-square"></i>Editar</button>
-                <div class="btns-space"></div>
-                <button class="btn-descargar" onclick="location.href='excel.php'"><i class="fa-solid fa-file-excel"></i>Descargar</button>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button class="btn-descargar me-md-2" onclick="location.href='asignaturas.php'"><i class="fa-solid fa-pen-to-square"> </i> Editar</button>
+                    <button class="btn-descargar" onclick="location.href='excel.php'"><i class="fa-solid fa-file-excel"> </i> Descargar</button>
+                </div>
             </div>
             <table class="table table-sm table-striped table-hover mt-4">
                 <thead class="table-primary">
