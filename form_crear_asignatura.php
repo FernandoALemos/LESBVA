@@ -27,6 +27,7 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -41,7 +42,9 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
     <p class="header_div_nav-item">Instituto Superior de Formación Docente y Técnica Nº 24</p>
 </header>
 
+
 <body>
+
     <div class="divMaterias-cabecera" >
         <button class="btn-descargar" onclick="location.href='buscador.php'">Volver</button>
     </div> <br>
@@ -182,7 +185,6 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
         </div>
         <button type="submit" class="btn-descargar">Crear Asignatura</button>
     </form>
-
 
 
 

@@ -93,7 +93,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         <div class="divMaterias-cabecera">
             <!-- <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
         <div class="btns-space"></div> -->
-        <button class="btn-descargar" onclick="location.href='from_crear_asignatura.php'">Crear Asignatura</button>
+        <button class="btn-descargar" onclick="location.href='form_crear_asignatura.php'">Crear Asignatura</button>
 
         </div>
         <form action='informacion.php' class="presentacion" method="POST" style="display: flex; justify-content: center; flex-direction: row;">

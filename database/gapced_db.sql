@@ -67,6 +67,7 @@ create table usuarios(
     email varchar(30) UNIQUE,
     contrasenia varchar(30),
     usuario_suspendido boolean,
+    primer_ingreso boolean,
     foreign key (rol_id) references roles(rol_id),
     foreign key (cargo_id) references cargos(cargo_id),
     primary key (usuario_id, rol_id)

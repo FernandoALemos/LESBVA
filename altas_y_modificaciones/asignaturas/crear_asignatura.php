@@ -1,6 +1,8 @@
 <?php
 require_once "../../database/conectar_db.php";
 
+$text = "";
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ciclo_id = $_POST['ciclo_id'];
     $carrera_id = $_POST['carrera_id'];
@@ -24,9 +26,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = mysqli_query($con, $query);
 
     if ($result) {
-        $_SESSION['mensaje_exito'] = "La asignatura se ha creado con éxito.";
-        header("Location: ../../form_crear_asignatura.php");
-    } else {
+        // $_SESSION['mensaje_exito'] = "La asignatura se ha creado con éxito.";
+        ?>
+        
+        <script>
+                alert("Se creó con éxito la asignatura");
+            </script>
+            <?php
+            $text = "Se creó con éxito la asignatura";
+            return $text;
+            header("Location: ../../form_crear_asignatura.php");
+        }
+
+        
+    else {
         echo "Error: " . mysqli_error($con);
     }
 }
