@@ -39,7 +39,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 
             <ul>
                 <a href="ciclos_carreras_cursos.php" class='btn-descargar'>
-                    <i class="fa-solid fa-user-plus"></i>
+                    <i class="fa-solid fa-circle-plus"></i>
                     <span class="nombre-link">Ciclos/Carreras/Cursos</span>
                 </a>
             </ul>
@@ -67,7 +67,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 
             <ul>
                 <a href="usuarios.php" class='btn-descargar'>
-                    <i class="fa-solid fa-list-check"></i>
+                    <i class="fa-solid fa-user"></i>
                     <span class="nombre-link">Usuarios </span> <!-- HAY QUE CREAR EL ABM -->
                 </a>
             </ul>
