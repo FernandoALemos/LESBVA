@@ -89,18 +89,18 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 </header>
 <main>
 
-    <body>
+    <body class=".bg-secondary.bg-gradient">
         <div class="divMaterias-cabecera">
             <!-- <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
         <div class="btns-space"></div> -->
-        <button class="btn-descargar" onclick="location.href='form_crear_asignatura.php'">Crear Asignatura</button>
+        <button class="btn-descargar">Reportes</button>
 
         </div>
         <form action='informacion.php' class="presentacion" method="POST" style="display: flex; justify-content: center; flex-direction: row;">
             <div style="margin-right: 10px;">
                 <?php
                 $con = conectar_db();
-                $sql_ciclo = "SELECT DISTINCT cl.ciclo FROM materia_carrera mc inner join ciclo_lectivo cl on mc.ciclo_id = cl.ciclo_id";
+                $sql_ciclo = "SELECT DISTINCT cl.ciclo FROM materia_carrera mc inner join ciclo_lectivo cl on mc.ciclo_id = cl.ciclo_id ORDER BY cl.ciclo DESC";
                 $resultado_ciclo = $con->query($sql_ciclo);
 
                 $ciclo = array();

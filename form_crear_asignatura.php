@@ -46,11 +46,11 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
 <body>
 
     <div class="divMaterias-cabecera" >
-        <button class="btn-descargar" onclick="location.href='buscador.php'">Volver</button>
+        <button class="btn-descargar" onclick="location.href='index.php'">Volver</button>
     </div> <br>
         
     <form action="altas_y_modificaciones\asignaturas\crear_asignatura.php" method="post">
-        <label>Nueva Asignatura</label>
+        <label>Nueva Asignación</label>
         <div class="form-row">
             <!-- Campo Ciclo -->
             <div class="form-group col-md-6">
