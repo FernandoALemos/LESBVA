@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = mysqli_query($con, $query);
 
     if ($result) {
-        $_SESSION['mensaje_exito'] = "La asignatura se ha modificado con éxito.";
-        header("Location: ../../asignaturas.php");
+        header("Location: ../../asignaturas.php?mensaje=editado");
+        exit();
     } else {
         echo "Error: " . mysqli_error($con);
     }

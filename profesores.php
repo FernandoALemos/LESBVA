@@ -33,6 +33,42 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 </header>
 
 <body>
+    <?php
+    if (isset($_GET['mensaje'])) {
+        $mensaje = '';
+        if ($_GET['mensaje'] == 'creado') {
+            $mensaje = 'Profesor/ra creado/a con éxito.';
+        } elseif ($_GET['mensaje'] == 'editado') {
+            $mensaje = 'Profesor/ra editado/a con éxito.';
+        }
+        if ($mensaje) {
+            echo '
+            <div class="modal fade" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="modalMensajeLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalMensajeLabel">Éxito</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            '.$mensaje.'
+                        </div>
+                    </div>
+                </div>
+            </div>';
+        }
+    }
+    ?>
+    <script>
+        $(document).ready(function() {
+            $('#modalMensaje').modal('show');
+            setTimeout(function() {
+                $('#modalMensaje').modal('hide');
+            }, 3000); // se cierra después de 3 segundos
+        });
+    </script>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Profesores</h1>
         <button class="btn-descargar" data-toggle="modal" data-target="#modalCrearProfesor">Nuevo profesor</button>

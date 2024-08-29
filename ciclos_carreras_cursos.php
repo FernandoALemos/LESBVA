@@ -36,6 +36,55 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 <body>
     <!-- <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button> -->
     <!-- <div class="btns-space"></div><br> -->
+    <?php
+    if (isset($_GET['mensaje'])) {
+        $mensaje = '';
+        if ($_GET['mensaje'] == 'ciclo_creado') {
+            $mensaje = 'Ciclo creado con éxito.';
+        } 
+        elseif ($_GET['mensaje'] == 'ciclo_editado') {
+            $mensaje = 'Ciclo editado con éxito.';
+        }
+        elseif ($_GET['mensaje'] == 'curso_creado') {
+            $mensaje = 'Curso editado con éxito.';
+        }
+        elseif ($_GET['mensaje'] == 'curso_editado') {
+            $mensaje = 'Curso editado con éxito.';
+        }
+        elseif ($_GET['mensaje'] == 'carrera_creada') {
+            $mensaje = 'Carrera editada con éxito.';
+        }
+        elseif ($_GET['mensaje'] == 'carrera_editada') {
+            $mensaje = 'Carrera editada con éxito.';
+        }
+        if ($mensaje) {
+            echo '
+            <div class="modal fade" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="modalMensajeLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalMensajeLabel">Éxito</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            '.$mensaje.'
+                        </div>
+                    </div>
+                </div>
+            </div>';
+        }
+    }
+    ?>
+    <script>
+        $(document).ready(function() {
+            $('#modalMensaje').modal('show');
+            setTimeout(function() {
+                $('#modalMensaje').modal('hide');
+            }, 3000); // se cierra después de 3 segundos
+        });
+    </script>
 
     <!-- CICLOS -->
     <main class="container mt-5">

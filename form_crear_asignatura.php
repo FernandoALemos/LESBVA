@@ -44,7 +44,40 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
 
 
 <body>
-
+    <?php
+    if (isset($_GET['mensaje'])) {
+        $mensaje = '';
+        if ($_GET['mensaje'] == 'creado') {
+            $mensaje = 'Asignatura creada con éxito.';
+        }
+        if ($mensaje) {
+            echo '
+            <div class="modal fade" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="modalMensajeLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalMensajeLabel">Éxito</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            '.$mensaje.'
+                        </div>
+                    </div>
+                </div>
+            </div>';
+        }
+    }
+    ?>
+    <script>
+        $(document).ready(function() {
+            $('#modalMensaje').modal('show');
+            setTimeout(function() {
+                $('#modalMensaje').modal('hide');
+            }, 3000); // se cierra después de 3 segundos
+        });
+    </script>
     <div class="divMaterias-cabecera" >
         <button class="btn-descargar" onclick="location.href='index.php'">Volver</button>
     </div> <br>
