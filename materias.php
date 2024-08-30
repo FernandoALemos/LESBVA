@@ -68,10 +68,10 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             }, 3000); // se cierra después de 3 segundos
         });
     </script>
-
+    <br>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Unidades Curriculares</h1>
-        <button class="btn-descargar" data-toggle="modal" data-target="#modalCrearMateria">Nueva materia</button>
+        <button class="btn-descargar" data-toggle="modal" data-target="#modalCrearMateria"><i class="fa-solid fa-plus"> </i> Nueva materia</button>
     </div>
     <table class="table table-sm table-striped table-hover mt-4">
         <thead class="table-primary">
@@ -87,7 +87,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 echo "<tr>";
                 echo "<td>{$materia['materia_nombre']}</td>";
                 echo "<td>
-                        <button class='btn btn-info btn-sm btnEditar' data-id='{$materia['materia_id']}' data-nombre='{$materia['materia_nombre']}'>Editar</button>
+                        <button class='btn btn-info btn-sm btnEditar' data-id='{$materia['materia_id']}' data-nombre='{$materia['materia_nombre']}'><i class='fa-solid fa-pen-to-square'> </i> Editar</button>
                     </td>";
                 echo "</tr>";
             }
@@ -168,8 +168,8 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 
 </body>
 <footer>
-    <p class="titulos"><i class="fa-solid fa-arrow-right-from-bracket"></i><a href="logout.php">Cerrar sesión</a></p><br>
-    <p class="titulos"><i class="fa-solid fa-house"></i><a href="index.php">Ir a inicio</a></p><br> <!-- Lo agrego acá, queda mejor que arriba de todo creo. -->
+    <p class="titulos"><i class="fa-solid fa-arrow-right-from-bracket"> </i><a href="logout.php"> Cerrar sesión</a></p><br>
+    <p class="titulos"><i class="fa-solid fa-house"> </i><a href="index.php"> Ir a inicio</a></p><br> <!-- Lo agrego acá, queda mejor que arriba de todo creo. -->
 </footer>
 
 </html>

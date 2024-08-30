@@ -62,7 +62,7 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
                             </button>
                         </div>
                         <div class="modal-body">
-                            '.$mensaje.'
+                            ' . $mensaje . '
                         </div>
                     </div>
                 </div>
@@ -78,12 +78,14 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
             }, 3000); // se cierra después de 3 segundos
         });
     </script>
-    <div class="divMaterias-cabecera" >
-        <button class="btn-descargar" onclick="location.href='index.php'">Volver</button>
+    <div class="divMaterias-cabecera">
+        <!-- <button class="btn-descargar" onclick="location.href='index.php'"><i class="fa-solid fa-arrow-left"> </i> Volver</button> -->
     </div> <br>
-        
+
     <form action="altas_y_modificaciones\asignaturas\crear_asignatura.php" method="post">
-        <label>Nueva Asignación</label>
+        <label>
+            <h3>Nueva Asignación</h3>
+        </label>
         <div class="form-row">
             <!-- Campo Ciclo -->
             <div class="form-group col-md-6">
@@ -210,25 +212,28 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
         </div>
         <div class="form-group">
             <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck" required>
-            <label class="form-check-label" for="gridCheck">
-                Confirmar
-            </label>
+                <input class="form-check-input" type="checkbox" id="gridCheck" required>
+                <label class="form-check-label" for="gridCheck">
+                    Confirmar
+                </label>
             </div>
+        </div><br><br>
+        <div class="divMaterias-cabecera">
+            <button class="btn-descargar" onclick="location.href='index.php'"><i class="fa-solid fa-arrow-left"> </i> Volver</button>
+            <button type="submit" class="btn-descargar"><i class="fa-solid fa-check"> </i> Crear Asignación</button>
         </div>
-        <button type="submit" class="btn-descargar">Crear Asignatura</button>
     </form>
 
 
 
-<script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
 
 
 </body>
 
 <footer>
-    <p class="titulos"><i class="fa-solid fa-arrow-right-from-bracket"> </i><a href="logout.php">Cerrar sesión</a></p><br>
-    <p class="titulos"><i class="fa-solid fa-house"> </i><a href="index.php">Ir a inicio</a></p><br> <!-- Lo agrego acá, queda mejor que arriba de todo creo. -->
+    <p class="titulos"><i class="fa-solid fa-arrow-right-from-bracket"> </i><a href="logout.php"> Cerrar sesión</a></p><br>
+    <p class="titulos"><i class="fa-solid fa-house"> </i><a href="index.php"> Ir a inicio</a></p><br> <!-- Lo agrego acá, queda mejor que arriba de todo creo. -->
 </footer>
 
 

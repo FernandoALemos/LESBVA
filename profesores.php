@@ -71,7 +71,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     </script>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Profesores</h1>
-        <button class="btn-descargar" data-toggle="modal" data-target="#modalCrearProfesor">Nuevo profesor</button>
+        <button class="btn-descargar" data-toggle="modal" data-target="#modalCrearProfesor"><i class="fa-solid fa-user-plus"> </i> Nuevo profesor</button>
     </div>
     <table class="table table-sm table-striped table-hover mt-4">
         <thead class="table-primary">
@@ -89,7 +89,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 echo "<td>{$profesor['profesor_apellido']}</td>";
                 echo "<td>{$profesor['profesor_nombre']}</td>";
                 echo "<td>
-                        <button class='btn btn-info btn-sm btnEditar' data-id='{$profesor['profesor_id']}' data-nombre='{$profesor['profesor_nombre']}' data-apellido='{$profesor['profesor_apellido']}'>Editar</button>
+                        <button class='btn btn-info btn-sm btnEditar' data-id='{$profesor['profesor_id']}' data-nombre='{$profesor['profesor_nombre']}' data-apellido='{$profesor['profesor_apellido']}'><i class='fa-solid fa-pen-to-square'> </i> Editar</button>
                     </td>";
                 echo "</tr>";
             }
@@ -175,7 +175,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     </script>
 </body>
 <footer>
-    <p class="titulos"><i class="fa-solid fa-arrow-right-from-bracket"></i><a href="logout.php">Cerrar sesión</a></p><br>
-    <p class="titulos"><i class="fa-solid fa-house"></i><a href="index.php">Ir a inicio</a></p><br> <!-- Lo agrego acá, queda mejor que arriba de todo creo. -->
+    <p class="titulos"><i class="fa-solid fa-arrow-right-from-bracket"> </i><a href="logout.php"> Cerrar sesión</a></p><br>
+    <p class="titulos"><i class="fa-solid fa-house"> </i><a href="index.php"> Ir a inicio</a></p><br> <!-- Lo agrego acá, queda mejor que arriba de todo creo. -->
 </footer>
 </html>
