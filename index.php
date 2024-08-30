@@ -33,55 +33,28 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 
     <body>
         <nav>
-            <!-- <div>
-                <h1>Bienvenido <?php echo $_SESSION['usuario_nombre']; ?></h1>
-            </div><br> -->
 
             <ul>
-                <!-- <a href="ciclos_carreras_cursos.php" class='btn-descargar'>
-                    <i class="fa-solid fa-circle-plus"></i>
-                    <span class="nombre-link">Ciclos/Carreras/Cursos</span>
-                </a> -->
-                <button class="btn-descargar" onclick="location.href='ciclos_carreras_cursos.php'"><i class="fa-solid fa-circle-plus"> </i> Ciclos/Carreras/Cursos</button>
+                <button class="btn-descargar" onclick="location.href='ciclos_carreras_cursos.php'"><i class="fa-solid fa-rectangle-list"> </i> Ciclos/Carreras/Cursos</button>
             </ul>
 
             <ul>
-                <!-- <a href="materias.php" class='btn-descargar'>
-                    <i class="fa-solid fa-circle-plus"></i>
-                    <span class="nombre-link">Unidad Curricular</span>
-                </a> -->
-                <button class="btn-descargar" onclick="location.href='materias.php'"><i class="fa-solid fa-circle-plus"> </i> Unidad Curricular</button>
+                <button class="btn-descargar" onclick="location.href='materias.php'"><i class="fa-solid fa-file-signature"> </i> Unidad Curricular</button>
             </ul>
 
             <ul>
-                <!-- <a href="profesores.php" class='btn-descargar'>
-                    <i class="fa-solid fa-user-plus"></i>
-                    <span class="nombre-link">Profesores</span>
-                </a> -->
-                <button class="btn-descargar" onclick="location.href='profesores.php'"><i class="fa-solid fa-user-plus"> </i> Profesores</button>
+                <button class="btn-descargar" onclick="location.href='profesores.php'"><i class="fa-solid fa-user-graduate"> </i> Profesores</button>
             </ul>
 
             <ul>
-                <!-- <a href="buscador.php" class='btn-descargar'>
-                    <i class="fa-solid fa-list-check"></i>
-                    <span class="nombre-link">Reportes</span>
-                </a> -->
                 <button class="btn-descargar" onclick="location.href='buscador.php'"><i class="fa-solid fa-chart-line"> </i> Reportes</button>
             </ul>
 
             <ul>
-                <!-- <a href="form_crear_asignatura.php" class='btn-descargar'>
-                    <i class="fa-solid fa-list-check"></i>
-                    <span class="nombre-link">Asignaciones</span>
-                </a> -->
                 <button class="btn-descargar" onclick="location.href='form_crear_asignatura.php'"><i class="fa-solid fa-list-check"> </i> Asignaciones</button>
             </ul>
 
             <ul>
-                <!-- <a href="usuarios.php" class='btn-descargar'>
-                    <i class="fa-solid fa-user"></i>
-                    <span class="nombre-link">Usuarios </span>  HAY QUE CREAR EL ABM 
-                </a> -->
                 <button class="btn-descargar" onclick="location.href='usuarios.php'"><i class="fa-solid fa-user"> </i> Usuarios</button>
             </ul>
 
