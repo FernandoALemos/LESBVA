@@ -83,9 +83,8 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
         });
     </script>
     <div class="divMaterias-cabecera">
-        <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
         <div class="btns-space"></div>
-        <button class="btn-descargar" onclick="location.href='buscador.php'">Volver</button>
+        <button class="btn-descargar" onclick="location.href='buscador.php'"><i class="fa-solid fa-arrow-left"> </i> Volver</button>
     </div> <br>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Asignaturas</h1>
@@ -223,8 +222,8 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
 </body>
 
 <footer>
-    <p class="titulos"><i class="fa-solid fa-arrow-right-from-bracket"></i><a href="logout.php">Cerrar sesión</a></p><br>
-    <p class="titulos"><i class="fa-solid fa-house"></i><a href="index.php">Ir a inicio</a></p><br> <!-- Lo agrego acá, queda mejor que arriba de todo creo. -->
+    <p class="titulos"><i class="fa-solid fa-arrow-right-from-bracket"> </i><a href="logout.php"> Cerrar sesión</a></p><br>
+    <p class="titulos"><i class="fa-solid fa-house"> </i><a href="index.php"> Ir a inicio</a></p><br> <!-- Lo agrego acá, queda mejor que arriba de todo creo. -->
 </footer>
 
 
