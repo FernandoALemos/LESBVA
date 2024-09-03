@@ -90,13 +90,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 <main>
 
     <body class=".bg-secondary.bg-gradient">
-        <!-- <div class="divMaterias-cabecera"> -->
-            <!-- <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button>
-        <div class="btns-space"></div> -->
-        <!-- <button class="btn-descargar">Reportes</button> -->
-     
-
-        <!-- </div> -->
         <form action='informacion.php' class="presentacion" method="POST" style="display: flex; justify-content: center; flex-direction: row;">
             <div style="margin-right: 10px;">
                 <?php
@@ -109,7 +102,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                     $ciclo[] = $fila['ciclo'];
                 }
 
-                echo "<label for='ciclo'>Ciclo </label><br>";
+                echo "<label for='ciclo'><strong style='color: #135da7;'>Ciclo</strong></label><br>";
                 echo "<select name='ciclo' id='ciclo' required>";
                 echo "<option value=''>Seleccione un ciclo</option>";
                 foreach ($ciclo as $ciclos) {
@@ -118,25 +111,25 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 echo "</select>";
                 echo "<br>";
 
-                echo "<br><label for='turno_id'>Turno </label><br>";
+                echo "<label for='ciclo'><strong style='color: #135da7;'>Turno </strong></label><br>";
                 echo "<select name='turno_id' id='turno' required>";
                 echo "<option value=''>Seleccione un turno</option>";
                 echo "</select>";
                 echo "<br>";
 
-                echo "<br><label for='carrera_id'>Carrera </label>";
+                echo "<label for='ciclo'><strong style='color: #135da7;'>Carrera </strong></label><br>";
                 echo "<select name='carrera_id' id='carrera' required>";
                 echo "<option value=''>Seleccione una carrera</option>";
                 echo "</select>";
                 echo "<br>";
 
-                echo "<br><label for='curso_id'>Curso </label><br>";
+                echo "<label for='ciclo' style='color: #518eca;'>Curso </label><br>";
                 echo "<select name='curso_id' id='curso'>";
                 echo "<option value=''>Seleccione un curso</option>";
                 echo "</select>";
                 echo "<br>";
 
-                echo "<br><label for='profesor_id'>Profesor </label><br>";
+                echo "<label for='ciclo' style='color: #518eca;'>Profesor </label><br>";
                 echo "<select name='profesor_id' id='profesor'>";
                 echo "<option value=''>Seleccione un profesor</option>";
                 echo "</select>";
