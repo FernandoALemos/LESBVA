@@ -103,7 +103,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 }
 
                 echo "<label for='ciclo'><strong style='color: #135da7;'>Ciclo</strong></label><br>";
-                echo "<select name='ciclo' id='ciclo' required>";
+                echo "<select name='ciclo' id='ciclo'>";
                 echo "<option value=''>Seleccione un ciclo</option>";
                 foreach ($ciclo as $ciclos) {
                     echo "<option value='{$ciclos}'>{$ciclos}</option>";
@@ -112,13 +112,13 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 echo "<br>";
 
                 echo "<label for='ciclo'><strong style='color: #135da7;'>Turno </strong></label><br>";
-                echo "<select name='turno_id' id='turno' required>";
+                echo "<select name='turno_id' id='turno'>";
                 echo "<option value=''>Seleccione un turno</option>";
                 echo "</select>";
                 echo "<br>";
 
                 echo "<label for='ciclo'><strong style='color: #135da7;'>Carrera </strong></label><br>";
-                echo "<select name='carrera_id' id='carrera' required>";
+                echo "<select name='carrera_id' id='carrera'>";
                 echo "<option value=''>Seleccione una carrera</option>";
                 echo "</select>";
                 echo "<br>";
