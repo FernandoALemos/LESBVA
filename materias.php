@@ -73,6 +73,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         <h1>Unidades Curriculares</h1>
         <button class="btn-descargar" data-toggle="modal" data-target="#modalCrearMateria"><i class="fa-solid fa-plus"> </i> Nueva materia</button>
     </div>
+    <input type="text" id="searchMaterias" class="form-control mb-3" placeholder="Buscar unidad curricular...">
     <table class="table table-sm table-striped table-hover mt-4">
         <thead class="table-primary">
             <tr>
@@ -80,7 +81,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody class="table-active">
+        <tbody class="table-active" id="tablaMaterias">
             <?php
             $materias = Materia::listarMaterias();
             foreach ($materias as $materia) {
@@ -94,6 +95,22 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             ?>
         </tbody>
     </table>
+    <script>
+    // Función para filtro dinamico en Unidades Curriculares
+    document.getElementById('searchMaterias').addEventListener('keyup', function() {
+        let filter = this.value.toLowerCase();
+        let rows = document.querySelectorAll('#tablaMaterias tr');
+
+        rows.forEach(function(row) {
+            let nombreMateria = row.querySelector('td').textContent.toLowerCase();
+            if (nombreMateria.includes(filter)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 
 
