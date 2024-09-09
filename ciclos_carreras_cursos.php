@@ -90,9 +90,10 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     <main class="container mt-5">
         <div class="form-row">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1>Ciclos</h1> <!-- Corrijo, mal escrito-->
+                <h1>Ciclos</h1>
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearCiclo"><i class="fa-solid fa-plus"> </i> Nuevo ciclo</button>
             </div>
+            <input type="text" id="searchCiclos" class="form-control mb-3" placeholder="Buscar ciclo...">
             <table class="table table-sm table-striped table-hover mt-4">
                 <thead class="table-primary">
                     <tr>
@@ -100,7 +101,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="table-active">
+                <tbody class="table-active" id="tablaCiclos">
                     <?php
                     $ciclos = CicloLectivo::listarCiclos();
                     foreach ($ciclos as $ciclo) {
@@ -114,10 +115,27 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                     ?>
                 </tbody>
             </table>
+            <script>
+                // Función para filtro dinámico en Ciclos
+                document.getElementById('searchCiclos').addEventListener('keyup', function() {
+                    let filter = this.value.toLowerCase();
+                    let rows = document.querySelectorAll('#tablaCiclos tr');
+
+                    rows.forEach(function(row) {
+                        let ciclo = row.querySelector('td').textContent.toLowerCase();
+                        if (ciclo.includes(filter)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                });
+            </script>
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h1>Cursos</h1>
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearCurso"><i class="fa-solid fa-plus"> </i> Nuevo curso</button>
             </div>
+            <input type="text" id="searchCursos" class="form-control mb-3" placeholder="Buscar curso...">
             <table class="table table-sm table-striped table-hover mt-4">
                 <thead class="table-primary">
                     <tr>
@@ -125,7 +143,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="table-active">
+                <tbody class="table-active" id="tablaCursos">
                     <?php
                     $cursos = Curso::listar_Cursos();
                     foreach ($cursos as $curso) {
@@ -139,6 +157,22 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                     ?>
                 </tbody>
             </table>
+            <script>
+    // Función para filtro dinámico en Cursos
+    document.getElementById('searchCursos').addEventListener('keyup', function() {
+        let filter = this.value.toLowerCase();
+        let rows = document.querySelectorAll('#tablaCursos tr');
+
+        rows.forEach(function(row) {
+            let curso = row.querySelector('td').textContent.toLowerCase();
+            if (curso.includes(filter)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
         </div>
     </main>
 
@@ -218,6 +252,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 <h1>Carreras</h1>
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearCarrera"><i class="fa-solid fa-plus"> </i> Nueva carrera</button>
             </div>
+            <input type="text" id="searchInput" class="form-control mb-3" placeholder="Buscar carrera...">
             <table class="table table-sm table-striped table-hover mt-4">
                 <thead class="table-primary">
                     <tr>
@@ -225,7 +260,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="table-active">
+                <tbody class="table-active" id="carreraTable">
                     <?php
                     $carreras = Carrera::listarCarreras();
                     foreach ($carreras as $carrera) {
@@ -240,6 +275,23 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 </tbody>
             </table>
         </div>
+
+        <script>
+            // Función para aplicar el buscador dinámico a carreras
+            document.getElementById('searchInput').addEventListener('keyup', function() {
+                let filter = this.value.toLowerCase();
+                let rows = document.querySelectorAll('#carreraTable tr');
+
+                rows.forEach(function(row) {
+                    let carrera = row.querySelector('td').textContent.toLowerCase();
+                    if (carrera.includes(filter)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        </script>
     </main>
 
 
