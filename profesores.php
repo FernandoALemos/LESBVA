@@ -69,10 +69,11 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             }, 3000); // se cierra después de 3 segundos
         });
     </script>
-    <div class="d-flex justify-content-between align-items-center mb-3">
+     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Profesores</h1>
         <button class="btn-descargar" data-toggle="modal" data-target="#modalCrearProfesor"><i class="fa-solid fa-user-plus"> </i> Nuevo profesor</button>
     </div>
+    <input type="text" id="searchProfesores" class="form-control mb-3" placeholder="Buscar profesor...">
     <table class="table table-sm table-striped table-hover mt-4">
         <thead class="table-primary">
             <tr>
@@ -81,7 +82,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody class="table-active">
+        <tbody class="table-active" id="tablaProfesores">
             <?php
             $profesores = Profesor::listarProfesores();
             foreach ($profesores as $profesor) {
@@ -96,6 +97,25 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             ?>
         </tbody>
     </table>
+    <script>
+    // Función para filtro dinámico de Profesores
+    document.getElementById('searchProfesores').addEventListener('keyup', function() {
+        let filter = this.value.toLowerCase();
+        let rows = document.querySelectorAll('#tablaProfesores tr');
+
+        rows.forEach(function(row) {
+            let apellido = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
+            let nombre = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            
+            // Filtra por apellido o nombre
+            if (apellido.includes(filter) || nombre.includes(filter)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 
     <!-- Modal Crear Profesor -->
