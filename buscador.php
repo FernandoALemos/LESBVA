@@ -26,61 +26,72 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     <title>Reportes</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#ciclo').change(function() {
-                var ciclo = $(this).val();
-                if (ciclo) {
-                    $.ajax({
-                        type: 'POST',
-                        url: 'get_turnos.php',
-                        data: {
-                            ciclo: ciclo
-                        },
-                        success: function(response) {
-                            $('#turno').html(response);
-                        }
+        function cargarFiltros() {
+            var filter_data = {
+                    ciclo: $('#ciclo').val(),
+                    carrera: $('#carrera').val(),
+                    turno: $('#turno').val(),
+                    curso: $('#curso').val(),
+                    profesor: $('#profesor').val()
+                };
+            $.ajax({
+                url: 'get_filtros.php',
+                method: 'POST',
+                data: filter_data,
+                dataType: 'json',
+                success: function(response) {
+                    $('#ciclo').empty();
+                    $('#turno').empty();
+                    $('#carrera').empty();
+                    $('#curso').empty();
+                    $('#profesor').empty();
+
+                    $('#ciclo').append('<option value="">Seleccione un ciclo</option>');
+                    response.ciclos.forEach(function(ciclo) {
+                        var selected = (filter_data && filter_data.ciclo === ciclo.id) ? 'selected' : '';
+                        $('#ciclo').append('<option value="' + ciclo.id + '" ' + selected + '>' + ciclo.descripcion + '</option>');
                     });
-                    $.ajax({
-                        type: 'POST',
-                        url: 'get_carreras.php',
-                        data: {
-                            ciclo: ciclo
-                        },
-                        success: function(response) {
-                            $('#carrera').html(response);
-                        }
+
+                    $('#turno').append('<option value="">Seleccione un turno</option>');
+                    response.turnos.forEach(function(turno) {
+                        var selected = (filter_data && filter_data.turno === turno.id) ? 'selected' : '';
+                        $('#turno').append('<option value="' + turno.id + '" ' + selected + '>' + turno.descripcion + '</option>');
                     });
+
+                    $('#carrera').append('<option value="">Seleccione una carrera</option>');
+                    response.carreras.forEach(function(carrera) {
+                        var selected = (filter_data && filter_data.carrera === carrera.id) ? 'selected' : '';
+                        $('#carrera').append('<option value="' + carrera.id + '" ' + selected + '>' + carrera.descripcion + '</option>');
+                    });
+
+                    $('#curso').append('<option value="">Seleccione un curso</option>');
+                    response.cursos.forEach(function(curso) {
+                        var selected = (filter_data && filter_data.curso === curso.id) ? 'selected' : '';
+                        $('#curso').append('<option value="' + curso.id + '" ' + selected + '>' + curso.descripcion + '</option>');
+                    });
+
+                    $('#profesor').append('<option value="">Seleccione un profesor</option>');
+                    response.profesores.forEach(function(profesor) {
+                        var selected = (filter_data && filter_data.profesor === profesor.id) ? 'selected' : '';
+                        $('#profesor').append('<option value="' + profesor.id + '" ' + selected + '>' + profesor.descripcion + '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al cargar los filtros:', error);
                 }
             });
+        }
 
-            $('#carrera').change(function() {
-                var carrera = $(this).val();
-                $.ajax({
-                    type: 'POST',
-                    url: 'get_cursos.php',
-                    data: {
-                        carrera: carrera
-                    },
-                    success: function(response) {
-                        $('#curso').html(response);
-                    }
-                });
-            });
-
-            $('#carrera').change(function() {
-                var carrera = $(this).val();
-                $.ajax({
-                    type: 'POST',
-                    url: 'get_profesores.php',
-                    data: {
-                        carrera: carrera
-                    },
-                    success: function(response) {
-                        $('#profesor').html(response);
-                    }
-                });
+        $(document).ready(function() {
+            cargarFiltros();
+            $('form').submit(function(e) {
+                if (!$('#ciclo').val() && !$('#turno').val() && !$('#carrera').val() && !$('#curso').val() && !$('#profesor').val()) {
+                    e.preventDefault();
+                    alert('Debe seleccionar al menos un filtro antes de continuar.');
+                }
             });
         });
+
     </script>
 </head>
 <header>
@@ -93,49 +104,37 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         <form action='informacion.php' class="presentacion" method="POST" style="display: flex; justify-content: center; flex-direction: row;">
             <div style="margin-right: 10px;">
                 <?php
-                $con = conectar_db();
-                $sql_ciclo = "SELECT DISTINCT cl.ciclo FROM materia_carrera mc inner join ciclo_lectivo cl on mc.ciclo_id = cl.ciclo_id ORDER BY cl.ciclo DESC";
-                $resultado_ciclo = $con->query($sql_ciclo);
-
-                $ciclo = array();
-                while ($fila = $resultado_ciclo->fetch_assoc()) {
-                    $ciclo[] = $fila['ciclo'];
-                }
-
                 echo "<label for='ciclo'><strong style='color: #135da7;'>Ciclo</strong></label><br>";
                 echo "<select name='ciclo' id='ciclo'>";
                 echo "<option value=''>Seleccione un ciclo</option>";
-                foreach ($ciclo as $ciclos) {
-                    echo "<option value='{$ciclos}'>{$ciclos}</option>";
-                }
                 echo "</select>";
                 echo "<br>";
 
-                echo "<label for='ciclo'><strong style='color: #135da7;'>Turno </strong></label><br>";
-                echo "<select name='turno_id' id='turno'>";
+                echo "<label for='turno'><strong style='color: #135da7;'>Turno </strong></label><br>";
+                echo "<select name='turno' id='turno'>";
                 echo "<option value=''>Seleccione un turno</option>";
                 echo "</select>";
                 echo "<br>";
 
-                echo "<label for='ciclo'><strong style='color: #135da7;'>Carrera </strong></label><br>";
-                echo "<select name='carrera_id' id='carrera'>";
+                echo "<label for='carrera'><strong style='color: #135da7;'>Carrera </strong></label><br>";
+                echo "<select name='carrera' id='carrera'>";
                 echo "<option value=''>Seleccione una carrera</option>";
                 echo "</select>";
                 echo "<br>";
 
-                echo "<label for='ciclo' style='color: #518eca;'>Curso </label><br>";
-                echo "<select name='curso_id' id='curso'>";
+                echo "<label for='curso' style='color: #135da7;'>Curso </label><br>";
+                echo "<select name='curso' id='curso'>";
                 echo "<option value=''>Seleccione un curso</option>";
                 echo "</select>";
                 echo "<br>";
 
-                echo "<label for='ciclo' style='color: #518eca;'>Profesor </label><br>";
-                echo "<select name='profesor_id' id='profesor'>";
+                echo "<label for='profesor' style='color: #135da7;'>Profesor </label><br>";
+                echo "<select name='profesor' id='profesor'>";
                 echo "<option value=''>Seleccione un profesor</option>";
                 echo "</select>";
                 echo "<br>";
 
-                echo "<br><input type='submit' class='btn-descargar' value='Continuar'>"; #Cambio estilo de boton, queda mejor.
+                echo "<br><input type='submit' class='btn-descargar' value='Continuar'>";
                 ?>
             </div>
         </form>
@@ -143,7 +142,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 </main>
 <footer>
     <p class="titulos"><i class="fa-solid fa-arrow-right-from-bracket"> </i><a href="logout.php"> Cerrar sesión</a></p><br>
-    <p class="titulos"><i class="fa-solid fa-house"> </i><a href="index.php"> Ir a inicio</a></p><br> <!-- Lo agrego acá, queda mejor que arriba de todo creo. -->
+    <p class="titulos"><i class="fa-solid fa-house"> </i><a href="index.php"> Ir a inicio</a></p><br> 
 </footer>
 
 </html>

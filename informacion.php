@@ -67,125 +67,156 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
                     </tr>
                 </thead>
                 <tbody class="table-active">
-                    <?php
+                <?php
                     $con = conectar_db();
-                    // guardar los valores de los filtros en la sesión
+
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                        $_SESSION['filtros'] = $_POST;
+                        $_SESSION['filtros'] = array_map(function ($value) {
+                            return is_numeric($value) ? intval($value) : $value;
+                        }, $_POST);
+                        $filtros = $_SESSION['filtros'];
+
+                        $ciclo_id = isset($filtros['ciclo']) ? $filtros['ciclo'] : null;
+                        $turno_id = isset($filtros['turno']) ? $filtros['turno'] : null;
+                        $carrera_id = isset($filtros['carrera']) ? $filtros['carrera'] : null;
+                        $curso_id = isset($filtros['curso']) ? $filtros['curso'] : null;
+                        $profesor_id = isset($filtros['profesor']) ? $filtros['profesor'] : null;
                     }
 
-                    // filtros de la sesión
-                    $filtros = isset($_SESSION['filtros']) ? $_SESSION['filtros'] : [];
+                    $where_clauses = [];
+                    
+                    if ($ciclo_id !== null && $ciclo_id !== "") {
+                        $where_clauses[] = "cl.ciclo_id = $ciclo_id";
+                        $sql_ciclo = "SELECT ciclo FROM ciclo_lectivo WHERE ciclo_id = ?";
+                                        $stmt_ciclo = $con->prepare($sql_ciclo);
+                                        $stmt_ciclo->bind_param("i", $ciclo_id);
+                                        $stmt_ciclo->execute();
+                                        $stmt_ciclo->bind_result($ciclo);
+                                        $stmt_ciclo->fetch();
+                                        $stmt_ciclo->close();
 
-                    //valores de los filtros
-                    $ciclo = isset($filtros['ciclo']) ? $filtros['ciclo'] : '';
-                    $turno_id = isset($filtros['turno_id']) ? $filtros['turno_id'] : '';
-                    $carrera = isset($filtros['carrera_id']) ? $filtros['carrera_id'] : '';
-                    $curso = isset($filtros['curso_id']) ? $filtros['curso_id'] : '';
-                    $profesor = isset($filtros['profesor_id']) ? $filtros['profesor_id'] : '';
-
-                    // Query en base a lo filtrado
-                    $sql = "SELECT 
-                                    mc.materia_carrera_id,
-                                    m.materia_nombre,
-                                    c.carrera_nombre,
-                                    cl.ciclo,
-                                    cr.curso,
-                                    t.turno,
-                                    p.profesor_nombre,
-                                    p.profesor_apellido,
-                                    mc.situacion_revista,
-                                    mc.inscriptos,
-                                    mc.regulares,
-                                    mc.atraso_academico,
-                                    mc.recursantes,
-                                    mc.modulos,
-                                    mc.primer_periodo,
-                                    mc.segundo_periodo
-                                FROM 
-                                    materia_carrera mc
-                                JOIN 
-                                    materias m ON mc.materia_id = m.materia_id
-                                JOIN 
-                                    carreras c ON mc.carrera_id = c.carrera_id
-                                JOIN 
-                                    ciclo_lectivo cl ON mc.ciclo_id = cl.ciclo_id
-                                JOIN 
-                                    cursos cr ON mc.curso_id = cr.curso_id
-                                JOIN 
-                                    turnos t ON mc.turno_id = t.turno_id
-                                JOIN 
-                                    profesores p ON mc.profesor_id = p.profesor_id
-                                WHERE 
-                                    cl.ciclo = ? AND mc.carrera_id = ? AND mc.turno_id = ?";
-
-                    // Si el curso está seleccionado, agregarlo a la consulta
-                    $params = [$ciclo, $carrera, $turno_id];
-                    $types = 'iii';
-                    // Si el curso está seleccionado, agregarlo a la consulta
-                    if (!empty($curso)) {
-                        $sql .= " AND mc.curso_id = ?";
-                        $params[] = $curso;
-                        $types .= 'i';
+                        $_SESSION['ciclo'] = $ciclo;
+                    }
+                    else {
+                        unset($_SESSION['ciclo']);
                     }
 
-                    // Si el profesor está seleccionado, agregarlo a la consulta
-                    if (!empty($profesor)) {
-                        $sql .= " AND mc.profesor_id = ?";
-                        $params[] = $profesor;
-                        $types .= 'i';
+                    if ($carrera_id !== null && $carrera_id !== "") {
+                        $where_clauses[] = "mc.carrera_id = $carrera_id";
+                        $sql_carrera = "SELECT carrera_nombre FROM carreras WHERE carrera_id = ?";
+                                        $stmt_carrera = $con->prepare($sql_carrera);
+                                        $stmt_carrera->bind_param("i", $carrera_id);
+                                        $stmt_carrera->execute();
+                                        $stmt_carrera->bind_result($carrera_nombre);
+                                        $stmt_carrera->fetch();
+                                        $stmt_carrera->close();
+
+                        $_SESSION['carrera_nombre'] = $carrera_nombre;
+                    }
+                    else {
+                        unset($_SESSION['carrera_nombre']);
                     }
 
+                    if ($turno_id !== null && $turno_id !== "") {
+                        $where_clauses[] = "mc.turno_id = $turno_id";
+                        $sql_turno = "SELECT turno FROM turnos WHERE turno_id = ?";
+                                        $stmt_turno = $con->prepare($sql_turno);
+                                        $stmt_turno->bind_param("i", $turno_id);
+                                        $stmt_turno->execute();
+                                        $stmt_turno->bind_result($turno);
+                                        $stmt_turno->fetch();
+                                        $stmt_turno->close();
 
-                    // Agregar la cláusula ORDER BY para ordenar por materia_nombre y curso
-                    $sql .= " ORDER BY cr.curso, m.materia_nombre";
+                        $_SESSION['turno'] = $turno;
+                    }
+                    else {
+                        unset($_SESSION['turno']);
+                    }
 
-                    // Preparar y ejecutar la consulta
-                    $stmt = $con->prepare($sql);
-                    $stmt->bind_param($types, ...$params);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
+                    if ($curso_id !== null && $curso_id !== "") {
+                        $where_clauses[] = "mc.curso_id = $curso_id";
+                        $sql_curso = "SELECT curso FROM cursos WHERE curso_id = ?";
+                                        $stmt_curso = $con->prepare($sql_curso);
+                                        $stmt_curso->bind_param("i", $curso_id);
+                                        $stmt_curso->execute();
+                                        $stmt_curso->bind_result($curso);
+                                        $stmt_curso->fetch();
+                                        $stmt_curso->close();
 
-                    // Obtener el nombre de la carrera
-                    $sql_carrera = "SELECT carrera_nombre FROM carreras WHERE carrera_id = ?";
-                    $stmt_carrera = $con->prepare($sql_carrera);
-                    $stmt_carrera->bind_param("i", $carrera);
-                    $stmt_carrera->execute();
-                    $stmt_carrera->bind_result($carrera_nombre);
-                    $stmt_carrera->fetch();
-                    $stmt_carrera->close();
+                        $_SESSION['curso'] = $curso;
+                    }
+                    else {
+                        unset($_SESSION['curso']);
+                    }
 
-                    // Obtener el nombre del turno
-                    $sql_turno = "SELECT turno FROM turnos WHERE turno_id = ?";
-                    $stmt_turno = $con->prepare($sql_turno);
-                    $stmt_turno->bind_param("i", $turno_id);
-                    $stmt_turno->execute();
-                    $stmt_turno->bind_result($turno);
-                    $stmt_turno->fetch();
-                    $stmt_turno->close();
+                    if ($profesor_id !== null && $profesor_id !== "") {
+                        $where_clauses[] = "mc.profesor_id = $profesor_id";
+                        $sql_profesor = "SELECT CONCAT(profesor_apellido, ' ', profesor_nombre) AS profesor FROM profesores WHERE profesor_id = ?";
+                                        $stmt_profesor = $con->prepare($sql_profesor);
+                                        $stmt_profesor->bind_param("i", $profesor_id);
+                                        $stmt_profesor->execute();
+                                        $stmt_profesor->bind_result($profesor);
+                                        $stmt_profesor->fetch();
+                                        $stmt_profesor->close();
 
-                    // OBTENGO LA DATA?
+                        $_SESSION['profesor'] = $profesor;
+                    }
+                    else {
+                        unset($_SESSION['profesor']);
+                    }
+
+                    $where_sql = '';
+                    if (!empty($where_clauses)) {
+                        $where_sql = 'WHERE ' . implode(' AND ', $where_clauses);
+                    }
+
+                    $sql_filtros = "SELECT DISTINCT 
+                                mc.materia_carrera_id,
+                                m.materia_nombre,
+                                c.carrera_nombre,
+                                cl.ciclo,
+                                cr.curso,
+                                t.turno,
+                                p.profesor_apellido, 
+                                p.profesor_nombre,
+                                mc.situacion_revista,
+                                mc.inscriptos,
+                                mc.regulares,
+                                mc.atraso_academico,
+                                mc.recursantes,
+                                mc.modulos,
+                                mc.primer_periodo,
+                                mc.segundo_periodo
+                            FROM 
+                                materia_carrera mc
+                            INNER JOIN materias m ON mc.materia_id = m.materia_id
+                            INNER JOIN carreras c ON mc.carrera_id = c.carrera_id
+                            INNER JOIN ciclo_lectivo cl ON mc.ciclo_id = cl.ciclo_id
+                            INNER JOIN cursos cr ON mc.curso_id = cr.curso_id
+                            INNER JOIN turnos t ON mc.turno_id = t.turno_id
+                            INNER JOIN profesores p ON mc.profesor_id = p.profesor_id
+                            $where_sql
+                            ORDER BY 
+                                cl.ciclo,
+                                c.carrera_nombre, 
+                                cr.curso, 
+                                m.materia_nombre, 
+                                p.profesor_apellido";
+
+                    $result = $con->query($sql_filtros);
+
                     $data = [];
                     $data_ids = [];
                     while ($row = $result->fetch_assoc()) {
-                        $data[] = $row;  // Llenas $data con todas las columnas
-                        $data_ids[] = $row['materia_carrera_id'];  // Llenas $data_ids solo con los IDs
+                        $data[] = $row;
+                        $data_ids[] = $row['materia_carrera_id'];
                     }
 
-                    // Almacenar los IDs en la sesión
-                    $_SESSION['materia_carrera_ids'] = $data_ids;
-
-                    // Almacenar los datos en la sesión para el excel
                     $_SESSION['materia_data'] = $data;
-                    $_SESSION['ciclo'] = $ciclo;
-                    $_SESSION['carrera_nombre'] = $carrera_nombre;
-                    $_SESSION['turno'] = $turno;
-
-                    // Verifica si hay resultados
+                    $_SESSION['materia_carrera_ids'] = $data_ids;
                     if (empty($data)) {
                         echo "<tr><td colspan='13'><b class='bold red'>No hay materias registradas en el sistema</b></td></tr>";
                     } else {
-                        // VER BIEN COMO CENTRAR PORQUE AGRANDA MUCHO LA PANTALLA
                         foreach ($data as $info) { ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($info['ciclo']); ?></td>
@@ -193,7 +224,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
                                 <td><?php echo htmlspecialchars($info['curso']); ?></td>
                                 <td><?php echo htmlspecialchars($info['materia_nombre']); ?></td>
                                 <td><?php echo htmlspecialchars($info['modulos']); ?></td>
-                                <td><?php echo htmlspecialchars($info['profesor_nombre'] . " " . $info['profesor_apellido']); ?></td>
+                                <td><?php echo htmlspecialchars($info['profesor_apellido'] . " " . $info['profesor_nombre']); ?></td>
                                 <td><?php echo htmlspecialchars($info['situacion_revista']); ?></td>
                                 <td><?php echo htmlspecialchars($info['inscriptos']); ?></td>
                                 <td><?php echo htmlspecialchars($info['regulares']); ?></td>
@@ -205,8 +236,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) {
                     <?php }
                     }
 
-                    $stmt->close();
-                    $con->close();
+                    $con->close()
                     ?>
                 </tbody>
             </table>

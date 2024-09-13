@@ -2,25 +2,26 @@
 session_start();
 require_once "database/conectar_db.php";
 
-// Verificar si los datos de la sesión existen
-if (!isset($_SESSION['materia_data']) || !isset($_SESSION['ciclo']) || !isset($_SESSION['carrera_nombre'])) {
+
+if (!isset($_SESSION['materia_data'])) {
     die("No hay datos disponibles para descargar.");
 }
-
 $data = $_SESSION['materia_data'];
-$ciclo = $_SESSION['ciclo'];
-$turno = $_SESSION['turno'];
-$carrera_nombre = $_SESSION['carrera_nombre'];
 
-// Preparar el nombre del archivo
-$filename = "{$ciclo}-{$carrera_nombre}-{$turno}.xls";
 
-// Enviar encabezados para la descarga del archivo
+$ciclo = $_SESSION['ciclo'] ?? "";
+$carrera_nombre = $_SESSION['carrera_nombre'] ?? "";
+$turno = $_SESSION['turno'] ?? "";
+$curso = $_SESSION['curso'] ?? "";
+$profesor = $_SESSION['profesor'] ?? "";
+
+
+$filename_parts = array_filter([$ciclo, $carrera_nombre, $turno, $curso, $profesor]);
+$filename = implode("-", $filename_parts) . ".xls";
+
 header("Content-Type: application/vnd.ms-excel");
 header("Content-Disposition: attachment; filename=$filename");
 
-// Iniciar la tabla
-// Usamos utf8_decode para que reconosca los caracteres especiales al meterlos en el .xls
 echo "<table border='1'>
         <thead>
             <tr>

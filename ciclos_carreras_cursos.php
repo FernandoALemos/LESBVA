@@ -34,8 +34,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 </header>
 
 <body>
-    <!-- <button class="btn-descargar" onclick="location.href='index.php'">Inicio</button> -->
-    <!-- <div class="btns-space"></div><br> -->
     <?php
     if (isset($_GET['mensaje'])) {
         $mensaje = '';
@@ -82,7 +80,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             $('#modalMensaje').modal('show');
             setTimeout(function() {
                 $('#modalMensaje').modal('hide');
-            }, 3000); // se cierra después de 3 segundos
+            }, 3000);
         });
     </script>
 
@@ -116,7 +114,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 </tbody>
             </table>
             <script>
-                // Función para filtro dinámico en Ciclos
                 document.getElementById('searchCiclos').addEventListener('keyup', function() {
                     let filter = this.value.toLowerCase();
                     let rows = document.querySelectorAll('#tablaCiclos tr');
@@ -139,7 +136,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             <table class="table table-sm table-striped table-hover mt-4">
                 <thead class="table-primary">
                     <tr>
-                        <th>Cursos disponibles</th> <!--Agrego "disponibles" para que visualmente no quede el boton "nuevo curso" pegado al titulo "Cursos" -->
+                        <th>Cursos disponibles</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -158,21 +155,20 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 </tbody>
             </table>
             <script>
-    // Función para filtro dinámico en Cursos
-    document.getElementById('searchCursos').addEventListener('keyup', function() {
-        let filter = this.value.toLowerCase();
-        let rows = document.querySelectorAll('#tablaCursos tr');
+                document.getElementById('searchCursos').addEventListener('keyup', function() {
+                    let filter = this.value.toLowerCase();
+                    let rows = document.querySelectorAll('#tablaCursos tr');
 
-        rows.forEach(function(row) {
-            let curso = row.querySelector('td').textContent.toLowerCase();
-            if (curso.includes(filter)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    });
-</script>
+                    rows.forEach(function(row) {
+                        let curso = row.querySelector('td').textContent.toLowerCase();
+                        if (curso.includes(filter)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                });
+            </script>
         </div>
     </main>
 
@@ -277,7 +273,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         </div>
 
         <script>
-            // Función para aplicar el buscador dinámico a carreras
             document.getElementById('searchInput').addEventListener('keyup', function() {
                 let filter = this.value.toLowerCase();
                 let rows = document.querySelectorAll('#carreraTable tr');
@@ -350,15 +345,15 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 
 
     <script>
-    $(document).ready(function() {
-        $('.btnEditarCarrera').on('click', function() {
-            var id = $(this).data('id');
-            var carrera = $(this).data('carrera');
-            $('#editar_carrera_id').val(id);
-            $('#editar_carrera_nombre').val(carrera);
-            $('#modalEditarCarrera').modal('show');
+        $(document).ready(function() {
+            $('.btnEditarCarrera').on('click', function() {
+                var id = $(this).data('id');
+                var carrera = $(this).data('carrera');
+                $('#editar_carrera_id').val(id);
+                $('#editar_carrera_nombre').val(carrera);
+                $('#modalEditarCarrera').modal('show');
+            });
         });
-    });
     </script>
 
 
@@ -417,15 +412,15 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 
 
     <script>
-    $(document).ready(function() {
-        $('.btnEditarCurso').on('click', function() {
-            var id = $(this).data('id');
-            var curso = $(this).data('curso');
-            $('#editar_curso_id').val(id);
-            $('#editar_curso').val(curso);
-            $('#modalEditarCurso').modal('show');
+        $(document).ready(function() {
+            $('.btnEditarCurso').on('click', function() {
+                var id = $(this).data('id');
+                var curso = $(this).data('curso');
+                $('#editar_curso_id').val(id);
+                $('#editar_curso').val(curso);
+                $('#modalEditarCurso').modal('show');
+            });
         });
-    });
     </script>
 
 
@@ -433,7 +428,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 </body>
 <footer>
     <p class="titulos"><i class="fa-solid fa-arrow-right-from-bracket"> </i><a href="logout.php"> Cerrar sesión</a></p><br>
-    <p class="titulos"><i class="fa-solid fa-house"> </i><a href="index.php"> Ir a inicio</a></p><br> <!-- Lo agrego acá, queda mejor que arriba de todo creo. -->
+    <p class="titulos"><i class="fa-solid fa-house"> </i><a href="index.php"> Ir a inicio</a></p><br> 
 </footer>
 
 </html>

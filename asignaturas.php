@@ -30,11 +30,8 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/all.min.css" rel="stylesheet">
@@ -79,7 +76,7 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
             $('#modalMensaje').modal('show');
             setTimeout(function() {
                 $('#modalMensaje').modal('hide');
-            }, 3000); // se cierra después de 3 segundos
+            }, 3000);
         });
     </script>
     <div class="divMaterias-cabecera">
@@ -155,7 +152,6 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
                 success: function(response) {
                     console.log("Raw response: ", response);
 
-                    // Eliminar cualquier dato no JSON antes de la cadena JSON
                     var jsonResponse = response.substring(response.indexOf('{'));
                     console.log("JSON response: ", jsonResponse);
 
@@ -167,7 +163,6 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
                         console.error("Error al parsear JSON: ", error);
                     }
 
-                    // Convertir los IDs y otros campos numéricos a número
                     form_data.materia_carrera_id = parseInt(form_data.materia_carrera_id, 10);
                     form_data.turno_id = parseInt(form_data.turno_id, 10);
                     form_data.carrera_id = parseInt(form_data.carrera_id, 10);
@@ -182,11 +177,6 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
                     form_data.primer_periodo = parseInt(form_data.primer_periodo, 10);
                     form_data.segundo_periodo = parseInt(form_data.segundo_periodo, 10);
 
-                    // Verificar el tipo de cada dato después de la conversión ejemplo
-                    // console.log("asignatura_id: " + form_data.materia_carrera_id + ", tipo: " + typeof form_data.materia_carrera_id);
-
-
-                    // Rellenar los campos del modal con los datos recibidos
                     $('#edit_asignatura_id').val(form_data.materia_carrera_id);
                     $('#edit_turno_id').val(form_data.turno_id);
                     $('#edit_carrera_id').val(form_data.carrera_id);
@@ -223,7 +213,7 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
 
 <footer>
     <p class="titulos"><i class="fa-solid fa-arrow-right-from-bracket"> </i><a href="logout.php"> Cerrar sesión</a></p><br>
-    <p class="titulos"><i class="fa-solid fa-house"> </i><a href="index.php"> Ir a inicio</a></p><br> <!-- Lo agrego acá, queda mejor que arriba de todo creo. -->
+    <p class="titulos"><i class="fa-solid fa-house"> </i><a href="index.php"> Ir a inicio</a></p><br>
 </footer>
 
 

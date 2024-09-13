@@ -127,7 +127,11 @@
                     JOIN turnos t ON mc.turno_id = t.turno_id
                     JOIN profesores p ON mc.profesor_id = p.profesor_id
                     WHERE mc.materia_carrera_id IN ($data_list)
-                    ORDER BY cr.curso, m.materia_nombre";
+                    ORDER BY cl.ciclo,
+                            c.carrera_nombre, 
+                            cr.curso, 
+                            m.materia_nombre, 
+                            p.profesor_apellido";
             
             $result = $con->query($sql);
             

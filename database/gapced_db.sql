@@ -21,7 +21,7 @@ create table turnos(
     primary key (turno_id)
 );
 
-insert into turnos (turno) values ('Mañana'), ('Tarde'), ('Verpertino');
+insert into turnos (turno) values ('Mañana'), ('Tarde'), ('Vespertino');
 
 create table carreras(
     carrera_id int auto_increment,
