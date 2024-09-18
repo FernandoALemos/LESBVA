@@ -103,41 +103,61 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     <body class=".bg-secondary.bg-gradient">
         <form action='informacion.php' class="presentacion" method="POST" style="display: flex; justify-content: center; flex-direction: row;">
             <div style="margin-right: 10px;">
-                <?php
-                echo "<label for='ciclo'><strong style='color: #135da7;'>Ciclo</strong></label><br>";
-                echo "<select name='ciclo' id='ciclo'>";
-                echo "<option value=''>Seleccione un ciclo</option>";
-                echo "</select>";
-                echo "<br>";
+                
+                <label for='ciclo'><strong style='color: #135da7;'>Ciclo</strong></label><br>
+                <select name='ciclo' id='ciclo'>
+                <option value=''>Seleccione un ciclo</option>
+                </select>
+                <br>
 
-                echo "<label for='turno'><strong style='color: #135da7;'>Turno </strong></label><br>";
-                echo "<select name='turno' id='turno'>";
-                echo "<option value=''>Seleccione un turno</option>";
-                echo "</select>";
-                echo "<br>";
+                <label for='turno'><strong style='color: #135da7;'>Turno </strong></label><br>
+                <select name='turno' id='turno'>
+                <option value=''>Seleccione un turno</option>
+                </select>
+                <br>
 
-                echo "<label for='carrera'><strong style='color: #135da7;'>Carrera </strong></label><br>";
-                echo "<select name='carrera' id='carrera'>";
-                echo "<option value=''>Seleccione una carrera</option>";
-                echo "</select>";
-                echo "<br>";
+                <label for='carrera'><strong style='color: #135da7;'>Carrera </strong></label><br>
+                <select name='carrera' id='carrera'>
+                <option value=''>Seleccione una carrera</option>
+                </select>
+                <br>
 
-                echo "<label for='curso' style='color: #135da7;'>Curso </label><br>";
-                echo "<select name='curso' id='curso'>";
-                echo "<option value=''>Seleccione un curso</option>";
-                echo "</select>";
-                echo "<br>";
+                <label for='curso' style='color: #135da7;'>Curso </label><br>
+                <select name='curso' id='curso'>
+                <option value=''>Seleccione un curso</option>
+                </select>
+                <br><br>
 
-                echo "<label for='profesor' style='color: #135da7;'>Profesor </label><br>";
-                echo "<select name='profesor' id='profesor'>";
-                echo "<option value=''>Seleccione un profesor</option>";
-                echo "</select>";
-                echo "<br>";
+                <label for='profesor' style='color: #135da7;'>Profesor </label>
+                <input type="text" id="buscarProfesor" placeholder="Buscar para seleccionar" onkeyup="filtrarOpciones('buscarProfesor', 'profesor')"><br>
+                <select name='profesor' id='profesor'>
+                <option value=''>Seleccione un profesor</option>
+                </select>
+                <br>
 
-                echo "<br><input type='submit' class='btn-descargar' value='Continuar'>";
-                ?>
+                <br><input type='submit' class='btn-descargar' value='Continuar'>
+                
             </div>
         </form>
+        <script>
+        // Función para filtrar opciones de un select
+        function filtrarOpciones(inputId, selectId) {
+            var input = document.getElementById(inputId);
+            var filtro = input.value.toLowerCase();
+            var select = document.getElementById(selectId);
+            var opciones = select.getElementsByTagName("option");
+
+            // Busca sobre las opciones y oculta las que no coincidan
+            for (var i = 0; i < opciones.length; i++) {
+                var texto = opciones[i].textContent || opciones[i].innerText;
+                if (texto.toLowerCase().indexOf(filtro) > -1 || opciones[i].value === '') {
+                    opciones[i].style.display = "";
+                } else {
+                    opciones[i].style.display = "none";
+                }
+            }
+        }
+    </script>
     </body>
 </main>
 <footer>
