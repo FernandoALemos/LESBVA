@@ -91,7 +91,7 @@
         public static function verificarExistenciaCargo($carrera_id, $turno_id, $cargo_nombre, $cargo_id = null) {
             $con = conectar_db();
             $sql = "SELECT cargo_id FROM cargos 
-                    WHERE (carrera_id = ? AND turno_id = ?) OR cargo_nombre = ?";
+                    WHERE (carrera_id = ? AND turno_id = ?) OR LOWER(cargo_nombre) = LOWER(?)";
         
             if ($cargo_id !== null) {
                 $sql .= " AND cargo_id <> ?";
