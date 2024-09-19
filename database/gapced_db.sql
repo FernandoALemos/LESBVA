@@ -82,8 +82,8 @@ insert into usuarios (usuario_nombre, usuario_apellido, rol_id, cargo_id, email,
 
 create table profesores(
     profesor_id int auto_increment,
-    profesor_nombre varchar (50),
-    profesor_apellido varchar (40),
+    profesor_nombre varchar (60),
+    profesor_apellido varchar (60),
     primary key (profesor_id)
 );
 
@@ -127,7 +127,7 @@ insert into ciclo_lectivo (ciclo) values
 
 create table materias(
     materia_id int auto_increment,
-    materia_nombre varchar(45),
+    materia_nombre varchar(100),
     primary key (materia_id)
 ); 
 
