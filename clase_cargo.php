@@ -90,28 +90,39 @@
         #region verificarExistenciaCargo
         public static function verificarExistenciaCargo($carrera_id, $turno_id, $cargo_nombre, $cargo_id = null) {
             $con = conectar_db();
-            $sql = "SELECT cargo_id FROM cargos 
-                    WHERE (carrera_id = ? AND turno_id = ?) OR LOWER(cargo_nombre) = LOWER(?)";
-        
+            $sql = "SELECT cargo_id, cargo_nombre FROM cargos 
+                    WHERE carrera_id = ? AND turno_id = ?";
+            
             if ($cargo_id !== null) {
                 $sql .= " AND cargo_id <> ?";
             }
+            
             $stmt = $con->prepare($sql);
-        
+            
             if ($cargo_id !== null) {
-                $stmt->bind_param("iisi", $carrera_id, $turno_id, $cargo_nombre, $cargo_id);
+                $stmt->bind_param("iis", $carrera_id, $turno_id, $cargo_id);
             } else {
-                $stmt->bind_param("iis", $carrera_id, $turno_id, $cargo_nombre);
+                $stmt->bind_param("is", $carrera_id, $turno_id);
             }
         
             $stmt->execute();
             $resultado = $stmt->get_result();
-
-            if ($resultado->num_rows > 0) {
-                return true;
-            }
         
-            return false;
+            if ($resultado->num_rows > 0) {
+
+                $fila = $resultado->fetch_assoc();
+                $cargo_nombre_existente = $fila['cargo_nombre'];
+        
+                if (strtolower($cargo_nombre_existente) !== strtolower($cargo_nombre)) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+            else{
+                return false;
+            }
         }
         #endregion
 
