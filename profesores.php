@@ -38,8 +38,12 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         $mensaje = '';
         if ($_GET['mensaje'] == 'creado') {
             $mensaje = 'Profesor/ra creado/a con éxito.';
-        } elseif ($_GET['mensaje'] == 'editado') {
+        } 
+        elseif ($_GET['mensaje'] == 'editado') {
             $mensaje = 'Profesor/ra editado/a con éxito.';
+        }
+        elseif ($_GET['mensaje'] == 'prof_error') {
+            $mensaje = 'Profesor/ra editado/a ya existe.';
         }
         if ($mensaje) {
             echo '

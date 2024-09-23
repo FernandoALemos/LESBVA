@@ -57,18 +57,6 @@
         }
         #endregion
 
-        #region eliminarProfesor
-        public static function eliminarProfesor($profesor_id){
-            $con = conectar_db();
-            $text = "";
-
-            mysqli_query($con, "delete from profesores where profesor_id = $profesor_id;");
-
-            (mysqli_affected_rows($con) > 0) ? $text = "Profesor eliminado correctamente" : $text = "No se pudo eliminar el/la profesor/a";
-
-            return $text;
-        }
-        #endregion
         #endregion
         public static function listarProfesores(){
             $con = conectar_db();
@@ -84,6 +72,31 @@
             }
 
             return $profesores;
+        }
+
+        public static function verificarProfesor($profesor_nombre, $profesor_apellido, $profesor_id = null) {
+            $con = conectar_db();
+            $sql = "SELECT profesor_id, profesor_nombre, profesor_apellido FROM profesores
+            WHERE profesor_nombre = ? AND profesor_apellido = ?";
+            
+            if ($profesor_id !== null) {
+                $sql .= " AND profesor_id <> ?";
+                $stmt = $con->prepare($sql);
+                $stmt->bind_param("sii", $profesor_nombre, $profesor_apellido, $profesor_id);
+            } else {
+                $stmt = $con->prepare($sql);
+                $stmt->bind_param("si", $profesor_nombre, $profesor_apellido);
+            }
+            
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+    
+            if ($resultado->num_rows > 0) {
+                return true;
+            }
+            else{
+                return false;
+            }
         }
 
     }
