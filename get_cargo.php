@@ -17,13 +17,13 @@ WHERE ca.cargo_id = $id LIMIT 1";
 $resultado = $con->query($sql);
 $rows = $resultado->num_rows;
 
-$asignatura = [];
+$cargo = [];
 
 if ($rows > 0) {
-    $asignatura = $resultado->fetch_array();
+    $cargo = $resultado->fetch_array();
 }
 
-echo json_encode($asignatura, JSON_UNESCAPED_UNICODE);
+echo json_encode($cargo, JSON_UNESCAPED_UNICODE);
 
 
 ?>
