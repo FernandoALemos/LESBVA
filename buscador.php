@@ -126,10 +126,10 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 <select name='curso' id='curso'>
                 <option value=''>Seleccione un curso</option>
                 </select>
-                <br><br>
+                <br>
 
-                <label for='profesor' style='color: #135da7;'>Profesor </label>
-                <input type="text" id="buscarProfesor" placeholder="Buscar para seleccionar" onkeyup="filtrarOpciones('buscarProfesor', 'profesor')"><br>
+                <label for='profesor' style='color: #135da7;'>Profesor </label><br>
+                <!-- <input type="text" id="buscarProfesor" placeholder="Buscar para seleccionar" onkeyup="filtrarOpciones('buscarProfesor', 'profesor')"><br> -->
                 <select name='profesor' id='profesor'>
                 <option value=''>Seleccione un profesor</option>
                 </select>

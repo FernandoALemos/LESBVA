@@ -37,8 +37,12 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         $mensaje = '';
         if ($_GET['mensaje'] == 'creado') {
             $mensaje = 'Materia creada con éxito.';
-        } elseif ($_GET['mensaje'] == 'editado') {
+        } 
+        elseif ($_GET['mensaje'] == 'editado') {
             $mensaje = 'Materia editada con éxito.';
+        }
+        elseif ($_GET['mensaje'] == 'mat_error') {
+            $mensaje = 'La unidad curricular ya existe.';
         }
         if ($mensaje) {
             echo '

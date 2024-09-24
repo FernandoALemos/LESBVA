@@ -39,19 +39,14 @@ class Materia
     #endregion
 
     #region modificarMateria
-    public function modificarMateria($id)
-    {
+    public function modificarMateria($id){
         $con = conectar_db();
-        $texto = "";
-        mysqli_query($con, "update materias set materia_nombre = '$this->materia_nombre' where materia_id = $id");
-
-        if (mysqli_affected_rows($con) > 0) {
-            $texto = "Materia modificada correctamente";
-        } else {
-            $texto = "No se pudo modificar la materia";
-        }
-
-        echo "<script>alert('$texto');</script>";
+        $sql = "UPDATE materias 
+                SET materia_nombre = ?
+                WHERE materia_id = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("si", $this->materia_nombre, $id);
+        $stmt->execute();
     }
     #endregion
 
@@ -90,6 +85,30 @@ class Materia
     }
     #endregion
 
+    public static function verificarMateria($materia_nombre, $materia_id = null) {
+        $con = conectar_db();
+        $sql = "SELECT materia_id, materia_nombre FROM materias
+        WHERE materia_nombre = ?";
+        
+        if ($materia_id !== null) {
+            $sql .= " AND materia_id <> ?";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("si", $materia_nombre, $materia_id);
+        } else {
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("s", $materia_nombre);
+        }
+        
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        if ($resultado->num_rows > 0) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
 #endregion
 
