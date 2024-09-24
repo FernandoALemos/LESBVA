@@ -55,6 +55,15 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         elseif ($_GET['mensaje'] == 'carrera_editada') {
             $mensaje = 'Carrera editada con éxito.';
         }
+        elseif ($_GET['mensaje'] == 'ca_error') {
+            $mensaje = 'La carrera ya existe.';
+        }
+        elseif ($_GET['mensaje'] == 'cl_error') {
+            $mensaje = 'El ciclo ya existe.';
+        }
+        elseif ($_GET['mensaje'] == 'cr_error') {
+            $mensaje = 'El curso ya existe.';
+        }
         if ($mensaje) {
             echo '
             <div class="modal fade" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="modalMensajeLabel" aria-hidden="true">

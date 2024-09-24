@@ -11,7 +11,6 @@
 
         #region constructor
         public function __construct($ciclo){
-            // $this->ciclo_id = $ciclo_id;
             $this->ciclo = $ciclo;
         }
         #endregion
@@ -20,38 +19,29 @@
         #region crearCiclo
         public function crearCiclo(){
             $con = conectar_db();
-            mysqli_query($con, "insert into ciclo_lectivo (ciclo) values ('$this->ciclo')");
-
-            if (mysqli_affected_rows($con) > 0) {
-                ?><script>
-                    alert("Ciclo creado con éxito");
-                </script>
-            <?php
-                } else {
-            ?><script>
-                alert("No se pudo crear el ciclo");
-            </script>
-            <?php }
+            $sql = "INSERT INTO ciclo_lectivo (ciclo) 
+                    VALUES (?)";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("s", $this->ciclo);
+            $stmt->execute();
         }
         #endregion
 
         #region modificarCiclo
-        public function modificarCiclo($id){
+        public function modificarCiclo($ciclo_id){
             $con = conectar_db();
-            mysqli_query($con, "update ciclo_lectivo set ciclo = '$this->ciclo' where ciclo_id = $id");
-
-            if (mysqli_affected_rows($con) > 0) {
-                $texto = "Ciclo modificado correctamente";
-            } else {
-                $texto = "No se pudo modificar el ciclo";
-            }
-    
-            echo "<script>alert('$texto');</script>";
+            $sql = "UPDATE ciclo_lectivo 
+                    SET ciclo = ?
+                    WHERE ciclo_id = ?";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("si", $this->ciclo, $ciclo_id);
+            $stmt->execute();
         }
         #endregion
 
         #region eliminarCiclo
         public static function eliminarCiclo($ciclo_id){
+            
             $con = condb();
             $text = "";
 
@@ -83,6 +73,31 @@
         #endregion
 
         #endregion
+
+        public static function verificarCiclo($ciclo, $ciclo_id = null) {
+            $con = conectar_db();
+            $sql = "SELECT ciclo_id, ciclo FROM ciclo_lectivo
+            WHERE ciclo = ?";
+            
+            if ($ciclo_id !== null) {
+                $sql .= " AND ciclo_id <> ?";
+                $stmt = $con->prepare($sql);
+                $stmt->bind_param("si", $ciclo, $ciclo_id);
+            } else {
+                $stmt = $con->prepare($sql);
+                $stmt->bind_param("s", $ciclo);
+            }
+            
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+    
+            if ($resultado->num_rows > 0) {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
 
     }
     #endregion

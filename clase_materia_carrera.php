@@ -24,7 +24,6 @@
 
         #region constructor
         public function __construct(
-        // $materia_carrera_id,
         $materia_id,
         $carrera_id,
         $ciclo_id,
@@ -99,10 +98,9 @@
         public static function obtenerAsignaturasPorIds($data) {
             $con = conectar_db();
             
-            // Convertir el array de IDs en una cadena separada por comas
+            // convertir el array de IDs en una cadena separada por comas
             $data_list = implode(",", $data);
             
-            // Preparar la consulta SQL
             $sql = "SELECT mc.*, 
                             m.materia_nombre, 
                             c.carrera_nombre, 
