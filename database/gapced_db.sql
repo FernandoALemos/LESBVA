@@ -53,7 +53,6 @@ create table cargos(
 );
 -- crear cargos para sistemas, luego el director podra crear cargos (VER QUE NO ROMPA)
 insert into cargos (carrera_id, turno_id, cargo_nombre) values 
-(1, 3, 'Directivo'),
 (1, 3, 'Sistemas');
 
 
@@ -64,7 +63,7 @@ create table usuarios(
     usuario_apellido varchar(30),
     rol_id int,
     cargo_id int,
-    email varchar(30) UNIQUE,
+    email varchar(60) UNIQUE,
     contrasenia varchar(30),
     usuario_suspendido boolean,
     primer_ingreso boolean,
@@ -109,7 +108,93 @@ insert into profesores (profesor_nombre, profesor_apellido) values
 ('Walter','Vilches'),
 ('Vacante','Vacante'),
 ('Walter', 'Muscolo'),
-('Gustavo', 'Tattoli');
+('Gustavo', 'Tattoli'),
+
+-- Nuevos profes de inicial e ingles
+('Prof', 'Higa'),
+('Prof', 'Arijón'),
+('Prof', 'Rivera'),
+('Victoria', 'Vilches'),
+('Prof', 'Morales'),
+('Prof', 'Perino'),
+('Prof', 'Agustine'),
+('Prof', 'Piperno'),
+('Prof', 'Dall Pozza'),
+('Prof', 'Lobisch Allona'),
+('Prof', 'Tarantino'),
+('Prof', 'Giussani'),
+('Prof', 'Pariani'),
+('Prof', 'Aquino'),
+('Prof', 'Bowley'),
+('Prof', 'Torales'),
+('Prof', 'Senones'),
+('Prof', 'Pérez'),
+('Prof', 'Luna '),
+('Prof', 'Martinez'),
+('Prof', 'Lorences'),
+('Prof', 'Cañete'),
+('Prof', 'Ciarlantini'),
+('Prof', 'Citati'),
+('Prof', 'Pastoriza'),
+('Prof', 'Pizano'),
+('Prof', 'Gaudio'),
+('Prof', 'Crevatin'),
+('Prof', 'Bello'),
+('Prof', 'Chavez'),
+('Prof', 'Silvegio'),
+('Prof', 'Gaudiano'),
+('Prof', 'Moina'),
+('Prof', 'Gala'),
+('Prof', 'Fabre'),
+('Prof', 'Finvard'),
+('Prof', 'Correa'),
+('Prof', 'Araujo'),
+('Prof', 'Bertoia'),
+('Prof', 'Sosa'),
+('Prof', 'Ivarra'),
+('Prof', 'Compiano'),
+('Prof', 'Hawresz'),
+('Prof', 'Gómez'),
+('Prof', 'Del Re'),
+('Prof', 'Helver'),
+
+('Mónica', 'Erbetta'),
+('Viviana', 'Camacho'),
+('Cristián', 'Ramirez'),
+('Norali', 'Boulan'),
+('Nadia','Czmuch Moyano'),
+('M.','Joghems'),
+('Lucia','Fauda S. Espinoza'),
+('Mónica','Cristiani'),
+('Yohana','Isaguirre'),
+('A.','Romano'),
+('Paula','Benitez'),
+('M.','Garbarini'),
+('B.','Tisera'),
+('R.','García'),
+('Marcela','Campagno'),
+('C.','Biocca'),
+('Leonel','Galeppi'),
+('Roxana','Garcia'),
+('Néstor','Manchini'),
+('Liliana','Colavolpe'),
+('Paula','Lanzillola'),
+('Sara','Pietro'),
+('A.','Defago'),
+('Carina','Mendelevich'),
+('C.','Serpentini'),
+('María Marta','Macaudier'),
+('Eliana','Mariano'),
+('Pablo','Benitez'),
+('Maria Inés','Haterfield'),
+('Andrea','Lucarelli'),
+('C.','Irusta'),
+('Nancy','Manchenik'),
+('Héctor','Oviedo'),
+('B.','Dodero'),
+('Antonella','Trimari'),
+('Lorena','Rodriguez'),
+('Tobías','Corro Molas');
 
 
 
@@ -121,7 +206,7 @@ create table ciclo_lectivo(
 );
 
 insert into ciclo_lectivo (ciclo) values 
-(2024), (2025);
+(2024), (2025), (2026), (2027);
 
 
 
@@ -162,11 +247,100 @@ insert into materias (materia_nombre) values
 ('Algoritmos y Estructura de Datos II'),
 ('Prácticas Profesionalizantes III A'),
 ('Prácticas Profesionalizantes III B'),
--- 3° quimica
-('Politica Institucional'),
--- 4° quimica
-('Análisis Quimico');
 
+-- Cufba
+('Taller de Oralidad'),
+('Taller de Escritura'),
+
+-- inicial
+-- 1°
+('Educación Temprana'),
+('Psicología, Desarrollo y Aprendizaje I'),
+('Corporeidad y Motricidad'),
+('Filosofía'),
+('Pedagogía'),
+('Análisis Mundo Contemporáneo'),
+('Prácticas I'),
+('Didáctica General'),
+('EDI'),
+('Taller Lógico-Matemático'),
+('Taller Lectura, Oralidad y Escritura'),
+-- 2°
+('Prácticas II'),
+('Psicología, Desarrollo y Aprendizaje II'),
+('Didáctica y Curriculum'),
+('Cultura, Comunicación y Educación'),
+('Didáctica Prácticas del Lenguaje'),
+('Psicología, Social e Institucional'),
+('Teoría Socio Política y Educación'),
+('Didáctica Ciencias Naturales'),
+('Didáctica Matemática'),
+('Educación Plástica'),
+('Didáctica Ciencias Sociales'),
+-- 3°
+('Historia y Prospectiva de la Educación'),
+('Educación Física'),
+('Taller Ciencias Sociales'),
+('Taller Ciencias Naturales'),
+('Herramientas de la Práctica'),
+('TFO: Alfabetización Inicial'),
+('Política, legislación y trabajo Escolar'),
+('Educación Musical'),
+('Producción de Materiales'),
+('Taller Matemática'),
+('Medios Audiovisuales'),
+('Taller Literatura Infantil'),
+('TFO: Educación Maternal'),
+('Juego y Desarrollo Infantil'),
+('TFO: TICs'),
+-- 4°
+('Ateneo Prácticas Lenguaje'),
+('Ateneo Naturaleza y Sociedad'),
+('Campo IV'),
+('Educación en y para Salud'),
+('Reflexión Filosófica'),
+('Ateneo Expresiones Estéticas'),
+('Ateneo Matemática'),
+-- ingles
+-- 1°
+('Problemática Socioinstitucionales'),
+('Pedagogía'),
+('Prácticas discursivas en lengua Española'),
+('Prácticas discursivas de la comunicación Oral'),
+('Práctica Docente'),
+('Prácticas discursivas de la comunicación Escrita'),
+('Estudios Interculturales Lengua Inglesa'),
+('Didáctica general'),
+('Introducción al Inglés con fines académicos'),
+-- 2°
+('Los Sujetos de la Educación'),
+('Historia y Política Argentina'),
+('Literatura en Lengua Inglesa y Niñez'),
+('Fundamentos de la Enseñanza y Aprendizaje en Inglés'),
+('Prácticas discursivas de la comunicación Oral II'),
+('Estudios Interculturales Lengua Inglesa II'),
+('Prácticas discursivas de la comunicación Escrita II'),
+('Enseñar con Tecnología'),
+-- 3°
+('Evaluación de los Aprendizajes'),
+('Educación para la Diversidad'),
+('Prácticas discursivas de la comunicación Oral III'),
+('Literatura en Lengua Inglesa y Niñez II'),
+('Fundamentos de la Enseñanza y el Aprendizaje II'),
+('Estudios Interculturales en Lengua Inglesa II'),
+('Francés'),
+('Prácticas discursivas de la comunicación Escrita III'),
+('Prácticas discursivas de la comunicación Oral III'),
+('Narrativa Pedagógica'),
+('Filosofía y Educación'),
+-- 4°
+('Tutorias y Orientación escolar'),
+('Análisis e Intervención en sit conv escolar'),
+('Est Interculturales en Lengua Inglesa IV'),
+('Prácticas discursivas de la comunicación Oral IV'),
+('Fundamentos de la Enseñanza y el Aprendizaje del Inglés'),
+('EDI'),
+('Prácticas discursivas de la comunicación Escrita IV');
 
 
 create table cursos(
