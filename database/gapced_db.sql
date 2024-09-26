@@ -83,6 +83,11 @@ create table profesores(
     profesor_id int auto_increment,
     profesor_nombre varchar (60),
     profesor_apellido varchar (60),
+    profesor_dni int (8) UNIQUE,
+    profesor_email varchar (60),
+    profesor_direccion varchar (60),
+    profesor_telefono varchar (25),
+    profesor_activo boolean,
     primary key (profesor_id)
 );
 
@@ -195,6 +200,14 @@ insert into profesores (profesor_nombre, profesor_apellido) values
 ('Antonella','Trimari'),
 ('Lorena','Rodriguez'),
 ('Tobías','Corro Molas');
+
+UPDATE profesores
+SET 
+    profesor_dni = profesor_id,
+    profesor_email = CONCAT('prof', profesor_apellido, '@gmail.com'),
+    profesor_direccion = 'Pasaje Crámer 471',
+    profesor_telefono = '+541143880864',
+    profesor_activo = 1;
 
 
 

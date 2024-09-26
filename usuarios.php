@@ -38,22 +38,28 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     if (isset($_GET['mensaje'])) {
         $mensaje = '';
         if ($_GET['mensaje'] == 'cargo_creado') {
+            $titulo = 'Éxito';
             $mensaje = 'Cargo creado con éxito.';
         } 
         elseif ($_GET['mensaje'] == 'cargo_editado') {
             $mensaje = 'Cargo editado con éxito.';
+            $titulo = 'Éxito';
         }
         elseif ($_GET['mensaje'] == 'usuario_creado') {
+            $titulo = 'Éxito';
             $mensaje = 'Usuario editado con éxito.';
         }
         elseif ($_GET['mensaje'] == 'usuario_editado') {
+            $titulo = 'Éxito';
             $mensaje = 'Usuario editado con éxito.';
         }
         elseif ($_GET['mensaje'] == 'cargo_error') {
-            $mensaje = 'Error: Ya éxiste el cargo.';
+            $titulo = 'Error';
+            $mensaje = 'Ya éxiste el cargo.';
         }
         elseif ($_GET['mensaje'] == 'usuario_error') {
-            $mensaje = 'Error: Ya éxiste el usuario.';
+            $titulo = 'Error';
+            $mensaje = 'Ya éxiste el usuario.';
         }
         if ($mensaje) {
             echo '
@@ -61,7 +67,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalMensajeLabel">Éxito</h5>
+                            <h5 class="modal-title" id="modalMensajeLabel">'.$titulo.'</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

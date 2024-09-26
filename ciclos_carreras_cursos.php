@@ -38,30 +38,39 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     if (isset($_GET['mensaje'])) {
         $mensaje = '';
         if ($_GET['mensaje'] == 'ciclo_creado') {
+            $titulo = 'Éxito';
             $mensaje = 'Ciclo creado con éxito.';
         } 
         elseif ($_GET['mensaje'] == 'ciclo_editado') {
+            $titulo = 'Éxito';
             $mensaje = 'Ciclo editado con éxito.';
         }
         elseif ($_GET['mensaje'] == 'curso_creado') {
+            $titulo = 'Éxito';
             $mensaje = 'Curso editado con éxito.';
         }
         elseif ($_GET['mensaje'] == 'curso_editado') {
+            $titulo = 'Éxito';
             $mensaje = 'Curso editado con éxito.';
         }
         elseif ($_GET['mensaje'] == 'carrera_creada') {
+            $titulo = 'Éxito';
             $mensaje = 'Carrera editada con éxito.';
         }
         elseif ($_GET['mensaje'] == 'carrera_editada') {
+            $titulo = 'Éxito';
             $mensaje = 'Carrera editada con éxito.';
         }
         elseif ($_GET['mensaje'] == 'ca_error') {
+            $titulo = 'Error';
             $mensaje = 'La carrera ya existe.';
         }
         elseif ($_GET['mensaje'] == 'cl_error') {
+            $titulo = 'Error';
             $mensaje = 'El ciclo ya existe.';
         }
         elseif ($_GET['mensaje'] == 'cr_error') {
+            $titulo = 'Error';
             $mensaje = 'El curso ya existe.';
         }
         if ($mensaje) {
@@ -70,7 +79,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalMensajeLabel">Éxito</h5>
+                            <h5 class="modal-title" id="modalMensajeLabel">'.$titulo.'</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

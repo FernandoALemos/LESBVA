@@ -36,12 +36,15 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     if (isset($_GET['mensaje'])) {
         $mensaje = '';
         if ($_GET['mensaje'] == 'creado') {
+            $titulo = 'Éxito';
             $mensaje = 'Materia creada con éxito.';
         } 
         elseif ($_GET['mensaje'] == 'editado') {
+            $titulo = 'Éxito';
             $mensaje = 'Materia editada con éxito.';
         }
         elseif ($_GET['mensaje'] == 'mat_error') {
+            $titulo = 'Error';
             $mensaje = 'La unidad curricular ya existe.';
         }
         if ($mensaje) {
@@ -50,7 +53,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalMensajeLabel">Éxito</h5>
+                            <h5 class="modal-title" id="modalMensajeLabel">'.$titulo.'</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

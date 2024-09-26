@@ -37,12 +37,15 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     if (isset($_GET['mensaje'])) {
         $mensaje = '';
         if ($_GET['mensaje'] == 'creado') {
+            $titulo = 'Éxito';
             $mensaje = 'Profesor/ra creado/a con éxito.';
         } 
         elseif ($_GET['mensaje'] == 'editado') {
+            $titulo = 'Éxito';
             $mensaje = 'Profesor/ra editado/a con éxito.';
         }
         elseif ($_GET['mensaje'] == 'prof_error') {
+            $titulo = 'Error';
             $mensaje = 'Profesor/ra editado/a ya existe.';
         }
         if ($mensaje) {
@@ -51,7 +54,9 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalMensajeLabel">Éxito</h5>
+                            <h5 class="modal-title" id="modalMensajeLabel">
+                                '.$titulo.'
+                            </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -73,7 +78,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             }, 3000); // se cierra después de 3 segundos
         });
     </script>
-     <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Profesores</h1>
         <button class="btn-descargar" data-toggle="modal" data-target="#modalCrearProfesor"><i class="fa-solid fa-user-plus"> </i> Nuevo profesor</button>
     </div>
@@ -83,6 +88,11 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             <tr>
                 <th>Apellido</th>
                 <th>Nombre</th>
+                <th>DNI</th>
+                <th>Email</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Activo</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -90,13 +100,22 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
             <?php
             $profesores = Profesor::listarProfesores();
             foreach ($profesores as $profesor) {
-                echo "<tr>";
-                echo "<td>{$profesor['profesor_apellido']}</td>";
-                echo "<td>{$profesor['profesor_nombre']}</td>";
-                echo "<td>
-                        <button class='btn btn-info btn-sm btnEditar' data-id='{$profesor['profesor_id']}' data-nombre='{$profesor['profesor_nombre']}' data-apellido='{$profesor['profesor_apellido']}'><i class='fa-solid fa-pen-to-square'> </i> Editar</button>
-                    </td>";
-                echo "</tr>";
+            ?>
+            <tr>
+                <td><?= $profesor['profesor_apellido'] ?></td>
+                <td><?= $profesor['profesor_nombre'] ?></td>
+                <td><?= $profesor['profesor_dni'] ?></td>
+                <td><?= $profesor['profesor_email'] ?></td>
+                <td><?= $profesor['profesor_direccion'] ?></td>
+                <td><?= $profesor['profesor_telefono'] ?></td>
+                <td><?= $profesor['profesor_activo'] ? 'Sí' : 'No' ?></td>
+                <?php echo "<td>
+                        <button class='btn btn-info btn-sm btnEditar' data-id='{$profesor['profesor_id']}'><i class='fa-solid fa-pen-to-square'> </i> Editar</button>
+                </td>";
+                ?>
+                
+            </tr>
+            <?php
             }
             ?>
         </tbody>
@@ -110,16 +129,21 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         rows.forEach(function(row) {
             let apellido = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
             let nombre = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            let dni = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+            let email = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+            let direccion = row.querySelector('td:nth-child(5)').textContent.toLowerCase();
+            let telefono = row.querySelector('td:nth-child(6)').textContent.toLowerCase();
+            let activo = row.querySelector('td:nth-child(7)').textContent.toLowerCase();
             
             // Filtra por apellido o nombre
-            if (apellido.includes(filter) || nombre.includes(filter)) {
+            if (apellido.includes(filter) || nombre.includes(filter) || dni.includes(filter) || email.includes(filter) || direccion.includes(filter) || telefono.includes(filter) || activo.includes(filter)) {
                 row.style.display = '';
             } else {
                 row.style.display = 'none';
             }
         });
     });
-</script>
+    </script>
 
 
     <!-- Modal Crear Profesor -->
@@ -134,13 +158,33 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="profesor_nombre">Nombre </label>
-                            <input type="text" class="form-control" id="profesor_nombre" name="profesor_nombre" required>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="profesor_nombre">Nombre </label>
+                                <input type="text" class="form-control" id="profesor_nombre" name="profesor_nombre" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="profesor_apellido">Apellido </label>
+                                <input type="text" class="form-control" id="profesor_apellido" name="profesor_apellido" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="profesor_dni">DNI</label>
+                                <input type="number" maxlength="8" class="form-control" name="profesor_dni" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="profesor_telefono">Teléfono</label>
+                                <input type="text" class="form-control" name="profesor_telefono" required>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="profesor_apellido">Apellido </label>
-                            <input type="text" class="form-control" id="profesor_apellido" name="profesor_apellido" required>
+                            <label for="profesor_email">Email</label>
+                            <input type="email" class="form-control" name="profesor_email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profesor_direccion">Dirección</label>
+                            <input type="text" class="form-control" name="profesor_direccion" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -164,14 +208,45 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" id="editar_profesor_id" name="profesor_id">
-                        <div class="form-group">
-                            <label for="editar_profesor_nombre">Nombre </label>
-                            <input type="text" class="form-control" id="editar_profesor_nombre" name="profesor_nombre" required>
+                        <input type="hidden" id="edit_profesor_id" name="profesor_id">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="edit_profesor_apellido">Apellido </label>
+                                <input type="text" class="form-control" id="edit_profesor_apellido" name="profesor_apellido" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="edit_profesor_nombre">Nombre </label>
+                                <input type="text" class="form-control" id="edit_profesor_nombre" name="profesor_nombre" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="edit_profesor_dni">DNI</label>
+                                <input type="number" maxlength="8" class="form-control" id="edit_profesor_dni" name="profesor_dni" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="edit_profesor_telefono">Teléfono</label>
+                                <input type="text" class="form-control" id="edit_profesor_telefono" name="profesor_telefono" required>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="editar_profesor_apellido">Apellido </label>
-                            <input type="text" class="form-control" id="editar_profesor_apellido" name="profesor_apellido" required>
+                            <label for="edit_profesor_email">Email</label>
+                            <input type="email" class="form-control" id="edit_profesor_email" name="profesor_email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_profesor_direccion">Dirección</label>
+                            <input type="text" class="form-control" id="edit_profesor_direccion" name="profesor_direccion" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profesor_activo">Activo</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="profesor_activo" id="edit_activo_no" value="0">
+                                <label class="form-check-label" for="edit_activo_no">No</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="profesor_activo" id="edit_activo_si" value="1">
+                                <label class="form-check-label" for="edit_activo_si">Sí</label>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -187,13 +262,47 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
     <script>
     $(document).ready(function() {
         $('.btnEditar').on('click', function() {
-            var id = $(this).data('id');
-            var nombre = $(this).data('nombre');
-            var apellido = $(this).data('apellido');
-            $('#editar_profesor_id').val(id);
-            $('#editar_profesor_nombre').val(nombre);
-            $('#editar_profesor_apellido').val(apellido);
-            $('#modalEditarProfesor').modal('show');
+            var profesor_id = $(this).data('id');
+            $.ajax({
+                url: 'get_profesor.php',
+                type: 'POST',
+                data: {profesor_id: profesor_id},
+                success: function(response) {
+                    var JsonResponse = response.substring(response.indexOf('{'));
+                    try {
+                        var form_data = JSON.parse(JsonResponse);
+                        console.log("Parsed data: ", form_data);
+                    } 
+                    catch (error) {
+                        console.error("Error al parsear JSON: ", error);
+                    }
+
+                    form_data.profesor_id = parseInt(form_data.profesor_id, 10);
+                    form_data.profesor_dni = parseInt(form_data.profesor_dni, 10);
+                    
+                    
+                    $('#edit_profesor_id').val(form_data.profesor_id);
+                    $('#edit_profesor_nombre').val(form_data.profesor_nombre);
+                    $('#edit_profesor_apellido').val(form_data.profesor_apellido);
+                    $('#edit_profesor_dni').val(form_data.profesor_dni);
+                    $('#edit_profesor_email').val(form_data.profesor_email);
+                    $('#edit_profesor_direccion').val(form_data.profesor_direccion);
+                    $('#edit_profesor_telefono').val(form_data.profesor_telefono)
+                
+
+                    if (form_data.profesor_activo == 1) {
+                        $('#edit_activo_si').prop('checked', true);
+                    } 
+                    else {
+                        $('#edit_activo_no').prop('checked', true);
+                    }
+                    
+                    $('#modalEditarProfesor').modal('show');
+                },
+                error: function(error) {
+                    console.log('Error:', error);
+                }
+            });
         });
     });
     </script>

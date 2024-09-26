@@ -3,64 +3,67 @@
 
     #region clase Profesor
     class Profesor{
-
         #region atributos
-        private $profesor_id;
         private $profesor_nombre;
         private $profesor_apellido;
+        private $profesor_dni;
+        private $profesor_email;
+        private $profesor_direccion;
+        private $profesor_telefono;
+        private $profesor_activo;
         #endregion
 
         #region constructor
-        public function __construct($profesor_nombre,$profesor_apellido){
-            // $this->profesor_id = $profesor_id;
+        public function __construct($profesor_nombre, $profesor_apellido, $profesor_dni, $profesor_email, $profesor_direccion, $profesor_telefono, $profesor_activo = true) {
             $this->profesor_nombre = $profesor_nombre;
             $this->profesor_apellido = $profesor_apellido;
+            $this->profesor_dni = $profesor_dni;
+            $this->profesor_email = $profesor_email;
+            $this->profesor_direccion = $profesor_direccion;
+            $this->profesor_telefono = $profesor_telefono;
+            $this->profesor_activo = $profesor_activo;
         }
         #endregion
 
         #region ABM Profesors
         #region crearProfesor
-        public function crearProfesor(){
+        public function crearProfesor() {
             $con = conectar_db();
-        
-
-            mysqli_query($con, "insert into profesores (profesor_nombre, profesor_apellido) values ('$this->profesor_nombre', '$this->profesor_apellido')");
-
-            if (mysqli_affected_rows($con) > 0) {
-                ?><script>
-                    alert("Profesor creado con éxito");
-                </script>
-            <?php
-                } else {
-            ?><script>
-                alert("No se pudo crear el profesor");
-            </script>
-            <?php
-        }}
+            $sql = "INSERT INTO profesores (profesor_nombre, profesor_apellido, profesor_dni, profesor_email, profesor_direccion, profesor_telefono, profesor_activo) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("ssisssi", $this->profesor_nombre, $this->profesor_apellido, $this->profesor_dni, $this->profesor_email, $this->profesor_direccion, $this->profesor_telefono, $this->profesor_activo);
+            $stmt->execute();
+        }
         
         #endregion
 
         #region modificarProfesor
-        public function modificarProfesor($id){
+        public function modificarProfesor($id) {
             $con = conectar_db();
-            $texto = "";
-            mysqli_query($con, "update profesores set profesor_nombre = '$this->profesor_nombre', profesor_apellido = '$this->profesor_apellido' where profesor_id = $id");
-
-            if (mysqli_affected_rows($con) > 0) {
-                $texto = "Se modifico correctamente el profesor";
-            } else {
-                $texto = "No se pudo modificar el profesor";
-            }
-
-            echo "<script>alert('$texto');</script>";
-            
+            $sql = "UPDATE profesores 
+                    SET profesor_nombre = ?, profesor_apellido = ?, profesor_dni = ?, profesor_email = ?, profesor_direccion = ?, profesor_telefono = ?, profesor_activo = ?
+                    WHERE profesor_id = ?";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("ssisssii", $this->profesor_nombre, $this->profesor_apellido, $this->profesor_dni, $this->profesor_email, $this->profesor_direccion, $this->profesor_telefono, $this->profesor_activo, $id);
+            $stmt->execute();
         }
         #endregion
 
         #endregion
         public static function listarProfesores(){
             $con = conectar_db();
-            $data = mysqli_query($con, "SELECT profesor_id, profesor_nombre, profesor_apellido FROM profesores ORDER BY profesor_apellido");
+            $data = mysqli_query($con, "SELECT 
+                        profesor_id,
+                        profesor_nombre, 
+                        profesor_apellido, 
+                        profesor_dni, 
+                        profesor_email, 
+                        profesor_direccion, 
+                        profesor_telefono, 
+                        profesor_activo
+                        FROM profesores 
+                        ORDER BY profesor_apellido");
             $profesores = [];
 
             if (mysqli_affected_rows($con) == 0) {
@@ -74,20 +77,20 @@
             return $profesores;
         }
 
-        public static function verificarProfesor($profesor_nombre, $profesor_apellido, $profesor_id = null) {
+        public static function verificarProfesor($profesor_dni, $profesor_id = null) {
             $con = conectar_db();
-            $sql = "SELECT profesor_id, profesor_nombre, profesor_apellido FROM profesores
-            WHERE profesor_nombre = ? AND profesor_apellido = ?";
-            
+            $sql = "SELECT profesor_id FROM profesores WHERE profesor_dni = ?";
             if ($profesor_id !== null) {
                 $sql .= " AND profesor_id <> ?";
-                $stmt = $con->prepare($sql);
-                $stmt->bind_param("sii", $profesor_nombre, $profesor_apellido, $profesor_id);
-            } else {
-                $stmt = $con->prepare($sql);
-                $stmt->bind_param("si", $profesor_nombre, $profesor_apellido);
             }
+            $stmt = $con->prepare($sql);
             
+            if ($profesor_id !== null) {
+                $stmt->bind_param("ii", $profesor_dni, $profesor_id);
+            } else {
+                $stmt->bind_param("i", $profesor_dni);
+            }
+    
             $stmt->execute();
             $resultado = $stmt->get_result();
     
