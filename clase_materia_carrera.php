@@ -57,42 +57,77 @@
         #endregion
 
         #region crearMateriasDeCarrera
-        public function crearMateriaCarrera(){
+        public static function crearAsignatura($ciclo_id, $carrera_id, $turno_id, $curso_id, $materia_id, $profesor_id, $situacion_revista, $modulos, $inscriptos, $regulares, $atraso_academico, $recursantes, $primer_periodo, $segundo_periodo) {
             $con = conectar_db();
-            $text = "";
-
-            mysqli_query($con, "insert into materias (materia_nombre) values ('$this->materia_nombre')");
-
-            (mysqli_affected_rows($con) > 0) ? $text = "Nueva materia agregada" : $text =" No se pudo generar una nueva materia";
-
-            return $text;
+            $sql = "INSERT INTO materia_carrera 
+                    (ciclo_id, carrera_id, turno_id, curso_id, materia_id, profesor_id, situacion_revista, modulos, inscriptos, regulares, atraso_academico, recursantes, primer_periodo, segundo_periodo)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+            $stmt = $con->prepare($sql);
+            if (!$stmt) {
+                die('Error en la preparación de la consulta: ' . $con->error);
+            }
+    
+            $stmt->bind_param(
+                'iiiiiisiiiiiii', 
+                $ciclo_id, $carrera_id, $turno_id, $curso_id, $materia_id, $profesor_id, 
+                $situacion_revista, $modulos, $inscriptos, $regulares, 
+                $atraso_academico, $recursantes, $primer_periodo, $segundo_periodo
+            );
+    
+            if ($stmt->execute()) {
+                echo "Asignatura creada con éxito.";
+            } else {
+                echo "Error al crear la asignatura: " . $stmt->error;
+            }
+    
+            $stmt->close();
+            $con->close();
         }
         #endregion
 
-        #region modificarMateriasCarrera
-        public function modificarMateriasCarrera(){
+        #region modificarAsignatura
+        public static function modificarAsignatura($asignatura_id, $ciclo_id, $carrera_id, $turno_id, $curso_id, $materia_id, $profesor_id, $situacion_revista, $modulos, $inscriptos, $regulares, $atraso_academico, $recursantes, $primer_periodo, $segundo_periodo) {
             $con = conectar_db();
-            $texto = "";
-            mysqli_query($con, "update materias set materia_nombre = '$this->materia_nombre' where id = $this->id");
 
-            (mysqli_affected_rows($con) > 0) ? $texto = "Materia modificada correctamente" : $texto = "No se pudo modificar la materia";
-
-            return $texto;
+            $sql = "UPDATE materia_carrera 
+                    SET ciclo_id = ?, 
+                        carrera_id = ?, 
+                        turno_id = ?, 
+                        curso_id = ?, 
+                        materia_id = ?, 
+                        profesor_id = ?, 
+                        situacion_revista = ?, 
+                        modulos = ?, 
+                        inscriptos = ?, 
+                        regulares = ?, 
+                        atraso_academico = ?, 
+                        recursantes = ?, 
+                        primer_periodo = ?, 
+                        segundo_periodo = ?
+                    WHERE materia_carrera_id = ?";
+        
+            $stmt = $con->prepare($sql);
+        
+            if ($stmt === false) {
+                return ['success' => false, 'message' => 'Error preparando la consulta.'];
+            }
+        
+            $stmt->bind_param(
+                "iiiiiisiiiiiiii", 
+                $ciclo_id, $carrera_id, $turno_id, $curso_id, $materia_id, $profesor_id, 
+                $situacion_revista, $modulos, $inscriptos, $regulares, $atraso_academico, 
+                $recursantes, $primer_periodo, $segundo_periodo, $asignatura_id
+            );
+        
+            if ($stmt->execute()) {
+                return ['success' => true, 'message' => 'Asignatura actualizada exitosamente.'];
+            } else {
+                return ['success' => false, 'message' => 'Error actualizando la asignatura.'];
+            }
         }
         #endregion
 
-        #region eliminarMateriasCarrera
-        public static function eliminarMateriasCarrera($id){
-            $con = conectar_db();
-            $text = "";
-
-            mysqli_query($con, "delete from materias where id = $id;");
-
-            (mysqli_affected_rows($con) > 0) ? $text = "Materia eliminada correctamente" : $text = "No se pudo eliminar la materia";
-
-            return $text;
-        }
-        #endregion
 
         #region obtenerAsignaturasPorIds
         public static function obtenerAsignaturasPorIds($data) {
@@ -178,7 +213,66 @@
         }
         #endregion
 
-
+        public static function verificarExistenciaAsignatura($ciclo_id, $carrera_id, $turno_id, $curso_id, $materia_id, $profesor_id, $asignatura_id = null) {
+            $con = conectar_db();
+            
+            // Primera consulta: verificar si ya existen dos asignaturas con los mismos ciclo_id, carrera_id, turno_id, curso_id y materia_id
+            $sql = "SELECT COUNT(*) as total 
+                    FROM materia_carrera 
+                    WHERE ciclo_id = ? AND carrera_id = ? AND turno_id = ? AND curso_id = ? AND materia_id = ?";
+        
+            $params = [$ciclo_id, $carrera_id, $turno_id, $curso_id, $materia_id];
+            $types = "iiiii"; 
+        
+            // Si es una edición (asignatura_id no es null), excluimos la asignatura actual
+            if ($asignatura_id !== null) {
+                $sql .= " AND materia_carrera_id <> ?";
+                $params[] = $asignatura_id;
+                $types .= "i";
+            }
+        
+            // Ejecutar la primera consulta
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param($types, ...$params);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+        
+            // Si ya hay dos asignaturas con los mismos ciclo_id, carrera_id, turno_id, curso_id y materia_id, devolvemos true
+            if ($row['total'] >= 2) {
+                return true;
+            }
+        
+            // Segunda consulta: verificar si el profesor ya está asignado a esta materia en este ciclo, carrera, turno, curso y materia
+            $sql_profesor = "SELECT COUNT(*) as total 
+                    FROM materia_carrera 
+                    WHERE ciclo_id = ? AND carrera_id = ? AND turno_id = ? AND curso_id = ? AND materia_id = ? AND profesor_id = ?";
+        
+            $params_profesor = [$ciclo_id, $carrera_id, $turno_id, $curso_id, $materia_id, $profesor_id];
+            $types_profesor = "iiiiii";
+        
+            // Si estamos editando (asignatura_id no es null), también excluimos la asignatura actual
+            if ($asignatura_id !== null) {
+                $sql_profesor .= " AND materia_carrera_id <> ?";
+                $params_profesor[] = $asignatura_id;
+                $types_profesor .= "i";
+            }
+        
+            // Ejecutar la segunda consulta
+            $stmt_profesor = $con->prepare($sql_profesor);
+            $stmt_profesor->bind_param($types_profesor, ...$params_profesor);
+            $stmt_profesor->execute();
+            $result_profesor = $stmt_profesor->get_result();
+            $row_profesor = $result_profesor->fetch_assoc();
+        
+            // Si el profesor ya está asignado, devolvemos true
+            if ($row_profesor['total'] >= 1) {
+                return true;
+            }
+        
+            // Si no hay conflictos, devolvemos false
+            return false;
+        }
     }
     #endregion
 

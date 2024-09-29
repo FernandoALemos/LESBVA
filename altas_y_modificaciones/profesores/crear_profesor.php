@@ -10,13 +10,13 @@ $profesor_direccion = isset($_POST['profesor_direccion']) ? $_POST['profesor_dir
 $profesor_telefono = isset($_POST['profesor_telefono']) ? $_POST['profesor_telefono'] : null;
 
 if (Profesor::verificarProfesor($profesor_dni)) {
-    header("Location: profesores.php?mensaje=prof_error");
+    header("Location: ../../profesores.php?mensaje=prof_error");
 } 
 else {
     $profesor_activo = 1;
     $profesor = new Profesor($profesor_nombre, $profesor_apellido, $profesor_dni, $profesor_email, $profesor_direccion, $profesor_telefono, $profesor_activo);
     $profesor->crearProfesor();
-    header("Location: profesores.php?mensaje=creado");
+    header("Location: ../../profesores.php?mensaje=creado");
 }
 
 ?>

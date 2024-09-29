@@ -1,35 +1,35 @@
 <?php
 require_once "../../database/conectar_db.php";
+require_once "../../clase_materia_carrera.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $asignatura_id = $_POST['asignatura_id'];
-    $carrera_id = $_POST['carrera_id'];
-    $turno_id = $_POST['turno_id'];
-    $curso_id = $_POST['curso_id'];
-    $materia_id = $_POST['materia_id'];
-    $profesor_id = $_POST['profesor_id'];
-    $modulos = $_POST['modulos'];
-    $situacion_revista = $_POST['situacion_revista'];
-    $inscriptos = $_POST['inscriptos'];
-    $regulares = $_POST['regulares'];
-    $atraso_academico = $_POST['atraso_academico'];
-    $recursantes = $_POST['recursantes'];
-    $primer_periodo = $_POST['primer_periodo'];
-    $segundo_periodo = $_POST['segundo_periodo'];
-    // Otros datos del formulario
-    $con = conectar_db();
-    $query = "UPDATE materia_carrera SET carrera_id='$carrera_id',turno_id='$turno_id',curso_id='$curso_id',materia_id='$materia_id',profesor_id='$profesor_id', modulos='$modulos',situacion_revista='$situacion_revista',inscriptos='$inscriptos',regulares='$regulares',atraso_academico='$atraso_academico',recursantes='$recursantes',primer_periodo='$primer_periodo',segundo_periodo='$segundo_periodo' WHERE materia_carrera_id='$asignatura_id'";
+    $asignatura_id = intval($_POST['asignatura_id']); 
+    $ciclo_id = intval($_POST['ciclo_id']);
+    $carrera_id = intval($_POST['carrera_id']);
+    $turno_id = intval($_POST['turno_id']);
+    $curso_id = intval($_POST['curso_id']);
+    $materia_id = intval($_POST['materia_id']);
+    $profesor_id = intval($_POST['profesor_id']);
+    $modulos = intval($_POST['modulos']);
+    $situacion_revista = $_POST['situacion_revista'] ?? null;
+    $inscriptos = intval($_POST['inscriptos']);
+    $regulares = intval($_POST['regulares']);
+    $atraso_academico = intval($_POST['atraso_academico']);
+    $recursantes = intval($_POST['recursantes']);
+    $primer_periodo = intval($_POST['primer_periodo']);
+    $segundo_periodo = intval($_POST['segundo_periodo']);
 
-    $result = mysqli_query($con, $query);
-
-    if ($result) {
-        header("Location: ../../asignaturas.php?mensaje=editado");
-        exit();
+    if (MateriaCarrera::verificarExistenciaAsignatura($ciclo_id, $carrera_id, $turno_id, $curso_id, $materia_id, $profesor_id, $asignatura_id)) {
+        header("Location: ../../asignaturas.php?mensaje=error");
     } else {
-        echo "Error: " . mysqli_error($con);
+        MateriaCarrera::modificarAsignatura(
+            $asignatura_id, $ciclo_id, $carrera_id, $turno_id, $curso_id, $materia_id, 
+            $profesor_id, $situacion_revista, $modulos, $inscriptos, $regulares, 
+            $atraso_academico, $recursantes, $primer_periodo, $segundo_periodo
+        );
+        header("Location: ../../asignaturas.php?mensaje=editado");
     }
-}
-else {
-    echo "Error: " . mysqli_error($con);
+} else {
+    echo "Error: faltan datos de la asignatura.";
 }
 ?>

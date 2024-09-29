@@ -52,6 +52,10 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
             $titulo = 'Éxito';
             $mensaje = 'Asignatura editada con éxito.';
         }
+        if ($_GET['mensaje'] == 'error') {
+            $titulo = 'Error';
+            $mensaje = 'Ya existe la asignatura.';
+        }
         if ($mensaje) {
             echo '
             <div class="modal fade" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="modalMensajeLabel" aria-hidden="true">
@@ -165,6 +169,7 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
                     }
 
                     form_data.materia_carrera_id = parseInt(form_data.materia_carrera_id, 10);
+                    form_data.ciclo_id = parseInt(form_data.ciclo_id, 10);
                     form_data.turno_id = parseInt(form_data.turno_id, 10);
                     form_data.carrera_id = parseInt(form_data.carrera_id, 10);
                     form_data.curso_id = parseInt(form_data.curso_id, 10);
@@ -179,6 +184,7 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
                     form_data.segundo_periodo = parseInt(form_data.segundo_periodo, 10);
 
                     $('#edit_asignatura_id').val(form_data.materia_carrera_id);
+                    $('#edit_ciclo_id').val(form_data.ciclo_id);
                     $('#edit_turno_id').val(form_data.turno_id);
                     $('#edit_carrera_id').val(form_data.carrera_id);
                     $('#edit_curso_id').val(form_data.curso_id);

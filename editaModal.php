@@ -17,6 +17,17 @@
                             <!-- Campos del formulario -->
                             <input type="hidden" id="edit_asignatura_id" name="asignatura_id">
                             <!-- Ciclo no funcion-->
+                            <div class="form-group">
+                                <label for="edit_ciclo_id">Carrera</label>
+                                <select class="form-control select2" id="edit_ciclo_id" name="ciclo_id" required>
+                                    <?php
+                                        $ciclos = CicloLectivo::listarCiclos();
+                                        foreach ($ciclos as $ciclo) {
+                                            echo "<option value='{$ciclo['ciclo_id']}'>{$ciclo['ciclo']}</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
                             <!-- Carrera -->
                             <div class="form-group">
                                 <label for="edit_carrera_id">Carrera</label>
@@ -102,7 +113,7 @@
                                     <input type="number" class="form-control" id="edit_inscriptos" name="inscriptos" required>
                                 </div>
                                 <!-- Regulares -->
-                                <div class="form-group col-md-6"">
+                                <div class="form-group col-md-6">
                                     <label for="edit_regulares">Regulares</label>
                                     <input type="number" class="form-control" id="edit_regulares" name="regulares" required>
                                 </div>

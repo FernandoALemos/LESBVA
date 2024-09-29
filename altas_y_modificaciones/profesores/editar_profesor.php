@@ -12,12 +12,12 @@ $profesor_telefono = isset($_POST['profesor_telefono']) ? $_POST['profesor_telef
 $profesor_activo = isset($_POST['profesor_activo']) ? $_POST['profesor_activo'] : null;
 
 if (Profesor::verificarProfesor($profesor_dni, $profesor_id)) {
-    header("Location: profesores.php?mensaje=prof_error");
+    header("Location: ../../profesores.php?mensaje=prof_error");
 } 
 else {
     $profesor = new Profesor($profesor_nombre, $profesor_apellido, $profesor_dni, $profesor_email, $profesor_direccion, $profesor_telefono, $profesor_activo);
     $profesor->modificarProfesor($profesor_id);
-    header("Location: profesores.php?mensaje=editado");
+    header("Location: ../../profesores.php?mensaje=editado");
 }
 
 ?>

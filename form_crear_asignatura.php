@@ -51,6 +51,10 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
             $titulo = 'Éxito';
             $mensaje = 'Asignatura creada con éxito.';
         }
+        if ($_GET['mensaje'] == 'error') {
+            $titulo = 'Error';
+            $mensaje = 'Ya existe la asignatura.';
+        }
         if ($mensaje) {
             echo '
             <div class="modal fade" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="modalMensajeLabel" aria-hidden="true">

@@ -1,7 +1,6 @@
 <?php
 require_once "../../database/conectar_db.php";
-
-$text = "";
+require_once "../../clase_materia_carrera.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ciclo_id = $_POST['ciclo_id'];
@@ -18,22 +17,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $recursantes = $_POST['recursantes'];
     $primer_periodo = $_POST['primer_periodo'];
     $segundo_periodo = $_POST['segundo_periodo'];
-    // Otros datos del formulario
-    $con = conectar_db();
-    $query = "INSERT INTO materia_carrera 
-    (ciclo_id, turno_id, carrera_id, curso_id, materia_id, profesor_id, modulos, situacion_revista, inscriptos, regulares, atraso_academico, recursantes, primer_periodo, segundo_periodo) 
-    VALUES ('$ciclo_id', '$turno_id','$carrera_id','$curso_id','$materia_id','$profesor_id','$modulos','$situacion_revista','$inscriptos','$regulares','$atraso_academico','$recursantes','$primer_periodo','$segundo_periodo')";
-    $result = mysqli_query($con, $query);
 
-    if ($result) {
-        header("Location: ../../form_crear_asignatura.php?mensaje=creado");
-        exit();
-    }
+    // echo $ciclo_id." | ".$carrera_id." | ".$turno_id." | ".$curso_id." | ".$materia_id." | ".$profesor_id." | ".$situacion_revista." | ".$modulos." | ".$inscriptos." | ".$regulares." | ".$atraso_academico." | ".$recursantes." | ".$primer_periodo." | ".$segundo_periodo;
 
-        
+    if (MateriaCarrera::verificarExistenciaAsignatura($ciclo_id, $carrera_id, $turno_id, $curso_id, $materia_id, $profesor_id)) {
+        header("Location: ../../form_crear_asignatura.php?mensaje=error");
+    } 
     else {
-        echo "Error: " . mysqli_error($con);
+        MateriaCarrera::crearAsignatura(
+            $ciclo_id, $carrera_id, $turno_id, $curso_id, $materia_id, $profesor_id, 
+            $situacion_revista, $modulos, $inscriptos, $regulares, 
+            $atraso_academico, $recursantes, $primer_periodo, $segundo_periodo
+        );
+        header("Location: ../../form_crear_asignatura.php?mensaje=creado");
     }
+} else {
+    echo "Error: faltan datos de la asignatura.";
 }
+
 ?>
 
