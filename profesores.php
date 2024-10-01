@@ -109,10 +109,10 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 <td><?= $profesor['profesor_direccion'] ?></td>
                 <td><?= $profesor['profesor_telefono'] ?></td>
                 <td><?= $profesor['profesor_activo'] ? 'Sí' : 'No' ?></td>
-                <?php echo "<td>
-                        <button class='btn btn-info btn-sm btnEditar' data-id='{$profesor['profesor_id']}'><i class='fa-solid fa-pen-to-square'> </i> Editar</button>
-                </td>";
-                ?>
+                <td>
+                        <button class='btn btn-info btn-sm btnEditar' data-id="<?= $profesor['profesor_id'] ?>"><i class='fa-solid fa-pen-to-square'> </i> Editar</button>
+                </td>
+                
                 
             </tr>
             <?php

@@ -47,7 +47,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         }
         elseif ($_GET['mensaje'] == 'usuario_creado') {
             $titulo = 'Éxito';
-            $mensaje = 'Usuario editado con éxito.';
+            $mensaje = 'Usuario creado con éxito.';
         }
         elseif ($_GET['mensaje'] == 'usuario_editado') {
             $titulo = 'Éxito';

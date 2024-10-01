@@ -5,6 +5,7 @@ $con = conectar_db();
 $id = intval($_POST['profesor_id']);
 
 $sql = "SELECT 
+            p.profesor_id,
             p.profesor_nombre, 
             p.profesor_apellido, 
             p.profesor_dni, 

@@ -80,9 +80,11 @@
         public static function verificarProfesor($profesor_dni, $profesor_id = null) {
             $con = conectar_db();
             $sql = "SELECT profesor_id FROM profesores WHERE profesor_dni = ?";
+            
             if ($profesor_id !== null) {
                 $sql .= " AND profesor_id <> ?";
             }
+            
             $stmt = $con->prepare($sql);
             
             if ($profesor_id !== null) {
@@ -90,14 +92,17 @@
             } else {
                 $stmt->bind_param("i", $profesor_dni);
             }
-    
+            
             $stmt->execute();
             $resultado = $stmt->get_result();
-    
             if ($resultado->num_rows > 0) {
-                return true;
-            }
-            else{
+                $row = $resultado->fetch_assoc();
+                if ($row['profesor_id'] == $profesor_id) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
                 return false;
             }
         }

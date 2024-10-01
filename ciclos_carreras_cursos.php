@@ -47,7 +47,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         }
         elseif ($_GET['mensaje'] == 'curso_creado') {
             $titulo = 'Éxito';
-            $mensaje = 'Curso editado con éxito.';
+            $mensaje = 'Curso creado con éxito.';
         }
         elseif ($_GET['mensaje'] == 'curso_editado') {
             $titulo = 'Éxito';
@@ -55,7 +55,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
         }
         elseif ($_GET['mensaje'] == 'carrera_creada') {
             $titulo = 'Éxito';
-            $mensaje = 'Carrera editada con éxito.';
+            $mensaje = 'Carrera creada con éxito.';
         }
         elseif ($_GET['mensaje'] == 'carrera_editada') {
             $titulo = 'Éxito';
