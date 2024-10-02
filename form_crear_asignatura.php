@@ -9,7 +9,7 @@ require_once "clase_profesores.php";
 require_once "clase_materia_carrera.php";
 
 session_start();
-if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
+if (!isset($_SESSION['rol_id'])) {
     echo "<h1>Usted no posee permisos para utilizar esta página</h1>";
     echo "<br><a href='login.php'>Ir a inicio</a>";
     exit();

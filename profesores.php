@@ -5,7 +5,7 @@ require_once "clase_profesores.php";
 
 
 session_start();
-if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo limito para que solo el director entre hasta que definamos todas las pantallas.
+if (!isset($_SESSION['rol_id']) || ($_SESSION['rol_id'] != 1 && $_SESSION['rol_id'] != 2)) {
     echo "<h1>Usted no posee permisos para utilizar esta página</h1>";
     echo "<br><a href='login.php'>Ir a inicio</a>";
     exit();

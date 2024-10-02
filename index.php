@@ -8,11 +8,13 @@ require_once "clase_materia_carrera.php";
 
 
 session_start();
-if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo limito para que solo el director entre hasta que definamos todas las pantallas.
+if (!isset($_SESSION['rol_id'])) {
     echo "<h1>Usted no posee permisos para utilizar esta página</h1>";
     echo "<br><a href='login.php'>Ir a inicio</a>";
     exit();
 }
+
+$rol_id = $_SESSION['rol_id']; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +35,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
 
     <body>
         <nav>
+            <?php if ($rol_id == 1 || $rol_id == 2): ?>
 
             <ul>
                 <button class="btn-descargar" onclick="location.href='ciclos_carreras_cursos.php'"><i class="fa-solid fa-rectangle-list"> </i> Ciclos/Carreras/Cursos</button>
@@ -46,6 +49,8 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 <button class="btn-descargar" onclick="location.href='profesores.php'"><i class="fa-solid fa-user-graduate"> </i> Profesores</button>
             </ul>
 
+            <?php endif; ?>
+
             <ul>
                 <button class="btn-descargar" onclick="location.href='buscador.php'"><i class="fa-solid fa-chart-line"> </i> Reportes</button>
             </ul>
@@ -54,9 +59,13 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] <> 1) { //Acá solo lo li
                 <button class="btn-descargar" onclick="location.href='form_crear_asignatura.php'"><i class="fa-solid fa-list-check"> </i> Asignaciones</button>
             </ul>
 
+            <?php if ($rol_id == 1): ?>
+
             <ul>
                 <button class="btn-descargar" onclick="location.href='usuarios.php'"><i class="fa-solid fa-user"> </i> Usuarios</button>
             </ul>
+
+            <?php endif; ?>
 
         </nav>
     </body>
