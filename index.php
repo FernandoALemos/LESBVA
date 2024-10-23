@@ -8,6 +8,11 @@ require_once "clase_materia_carrera.php";
 
 
 session_start();
+if ($_SESSION['usuario_suspendido'] == 1){
+    echo "<h1>Este usuario esta suspendido</h1>";
+    echo "<br><a href='login.php'>Ir a inicio</a>";
+    exit();
+}
 if (!isset($_SESSION['rol_id'])) {
     echo "<h1>Usted no posee permisos para utilizar esta página</h1>";
     echo "<br><a href='login.php'>Ir a inicio</a>";
@@ -38,7 +43,7 @@ $rol_id = $_SESSION['rol_id'];
             <?php if ($rol_id == 1 || $rol_id == 2): ?>
 
             <ul>
-                <button class="btn-descargar" onclick="location.href='ciclos_carreras_cursos.php'"><i class="fa-solid fa-rectangle-list"> </i> Ciclos/Carreras/Cursos</button>
+                <button class="btn-descargar text-wrap" onclick="location.href='ciclos_carreras_cursos.php'"><i class="fa-solid fa-rectangle-list"> </i>Ciclos/Carreras/Cursos</button>
             </ul>
 
             <ul>
