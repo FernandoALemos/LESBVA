@@ -18,7 +18,7 @@
                             <input type="hidden" id="edit_asignatura_id" name="asignatura_id">
                             <!-- Ciclo no funcion-->
                             <div class="form-group">
-                                <label for="edit_ciclo_id">Carrera</label>
+                                <label for="edit_ciclo_id">Ciclo</label>
                                 <select class="form-control select2" id="edit_ciclo_id" name="ciclo_id" required>
                                     <?php
                                         $ciclos = CicloLectivo::listarCiclos();
