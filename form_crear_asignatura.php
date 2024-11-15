@@ -181,43 +181,43 @@ $data = isset($_SESSION['materia_data']) ? $_SESSION['materia_data'] : [];
             <!-- Campo modulos -->
             <div class="form-group col-md-6">
                 <label for="modulos">Módulos</label>
-                <input type="number" class="form-control" id="modulos" name="modulos" required>
+                <input type="number" class="form-control" id="modulos" name="modulos" value=2 required>
             </div>
         </div>
         <div class="form-row">
             <!-- Campo inscriptos -->
             <div class="form-group col-md-6">
                 <label for="inscriptos">Inscriptos</label>
-                <input type="number" class="form-control" id="inscriptos" name="inscriptos" required>
+                <input type="number" class="form-control" id="inscriptos" name="inscriptos" value=0 required>
             </div>
             <!-- Campo regulares -->
             <div class="form-group col-md-6">
                 <label for="regulares">Regulares</label>
-                <input type="number" class="form-control" id="regulares" name="regulares" required>
+                <input type="number" class="form-control" id="regulares" name="regulares" value=0 required>
             </div>
         </div>
         <div class="form-row">
             <!-- Campo atraso academico -->
             <div class="form-group col-md-6">
                 <label for="atraso_academico">Atraso Académico</label>
-                <input type="number" class="form-control" id="atraso_academico" name="atraso_academico" required>
+                <input type="number" class="form-control" id="atraso_academico" name="atraso_academico" value=0 required>
             </div>
             <!-- Campo recurusantes -->
             <div class="form-group col-md-6">
                 <label for="recursantes">Recursantes</label>
-                <input type="number" class="form-control" id="recursantes" name="recursantes" required>
+                <input type="number" class="form-control" id="recursantes" name="recursantes" value=0 required>
             </div>
         </div>
         <div class="form-row">
             <!-- Campo 1° Periodo -->
             <div class="form-group col-md-6">
                 <label for="primer_periodo">1° Período</label>
-                <input type="number" class="form-control" id="primer_periodo" name="primer_periodo" required>
+                <input type="number" class="form-control" id="primer_periodo" name="primer_periodo" value=0 required>
             </div>
             <!-- Campo 2° Periodo -->
             <div class="form-group col-md-6">
                 <label for="segundo_periodo">2° Período</label>
-                <input type="number" class="form-control" id="segundo_periodo" name="segundo_periodo" required>
+                <input type="number" class="form-control" id="segundo_periodo" name="segundo_periodo" value=0 required>
             </div>
         </div>
         <div class="form-group">
